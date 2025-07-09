@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0M_P WORLD TOUR 2026 "HERE, LIGHT"</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter for body, and a more expressive font for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lexend+Deca:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles for Material 3 Expressive Dark Theme -->
+    <style>
+        /* * This style block defines the core theme inspired by Material 3 Expressive.
+         * We use a dark blue/slate background as the main surface, with a vibrant blue
+         * as the primary accent color. Typography is set to be modern and readable.
+         * Components like cards and buttons have expressive rounded corners.
+        */
+        body {
+            font-family: 'Inter', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            color: #e2e8f0; /* slate-200 */
+        }
+
+        /* Expressive heading font */
+        .font-expressive {
+            font-family: 'Lexend Deca', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
+        }
+
+        /* Custom gradient for backgrounds and highlights */
+        .gradient-bg {
+            background-image: radial-gradient(circle at top, rgba(30, 64, 175, 0.3), transparent 40%);
+        }
+
+        /* Card styling for content sections */
+        .content-card {
+            background-color: rgba(30, 41, 59, 0.5); /* slate-800 with transparency */
+            border: 1px solid #334155; /* slate-700 */
+            border-radius: 1.5rem; /* 24px */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .content-card:hover {
+            border-color: #38bdf8; /* sky-400 */
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -15px rgba(56, 189, 248, 0.2);
+        }
+        
+        /* Animated underline for links */
+        .link-underline {
+            position: relative;
+            text-decoration: none;
+            color: #7dd3fc; /* sky-300 */
+        }
+        .link-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #38bdf8; /* sky-400 */
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .link-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Language switcher styles */
+        #lang-switcher {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 50;
+            background-color: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 9999px;
+            padding: 0.25rem;
+            display: flex;
+            gap: 0.25rem;
+            border: 1px solid #334155;
+        }
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent;
+        }
+        .lang-btn.active {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border-color: #7dd3fc;
+        }
+        .lang-btn:not(.active):hover {
+            background-color: rgba(56, 189, 248, 0.2);
+        }
+
+
+        /* Custom scrollbar for a more integrated look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; /* slate-800 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; /* slate-700 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; /* slate-600 */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Language Switcher -->
+    <div id="lang-switcher">
+        <button id="lang-en" class="lang-btn">EN</button>
+        <button id="lang-zh" class="lang-btn">ZH</button>
+        <button id="lang-ja" class="lang-btn">JA</button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="min-h-screen w-full gradient-bg">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+            
+            <!-- Header Section -->
+            <header class="text-center mb-20">
+                <img 
+                    src="https://links.0m-p.space/HERE-LGIHT-LOGO.png" 
+                    alt="0M_P WORLD TOUR 2026 HERE, LIGHT Logo" 
+                    class="w-full max-w-2xl mx-auto mb-4"
+                    onerror="this.onerror=null; this.src='https://placehold.co/1200x300/0f172a/e2e8f0?text=0M_P+WORLD+TOUR+2026'; this.style.border='1px solid #334155';"
+                >
+                <h2 data-translate-key="announced" class="font-expressive text-2xl md:text-3xl tracking-widest text-slate-400 animate-pulse">
+                    HAS BEEN ANNOUNCED
+                </h2>
+            </header>
+
+            <main class="space-y-16">
+
+                <!-- World Tour Section -->
+                <section id="tour-dates" class="content-card p-6 md:p-10">
+                    <h2 data-translate-key="world_tour_title" class="font-expressive text-3xl md:text-4xl font-bold mb-8 text-sky-400 border-b-2 border-sky-400/30 pb-4">
+                        WORLD TOUR
+                    </h2>
+                    <p class="text-center text-xl md:text-2xl text-slate-300 mb-10">
+                        <span class="font-bold text-sky-300">2026.2 - 2026.7</span>
+                    </p>
+                    <div id="locations-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-8 text-slate-300">
+                        <!-- Locations will be rendered by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Past Tours Section -->
+                <section id="past-tours" class="content-card p-6 md:p-10">
+                    <h2 data-translate-key="retrospective_title" class="font-expressive text-3xl md:text-4xl font-bold mb-8 text-sky-400 border-b-2 border-sky-400/30 pb-4">
+                        Retrospective
+                    </h2>
+                    <div class="bg-slate-900/50 p-6 rounded-2xl">
+                        <h3 class="font-expressive text-2xl font-semibold text-slate-200">0M_P WORLD TOUR 2025 "FLOWERS"</h3>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                            <div class="bg-slate-800/70 p-4 rounded-xl">
+                                <p class="text-3xl font-bold text-sky-400">5</p>
+                                <p data-translate-key="months" class="text-slate-400">Months</p>
+                            </div>
+                            <div class="bg-slate-800/70 p-4 rounded-xl">
+                                <p class="text-3xl font-bold text-sky-400">24</p>
+                                <p data-translate-key="cities" class="text-slate-400">Cities</p>
+                            </div>
+                            <div class="bg-slate-800/70 p-4 rounded-xl">
+                                <p class="text-3xl font-bold text-sky-400">350K+</p>
+                                <p data-translate-key="attendees" class="text-slate-400">Attendees</p>
+                            </div>
+                        </div>
+                        <p data-translate-key="retrospective_highlight" class="mt-6 text-slate-300">
+                            Highlight: 2 days at Japan National Stadium, mobilizing 140,000 people.
+                        </p>
+                        <div class="mt-6 text-center">
+                            <a href="https://tour.0m-p.space/2025" target="_blank" rel="noopener noreferrer" data-translate-key="visit_official_site" class="link-underline font-semibold text-lg">
+                                Visit Official Site
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- About 0M_P Section -->
+                <section id="about" class="content-card p-6 md:p-10">
+                    <h2 data-translate-key="about_title" class="font-expressive text-3xl md:text-4xl font-bold mb-8 text-sky-400 border-b-2 border-sky-400/30 pb-4">
+                        About 0M_P
+                    </h2>
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="flex-shrink-0">
+                            <img 
+                                src="https://links.0m-p.space/Avatar.png" 
+                                alt="0M_P Avatar" 
+                                class="w-40 h-40 rounded-full object-cover border-4 border-slate-700 shadow-lg"
+                                onerror="this.onerror=null; this.src='https://placehold.co/160x160/0f172a/e2e8f0?text=0M_P'; "
+                            >
+                        </div>
+                        <div class="text-slate-300 space-y-3">
+                            <p class="text-lg">
+                                <span data-translate-key="roles_title" class="font-semibold text-slate-200">Roles:</span>
+                                <span data-translate-key="roles_content"> Sound Producer / Singer / VOCALOID Producer / Writer</span>
+                            </p>
+                            <p data-translate-key="about_p1">
+                                Started activities in 2017. VOCALOID songs are mainly sung by Hatsune Miku.
+                            </p>
+                            <p data-translate-key="about_p2">
+                                Major debut in 2022 from Polydor Records, under Universal Music Japan.
+                            </p>
+                            <div>
+                                <p data-translate-key="key_works_title" class="font-semibold text-slate-200">Key Works:</p>
+                                <ul class="list-disc list-inside text-sky-300">
+                                    <li>"You Need"</li>
+                                    <li>"natural love"</li>
+                                    <li>"Spring of Flowers"</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other Information Section -->
+                <section id="links" class="content-card p-6 md:p-10">
+                    <h2 data-translate-key="more_info_title" class="font-expressive text-3xl md:text-4xl font-bold mb-8 text-sky-400 border-b-2 border-sky-400/30 pb-4">
+                        More Information
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 data-translate-key="concert_brands_title" class="font-expressive text-xl font-semibold mb-4 text-slate-200">Concert Brands</h3>
+                            <ul class="space-y-3">
+                                <li><a href="https://vlive.0m-p.space" target="_blank" rel="noopener noreferrer" class="link-underline">0M_P Virtual Live "On-Site"</a></li>
+                                <li><a href="https://tour.0m-p.space" target="_blank" rel="noopener noreferrer" class="link-underline">0M_P WORLD TOUR</a></li>
+                                <li><a href="https://tour.0m-p.space/China/2025" target="_blank" rel="noopener noreferrer" class="link-underline">0M_P CHINA TOUR 2025 "今天的事情"</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 data-translate-key="albums_title" class="font-expressive text-xl font-semibold mb-4 text-slate-200">Albums</h3>
+                            <ul class="space-y-3">
+                                <li><a href="https://album.0m-p.space/4th" target="_blank" rel="noopener noreferrer" class="link-underline">0M_P 4th Album "Two-Side Voices"</a></li>
+                                <li><a href="https://album.0m-p.space/tour_25" target="_blank" rel="noopener noreferrer" class="link-underline">0M_P WT 2025 "FLOWERS" OFFICIAL ALBUM</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- Footer Section -->
+            <footer class="text-center mt-20 pt-10 border-t border-slate-700">
+                <a href="https://www.universal-music.co.jp/" target="_blank" rel="noopener noreferrer" class="inline-block mb-6">
+                    <img 
+                        src="https://www.universalmusic.com/wp-content/themes/umgcore2/assets/img/logo.png" 
+                        alt="Universal Music Group Logo" 
+                        class="h-12 invert"
+                        onerror="this.onerror=null; this.src='https://placehold.co/240x48/0f172a/e2e8f0?text=Universal+Music+Group'; "
+                    >
+                </a>
+                <p class="text-xs text-slate-500 tracking-wider">
+                    © 2025 UNIVERSAL MUSIC LLC / 0M_P ALL RIGHTS RESERVED.
+                </p>
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+        // --- TRANSLATION DATA ---
+        const translations = {
+            en: {
+                announced: 'HAS BEEN ANNOUNCED',
+                world_tour_title: 'WORLD TOUR',
+                retrospective_title: 'Retrospective',
+                months: 'Months',
+                cities: 'Cities',
+                attendees: 'Attendees',
+                retrospective_highlight: 'Highlight: 2 days at Japan National Stadium, mobilizing 140,000 people.',
+                visit_official_site: 'Visit Official Site',
+                about_title: 'About 0M_P',
+                roles_title: 'Roles:',
+                roles_content: ' Sound Producer / Singer / VOCALOID Producer / Writer',
+                about_p1: 'Started activities in 2017. VOCALOID songs are mainly sung by Hatsune Miku.',
+                about_p2: 'Major debut in 2022 from Polydor Records, under Universal Music Japan.',
+                key_works_title: 'Key Works:',
+                more_info_title: 'More Information',
+                concert_brands_title: 'Concert Brands',
+                albums_title: 'Albums',
+            },
+            zh: {
+                announced: '现已公布',
+                world_tour_title: '世界巡回演唱会',
+                retrospective_title: '往年回顾',
+                months: '个月',
+                cities: '座城市',
+                attendees: '预计动员',
+                retrospective_highlight: '包含两天日本国立竞技场演唱会，共动员14万人。',
+                visit_official_site: '访问官方网站',
+                about_title: '关于 0M_P',
+                roles_title: '身份：',
+                roles_content: ' Sound Producer / 歌手 / VOCALOID Producer / 作家',
+                about_p1: '2017年开始活动，VOCALOID歌曲主要由初音未来演唱。',
+                about_p2: '2022年从环球音乐旗下的Polydor Records主流出道，目前所属日本环球音乐旗下。',
+                key_works_title: '主要作品：',
+                more_info_title: '更多信息',
+                concert_brands_title: '演唱会品牌',
+                albums_title: '专辑',
+            },
+            ja: {
+                announced: '開催決定',
+                world_tour_title: 'ワールドツアー',
+                retrospective_title: '過去のツアー',
+                months: 'ヶ月',
+                cities: '都市',
+                attendees: '動員予定',
+                retrospective_highlight: 'ハイライト：国立競技場2日間、14万人動員。',
+                visit_official_site: '公式サイトへ',
+                about_title: '0M_Pについて',
+                roles_title: '役割:',
+                roles_content: ' サウンドプロデューサー / 歌手 / VOCALOIDプロデューサー / 作家',
+                about_p1: '2017年より活動開始。ボーカロイド曲は主に初音ミクが歌う。',
+                about_p2: '2022年、ユニバーサルミュージック傘下のポリドール・レコードよりメジャーデビュー。',
+                key_works_title: '主な作品:',
+                more_info_title: '詳細情報',
+                concert_brands_title: 'コンサートブランド',
+                albums_title: 'アルバム',
+            }
+        };
+
+        const locations = {
+            en: {
+                "JAPAN": ["Tokyo", "Osaka", "Hokkaido", "Okinawa", "Nagoya", "Fukuoka", "Sendai"],
+                "CHINA": ["Beijing", "Shanghai", "Guangzhou", "Chengdu", "Changsha", "Wuhan", "Nanchang", "Kunming", "Shenzhen", "Xi'an", "Hangzhou", "Nanning", "Hong Kong", "Taipei", "Macau"],
+                "AUSTRALIA, SG & TH": ["Sydney", "Melbourne", "Singapore", "Bangkok"],
+                "NORTH AMERICA": ["USA", "Mexico", "Los Angeles", "Chicago", "Toronto", "Washington", "Vancouver", "Boston", "San Francisco"],
+                "SOUTH AMERICA": ["Brasília", "Argentina"],
+                "EUROPE": ["London", "Paris", "Moscow", "Berlin", "Madrid", "Rome", "Milan", "Barcelona"],
+            },
+            zh: {
+                "日本": ["东京", "大阪", "北海道", "冲绳", "名古屋", "福冈", "仙台"],
+                "中国": ["北京", "上海", "广州", "成都", "长沙", "武汉", "南昌", "昆明", "深圳", "西安", "杭州", "南宁", "香港", "台北", "澳门"],
+                "澳洲、新、泰": ["悉尼", "墨尔本", "新加坡", "曼谷"],
+                "北美洲": ["美国", "墨西哥", "洛杉矶", "芝加哥", "多伦多", "华盛顿", "温哥华", "波士顿", "旧金山"],
+                "南美洲": ["巴西利亚", "阿根廷"],
+                "欧洲": ["伦敦", "巴黎", "莫斯科", "柏林", "马德里", "罗马", "米兰", "巴塞罗那"],
+            },
+            ja: {
+                "日本": ["東京", "大阪", "北海道", "沖縄", "名古屋", "福岡", "仙台"],
+                "中国": ["北京", "上海", "広州", "成都", "長沙", "武漢", "南昌", "昆明", "深圳", "西安", "杭州", "南寧", "香港", "台北", "マカオ"],
+                "オーストラリア、シンガポール、タイ": ["シドニー", "メルボルン", "シンガポール", "バンコク"],
+                "北米": ["アメリカ", "メキシコ", "ロサンゼルス", "シカゴ", "トロント", "ワシントン", "バンクーバー", "ボストン", "サンフランシスコ"],
+                "南米": ["ブラジリア", "アルゼンチン"],
+                "ヨーロッパ": ["ロンドン", "パリ", "モスクワ", "ベルリン", "マドリード", "ローマ", "ミラノ", "バルセロナ"],
+            }
+        };
+
+        // --- LANGUAGE SWITCHING LOGIC ---
+        const langEnBtn = document.getElementById('lang-en');
+        const langZhBtn = document.getElementById('lang-zh');
+        const langJaBtn = document.getElementById('lang-ja');
+        const locationsContainer = document.getElementById('locations-container');
+        let currentLang = 'en';
+
+        function renderLocations(lang) {
+            const container = locationsContainer;
+            container.innerHTML = ''; // Clear previous locations
+            const currentLocations = locations[lang];
+            
+            for (const region in currentLocations) {
+                const isChina = region === "中国";
+                const ulClass = isChina ? "space-y-1 text-slate-400 md:columns-2" : "space-y-1 text-slate-400";
+                const regionHtml = `
+                    <div class="space-y-2">
+                        <h3 class="font-bold text-lg text-sky-400 uppercase tracking-wider">${region}</h3>
+                        <ul class="${ulClass}">
+                            ${currentLocations[region].map(city => `<li>${city}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                container.innerHTML += regionHtml;
+            }
+        }
+
+        function setLanguage(lang) {
+            if (!translations[lang]) return;
+            currentLang = lang;
+
+            // Update all elements with data-translate-key
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.dataset.translateKey;
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            // Re-render locations
+            renderLocations(lang);
+            
+            // Update active button style
+            langEnBtn.classList.remove('active');
+            langZhBtn.classList.remove('active');
+            langJaBtn.classList.remove('active');
+            document.documentElement.lang = lang;
+
+            if (lang === 'zh') {
+                langZhBtn.classList.add('active');
+            } else if (lang === 'ja') {
+                langJaBtn.classList.add('active');
+            } else {
+                langEnBtn.classList.add('active');
+            }
+        }
+
+        // --- EVENT LISTENERS ---
+        langEnBtn.addEventListener('click', () => setLanguage('en'));
+        langZhBtn.addEventListener('click', () => setLanguage('zh'));
+        langJaBtn.addEventListener('click', () => setLanguage('ja'));
+
+        // --- INITIALIZE ---
+        // Set default language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+             setLanguage('en');
+        });
+
+    </script>
+
+</body>
+</html>

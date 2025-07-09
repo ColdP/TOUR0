@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0M_P WORLD TOUR 2025 "FLOWERS"</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Lexend & Noto Sans for multi-language support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Applying the chosen font and base styles */
+        body {
+            font-family: 'Lexend', 'Noto Sans SC', 'Noto Sans TC', 'Noto Sans JP', sans-serif;
+            background-color: #f8f9fa; /* A very light grey for a soft white theme */
+            color: #1c1b1f; /* Material 3 standard text color */
+        }
+
+        /* Helper class for the rainbow gradient text */
+        .rainbow-text {
+            background: linear-gradient(90deg, #ff89b4, #ff5d5d, #ffb94c, #4caf50, #4c9cff, #a259ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        /* Custom styles for Material 3 Expressive cards */
+        .m3-card {
+            background-color: #ffffff;
+            border-radius: 1.75rem; /* 28px */
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .m3-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* Style for the main logo shadow */
+        .logo-shadow {
+             filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.9)) drop-shadow(0px 0px 35px rgba(255, 255, 255, 0.8));
+        }
+
+        /* Language switcher styles */
+        #lang-switcher {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 50;
+        }
+        #lang-switcher button {
+            background-color: rgba(0, 0, 0, 0.18);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        #lang-switcher button:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        #lang-menu {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        #lang-menu a {
+            color: #1c1b1f;
+        }
+        #lang-menu a:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        .theme-song-button {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            color: white;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <!-- Language Switcher -->
+    <div id="lang-switcher">
+        <button id="lang-toggle-btn" class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span id="current-lang-text">Language</span>
+        </button>
+        <div id="lang-menu" class="absolute right-0 mt-2 w-40 hidden">
+            <a href="#" class="block px-4 py-2 text-sm rounded-lg" onclick="changeLanguage('en'); return false;">English</a>
+            <a href="#" class="block px-4 py-2 text-sm rounded-lg" onclick="changeLanguage('zh-CN'); return false;">简体中文</a>
+            <a href="#" class="block px-4 py-2 text-sm rounded-lg" onclick="changeLanguage('zh-TW'); return false;">繁體中文</a>
+            <a href="#" class="block px-4 py-2 text-sm rounded-lg" onclick="changeLanguage('ja'); return false;">日本語</a>
+            <a href="#" class="block px-4 py-2 text-sm rounded-lg" onclick="changeLanguage('fr'); return false;">Français</a>
+            <a href="#" class="block px-4 py-2 text-sm rounded-lg" onclick="changeLanguage('de'); return false;">Deutsch</a>
+        </div>
+    </div>
+
+    <!-- 1. Header Section: Title + Main Visual -->
+    <header class="relative h-screen min-h-[600px] w-full flex flex-col items-center justify-center text-center text-white overflow-hidden">
+        <!-- Background Visual -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://links.0m-p.space/FLOWERS-MAIN-VISUAL.png" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/e0e0e0/a0a0a0?text=Image+Not+Found';"
+                 alt="Main visual for FLOWERS tour" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/20"></div> <!-- Soft overlay for text contrast -->
+        </div>
+        
+        <!-- Foreground Content -->
+        <div class="relative z-10 flex flex-col items-center mt-48"> <!-- MODIFIED: Adjusted margin-top -->
+            <img src="https://links.0m-p.space/FLOWERS-LOGO.svg" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/800x267/ffffff/000000?text=FLOWERS+LOGO';"
+                 alt="0M_P WORLD TOUR 2025 FLOWERS Logo" class="w-11/12 max-w-4xl logo-shadow mb-6"> <!-- MODIFIED: Increased size -->
+            <p class="text-3xl tracking-widest font-light" style="text-shadow: 0 0 10px rgba(255,255,255,0.7);" data-lang-key="officialSite">OFFICIAL SITE</p> <!-- MODIFIED: Increased size -->
+        </div>
+    </header>
+
+    <main class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+        
+        <!-- 2. World Tour Dates Section -->
+        <section id="tour-dates" class="max-w-7xl mx-auto mb-20">
+            <h2 class="text-5xl md:text-6xl font-bold text-center mb-4" data-lang-key="worldTour">WORLD TOUR</h2>
+            <p class="text-center text-xl text-gray-600 mb-12" data-lang-key="tourDates">FEBRUARY - JULY 2025</p>
+
+            <div class="space-y-16">
+                <!-- Asia Tour -->
+                <div>
+                    <h3 class="text-4xl font-semibold mb-8 text-center"><span class="rainbow-text" data-lang-key="asiaTour">Asia Tour</span></h3>
+                    <div id="asia-tour-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <!-- Tour stops will be populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Europe & North America -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <!-- Europe Tour -->
+                    <div>
+                        <h3 class="text-4xl font-semibold mb-8 text-center"><span class="rainbow-text" data-lang-key="europeTour">Europe Tour</span></h3>
+                        <p class="text-center text-gray-500 -mt-6 mb-8" data-lang-key="supportedBy">Supported by ROLL MUSIC COMPANY</p>
+                        <div id="europe-tour-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                           <!-- Tour stops will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- North America Tour -->
+                    <div>
+                        <h3 class="text-4xl font-semibold mb-8 text-center"><span class="rainbow-text" data-lang-key="naTour">North America Tour</span></h3>
+                         <p class="text-center text-gray-500 -mt-6 mb-8" data-lang-key="supportedBy">Supported by ROLL MUSIC COMPANY</p>
+                        <div id="na-tour-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                           <!-- Tour stops will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+                
+                 <!-- Australia Tour -->
+                <div class="pt-8">
+                    <h3 class="text-4xl font-semibold mb-8 text-center"><span class="rainbow-text" data-lang-key="ausTour">Australia Tour</span></h3>
+                    <div id="aus-tour-grid" class="grid grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto gap-6">
+                        <!-- Tour stops will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MOVED & UPDATED: Theme Song Section -->
+        <section id="theme-song" class="py-20 sm:py-28">
+            <div class="max-w-4xl mx-auto text-center px-4">
+                <h2 class="text-4xl font-bold mb-6" data-lang-key="themeSongTitle">Theme Song</h2>
+                <img src="https://links.0m-p.space/SoF-Cover.png" 
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x600/e0e0e0/a0a0a0?text=Cover+Art';"
+                     alt="Theme song cover art" 
+                     class="w-full max-w-md mx-auto rounded-3xl shadow-2xl mb-8">
+                <p class="text-5xl font-bold rainbow-text mb-8" data-lang-key="themeSongName">"Spring of Flower"</p>
+                <div class="text-lg text-gray-700 space-y-2">
+                    <p><span data-lang-key="creditLyrics" class="font-semibold">Lyrics, Music & Vocal</span> : 0M_P</p>
+                    <p><span data-lang-key="creditMovie" class="font-semibold">Movie</span> : AxM Production</p>
+                </div>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="https://0m-p.lnk.to/SoH_MV" target="_blank" rel="noopener noreferrer" 
+                       class="theme-song-button bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 hover:scale-105" data-lang-key="watchMV">
+                       Watch MV
+                    </a>
+                    <a href="https://0m-p.lnk.to/SoH_EP" target="_blank" rel="noopener noreferrer" 
+                       class="theme-song-button bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 hover:scale-105" data-lang-key="streaming">
+                       Streaming / DL
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Concert Review Section -->
+        <section id="review" class="bg-white py-20 sm:py-28">
+            <div class="max-w-4xl mx-auto text-center px-4">
+                <h2 class="text-2xl font-semibold tracking-wide uppercase rainbow-text mb-4" data-lang-key="tourName">0M_P WORLD TOUR 2025 "FLOWERS"</h2>
+                <p class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight" data-lang-key="reviewHeadline">A journey of <span class="rainbow-text">5</span> months, across <span class="rainbow-text">24</span> cities, reaching an estimated <span class="rainbow-text">350,000</span> people.</p>
+                <p class="mt-6 text-xl text-gray-600" data-lang-key="reviewSubheadline">Including a historic two-day concert at the Japan National Stadium, captivating 140,000 fans.</p>
+            </div>
+        </section>
+
+        <!-- 4. Next Tour Promo Section -->
+        <section id="next-tour" class="py-20 sm:py-28">
+            <div class="max-w-5xl mx-auto text-center px-4">
+                <p class="text-lg font-semibold text-indigo-500" data-lang-key="comingSoon">COMING SOON</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold my-4" data-lang-key="nextTourName">0M_P WORLD TOUR 2026 "HERE,LIGHT"</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-lang-key="nextTourDesc">
+                    Scheduled for February to July 2026, this tour will cover multiple regions including China, Japan, the Americas, and Europe, aiming to mobilize 400,000 people. It will feature two monumental shows at the Tokyo Dome, with an expected audience of 100,000.
+                </p>
+                <a href="https://tour.0m-p.space/2026" target="_blank" rel="noopener noreferrer" 
+                   class="inline-block mt-8 px-10 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 hover:scale-105 shadow-lg" data-lang-key="visitOfficialSite">
+                   Visit Official Site
+                </a>
+            </div>
+        </section>
+
+        <!-- 5. Artist Intro Section -->
+        <section id="artist" class="bg-white py-20 sm:py-28">
+            <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+                <div class="md:col-span-1 flex justify-center">
+                    <img src="https://links.0m-p.space/Avatar.png" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x400/e0e0e0/a0a0a0?text=0M_P';"
+                         alt="Avatar of 0M_P" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-2xl">
+                </div>
+                <div class="md:col-span-2 text-center md:text-left">
+                    <h2 class="text-5xl font-bold mb-4">0M_P</h2>
+                    <p class="text-xl font-medium rainbow-text mb-4" data-lang-key="artistRoles">Sound Producer / Singer / VOCALOID Producer / Writer</p>
+                    <div class="text-lg text-gray-700 space-y-3">
+                        <p data-lang-key="artistDesc1">Active since 2017, 0M_P is renowned for VOCALOID songs primarily featuring Hatsune Miku.</p>
+                        <p data-lang-key="artistDesc2">In 2022, 0M_P made a major debut from Polydor Records under Universal Music Japan and is currently affiliated with the label.</p>
+                        <p class="pt-2 font-semibold" data-lang-key="notableWorks">Notable Works: <span class="font-medium text-gray-600">"You Need", "natural love", "Drama of Play"</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 6. Other Information Section -->
+        <section id="more-info" class="bg-white py-20 sm:py-24">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12" data-lang-key="moreFrom">More From 0M_P</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Concert Brands -->
+                    <div class="m3-card p-8">
+                        <h3 class="text-2xl font-bold mb-4" data-lang-key="concertBrands">Concert Brands</h3>
+                        <ul class="space-y-3">
+                            <li><a href="https://vlive.0m-p.space" target="_blank" class="text-indigo-600 hover:text-indigo-800 transition">0M_P Virtual Live "On-Site"</a></li>
+                            <li><a href="https://tour.0m-p.space" target="_blank" class="text-indigo-600 hover:text-indigo-800 transition">0M_P WORLD TOUR</a></li>
+                            <li><a href="https://tour.0m-p.space/China/2025" target="_blank" class="text-indigo-600 hover:text-indigo-800 transition" data-lang-key="chinaTour2025">0M_P CHINA TOUR 2025 "今天的事情"</a></li>
+                        </ul>
+                    </div>
+                    <!-- Albums -->
+                    <div class="m3-card p-8">
+                        <h3 class="text-2xl font-bold mb-4" data-lang-key="albums">Albums</h3>
+                        <ul class="space-y-3">
+                            <li><a href="https://album.0m-p.space/4th" target="_blank" class="text-indigo-600 hover:text-indigo-800 transition" data-lang-key="album4th">0M_P 4th Album "Two-Side Voices"</a></li>
+                            <li><a href="https://album.0m-p.space/tour_25" target="_blank" class="text-indigo-600 hover:text-indigo-800 transition" data-lang-key="albumTour">"FLOWERS" OFFICIAL ALBUM (2025.7.16 Release)</a></li>
+                        </ul>
+                    </div>
+                    <!-- Special Card for Tour Album -->
+                    <div class="m3-card p-8 flex flex-col justify-center items-center text-center bg-gradient-to-br from-rose-50 to-violet-50">
+                        <h3 class="text-2xl font-bold rainbow-text mb-2">FLOWERS</h3>
+                        <p class="font-semibold text-lg mb-4" data-lang-key="officialTourAlbum">Official Tour Album</p>
+                        <p class="text-gray-600 mb-4" data-lang-key="releasing">Releasing on July 16, 2025</p>
+                        <a href="https://album.0m-p.space/tour_25" target="_blank" class="font-bold text-indigo-600 hover:underline" data-lang-key="learnMore">Learn More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 7. Footer Section -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <a href="https://www.universal-music.co.jp/" target="_blank" rel="noopener noreferrer" class="inline-block mb-8">
+                <img src="https://www.universalmusic.com/wp-content/themes/umgcore2/assets/img/logo.png" 
+                     onerror="this.onerror=null;this.src='https://placehold.co/200x50/ffffff/a0a0a0?text=Universal+Music';"
+                     alt="Universal Music Group Logo" class="h-10 w-auto invert brightness-0">
+            </a>
+            <div class="text-sm text-gray-400 space-y-2">
+                <p data-lang-key="creditsArt">Main Visual & Art Directed by <span class="font-semibold">米山舞</span></p>
+                <p data-lang-key="creditsWeb">Web Designed by <span class="font-semibold">AxM Production</span> / Design Director : <span class="font-semibold">White</span> / Concept Artist : <span class="font-semibold">0M_P</span></p>
+            </div>
+            <p class="mt-8 text-xs text-gray-500">&copy; 2025 UNIVERSAL MUSIC LLC / 0M_P ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+<script>
+// --- Language Data ---
+const translations = {
+    'en': {
+        langName: "Language",
+        officialSite: "OFFICIAL SITE",
+        worldTour: "WORLD TOUR",
+        tourDates: "FEBRUARY - JULY 2025",
+        asiaTour: "Asia Tour",
+        europeTour: "Europe Tour",
+        naTour: "North America Tour",
+        ausTour: "Australia Tour",
+        supportedBy: "Supported by ROLL MUSIC COMPANY",
+        reviewHeadline: `A journey of <span class="rainbow-text">5</span> months, across <span class="rainbow-text">24</span> cities, reaching an estimated <span class="rainbow-text">350,000</span> people.`,
+        reviewSubheadline: "Including a historic two-day concert at the Japan National Stadium, captivating 140,000 fans.",
+        comingSoon: "COMING SOON",
+        nextTourName: `0M_P WORLD TOUR 2026 "HERE,LIGHT"`,
+        nextTourDesc: "Scheduled for February to July 2026, this tour will cover multiple regions including China, Japan, the Americas, and Europe, aiming to mobilize 400,000 people. It will feature two monumental shows at the Tokyo Dome, with an expected audience of 100,000.",
+        visitOfficialSite: "Visit Official Site",
+        artistRoles: "Sound Producer / Singer / VOCALOID Producer / Writer",
+        artistDesc1: "Active since 2017, 0M_P is renowned for VOCALOID songs primarily featuring Hatsune Miku.",
+        artistDesc2: "In 2022, 0M_P made a major debut from Polydor Records under Universal Music Japan and is currently affiliated with the label.",
+        notableWorks: `Notable Works: <span class="font-medium text-gray-600">"You Need", "natural love", "Drama of Play"</span>`,
+        themeSongTitle: "Theme Song",
+        themeSongName: `"Spring of Flower"`,
+        creditLyrics: "Lyrics, Music & Vocal",
+        creditMovie: "Movie",
+        watchMV: "Watch MV",
+        streaming: "Streaming / DL",
+        moreFrom: "More From 0M_P",
+        concertBrands: "Concert Brands",
+        chinaTour2025: `0M_P CHINA TOUR 2025 "今天的事情"`,
+        albums: "Albums",
+        album4th: `0M_P 4th Album "Two-Side Voices"`,
+        albumTour: `"FLOWERS" OFFICIAL ALBUM (2025.7.16 Release)`,
+        officialTourAlbum: "Official Tour Album",
+        releasing: "Releasing on July 16, 2025",
+        learnMore: "Learn More &rarr;",
+        creditsArt: `Main Visual & Art Directed by <span class="font-semibold">米山舞</span>`,
+        creditsWeb: `Web Designed by <span class="font-semibold">AxM Production</span> / Design Director : <span class="font-semibold">White</span> / Concept Artist : <span class="font-semibold">0M_P</span>`,
+        tourName: `0M_P WORLD TOUR 2025 "FLOWERS"`,
+        venues: {
+            beijing: "Cadillac Arena (formerly Wukesong Arena)", shanghai: "Mercedes-Benz Arena", changsha: "Hunan International Convention and Exhibition Center", chengdu: "Sichuan Provincial Gymnasium", hongkong: "Hong Kong Coliseum", taipei: "Taipei Arena", tokyo: "National Stadium", osaka: "Osaka-jō Hall", nagoya: "Nippon Gaishi Hall", fukuoka: "Fukuoka International Center", sendai: "Sendai Gymnasium", saitama: "Saitama Super Arena", seoul: "Olympic Gymnastics Arena (KSPO Dome)", kunming: "Yunnan Provincial Gymnasium", london: "Wembley Arena", paris: "Accor Arena", berlin: "Mercedes-Benz Arena", berne: "Post Finance Arena", oslo: "Oslo Spektrum", la: "The Forum", sf: "Oakland Arena", ny: "Madison Square Garden", vancouver: "Rogers Arena", sydney: "Qudos Bank Arena", melbourne: "Rod Laver Arena"
+        }
+    },
+    'zh-CN': {
+        langName: "语言",
+        officialSite: "官方网站",
+        worldTour: "世界巡回演唱会",
+        tourDates: "2025年2月 - 7月",
+        asiaTour: "Asia Tour",
+        europeTour: "Europe Tour",
+        naTour: "North America Tour",
+        ausTour: "Australia Tour",
+        supportedBy: "由 ROLL MUSIC COMPANY 支持",
+        reviewHeadline: `一场为期<span class="rainbow-text">5</span>个月，跨越<span class="rainbow-text">24</span>座城市的旅程，预计动员<span class="rainbow-text">35万</span>人。`,
+        reviewSubheadline: "包括在日本国立竞技场举办的历史性两日演唱会，共吸引14万名粉丝。",
+        comingSoon: "即将开启",
+        nextTourName: `0M_P 世界巡回演唱会 2026 "HERE,LIGHT"`,
+        nextTourDesc: "计划于2026年2月至7月举行，本次巡演将覆盖中国、日本、美洲、欧洲等多个地区，目标动员40万人。其中包含两场在东京巨蛋的里程碑式演出，预计观众人数达10万。",
+        visitOfficialSite: "访问官方网站",
+        artistRoles: "音乐制作人 / 歌手 / VOCALOID制作人 / 作家",
+        artistDesc1: "自2017年开始活动，0M_P以主要由初音未来演唱的VOCALOID歌曲而闻名。",
+        artistDesc2: "2022年，0M_P从环球音乐旗下的Polydor Records主流出道，目前隶属于日本环球音乐。",
+        notableWorks: `主要作品: <span class="font-medium text-gray-600">"You Need", "natural love", "Drama of Play"</span>`,
+        themeSongTitle: "主题曲",
+        themeSongName: `"花之春"`,
+        creditLyrics: "作词, 作曲 & 演唱",
+        creditMovie: "影像",
+        watchMV: "观看MV",
+        streaming: "在线收听 / 下载",
+        moreFrom: "更多来自 0M_P",
+        concertBrands: "演唱会品牌",
+        chinaTour2025: `0M_P 中国巡回演唱会 2025 "今天的事情"`,
+        albums: "专辑",
+        album4th: `0M_P 第四张专辑 "Two-Side Voices"`,
+        albumTour: `"FLOWERS" 官方巡演专辑 (2025.7.16 发行)`,
+        officialTourAlbum: "官方巡演专辑",
+        releasing: "2025年7月16日 发行",
+        learnMore: "了解更多 &rarr;",
+        creditsArt: `主视觉 & 艺术指导: <span class="font-semibold">米山舞</span>`,
+        creditsWeb: `网页设计: <span class="font-semibold">AxM Production</span> / 设计总监: <span class="font-semibold">White</span> / 概念艺术家: <span class="font-semibold">0M_P</span>`,
+        tourName: `0M_P WORLD TOUR 2025 "FLOWERS"`,
+        venues: {
+            beijing: "凯迪拉克中心 (原五棵松体育馆)", shanghai: "梅赛德斯-奔驰文化中心", changsha: "湖南国际会展中心", chengdu: "四川省体育馆", hongkong: "香港体育馆", taipei: "台北小巨蛋", tokyo: "国立竞技场", osaka: "大阪城音乐厅", nagoya: "名古屋市综合体育馆", fukuoka: "福冈国际中心", sendai: "仙台市体育馆", saitama: "埼玉超级竞技场", seoul: "奥林匹克体操竞技场 (KSPO DOME)", kunming: "云南省体育馆", london: "温布利体育馆", paris: "雅高体育馆", berlin: "梅赛德斯-奔驰竞技场", berne: "邮政金融体育馆", oslo: "奥斯陆光谱体育馆", la: "论坛体育馆", sf: "奥克兰体育馆", ny: "麦迪逊广场花园", vancouver: "罗渣士体育馆", sydney: "库多斯银行体育馆", melbourne: "罗德·拉沃竞技场"
+        }
+    },
+    'zh-TW': {
+        langName: "語言",
+        officialSite: "官方網站",
+        worldTour: "世界巡迴演唱會",
+        tourDates: "2025年2月 - 7月",
+        asiaTour: "Asia Tour",
+        europeTour: "Europe Tour",
+        naTour: "North America Tour",
+        ausTour: "Australia Tour",
+        supportedBy: "由 ROLL MUSIC COMPANY 支持",
+        reviewHeadline: `一場為期<span class="rainbow-text">5</span>個月，橫跨<span class="rainbow-text">24</span>座城市的旅程，預計動員<span class="rainbow-text">35萬</span>人。`,
+        reviewSubheadline: "包括在日本國立競技場舉辦的歷史性兩日演唱會，共吸引14萬名粉絲。",
+        comingSoon: "即將開啟",
+        nextTourName: `0M_P 世界巡迴演唱會 2026 "HERE,LIGHT"`,
+        nextTourDesc: "計劃於2026年2月至7月舉行，本次巡演將覆蓋中國、日本、美洲、歐洲等多個地區，目標動員40萬人。其中包含兩場在東京巨蛋的里程碑式演出，預計觀眾人數達10萬人。",
+        visitOfficialSite: "訪問官方網站",
+        artistRoles: "音樂製作人 / 歌手 / VOCALOID製作人 / 作家",
+        artistDesc1: "自2017年開始活動，0M_P以主要由初音未來演唱的VOCALOID歌曲而聞名。",
+        artistDesc2: "2022年，0M_P從環球音樂旗下的Polydor Records主流出道，目前隸屬於日本環球音樂。",
+        notableWorks: `主要作品: <span class="font-medium text-gray-600">"You Need", "natural love", "Drama of Play"</span>`,
+        themeSongTitle: "主題曲",
+        themeSongName: `"花之春"`,
+        creditLyrics: "作詞, 作曲 & 演唱",
+        creditMovie: "影像",
+        watchMV: "觀看MV",
+        streaming: "線上收聽 / 下載",
+        moreFrom: "更多來自 0M_P",
+        concertBrands: "演唱會品牌",
+        chinaTour2025: `0M_P 中國巡迴演唱會 2025 "今天的事情"`,
+        albums: "專輯",
+        album4th: `0M_P 第四張專輯 "Two-Side Voices"`,
+        albumTour: `"FLOWERS" 官方巡演專輯 (2025.7.16 發行)`,
+        officialTourAlbum: "官方巡演專輯",
+        releasing: "2025年7月16日 發行",
+        learnMore: "了解更多 &rarr;",
+        creditsArt: `主視覺 & 藝術指導: <span class="font-semibold">米山舞</span>`,
+        creditsWeb: `網頁設計: <span class="font-semibold">AxM Production</span> / 設計總監: <span class="font-semibold">White</span> / 概念藝術家: <span class="font-semibold">0M_P</span>`,
+        tourName: `0M_P WORLD TOUR 2025 "FLOWERS"`,
+        venues: {
+            beijing: "凱迪拉克中心 (原五棵松體育館)", shanghai: "梅賽德斯-奔馳文化中心", changsha: "湖南國際會展中心", chengdu: "四川省體育館", hongkong: "香港體育館", taipei: "台北小巨蛋", tokyo: "國立競技場", osaka: "大阪城展演廳", nagoya: "名古屋市綜合體育館", fukuoka: "福岡國際中心", sendai: "仙台市體育館", saitama: "埼玉超級競技場", seoul: "奧林匹克體操競技場 (KSPO DOME)", kunming: "雲南省體育館", london: "溫布利體育館", paris: "雅高體育館", berlin: "梅賽德斯-奔馳競技場", berne: "郵政金融體育館", oslo: "奧斯陸光譜體育館", la: "論壇體育館", sf: "奧克蘭體育館", ny: "麥迪遜廣場花園", vancouver: "羅渣士體育館", sydney: "庫多斯銀行體育館", melbourne: "羅德·拉沃競技場"
+        }
+    },
+    'ja': {
+        langName: "言語",
+        officialSite: "公式サイト",
+        worldTour: "ワールドツアー",
+        tourDates: "2025年2月～7月",
+        asiaTour: "Asia Tour",
+        europeTour: "Europe Tour",
+        naTour: "North America Tour",
+        ausTour: "Australia Tour",
+        supportedBy: "協力: ROLL MUSIC COMPANY",
+        reviewHeadline: `<span class="rainbow-text">5</span>ヶ月にわたり、<span class="rainbow-text">24</span>都市を巡り、推定<span class="rainbow-text">35万</span>人を動員する旅。`,
+        reviewSubheadline: "日本の国立競技場での歴史的な2日間のコンサートを含み、14万人のファンを魅了しました。",
+        comingSoon: "近日公開",
+        nextTourName: `0M_P ワールドツアー 2026 "HERE,LIGHT"`,
+        nextTourDesc: "2026年2月から7月にかけて開催予定のこのツアーは、中国、日本、アメリカ、ヨーロッパなど複数の地域をカバーし、40万人の動員を目指します。東京ドームでの記念碑的な2公演を予定しており、観客動員数は10万人を見込んでいます。",
+        visitOfficialSite: "公式サイトへ",
+        artistRoles: "サウンドプロデューサー / 歌手 / VOCALOIDプロデューサー / 作家",
+        artistDesc1: "2017年から活動を開始し、主に初音ミクをフィーチャーしたVOCALOID曲で知られています。",
+        artistDesc2: "2022年、ユニバーサルミュージックジャパン傘下のPolydor Recordsからメジャーデビューし、現在も同レーベルに所属しています。",
+        notableWorks: `主な作品: <span class="font-medium text-gray-600">"You Need", "natural love", "Drama of Play"</span>`,
+        themeSongTitle: "テーマソング",
+        themeSongName: `"花の春"`,
+        creditLyrics: "作詞・作曲・ボーカル",
+        creditMovie: "映像",
+        watchMV: "MVを観る",
+        streaming: "ストリーミング / DL",
+        moreFrom: "0M_Pの関連情報",
+        concertBrands: "コンサートブランド",
+        chinaTour2025: `0M_P 中国ツアー 2025 "今日の事"`,
+        albums: "アルバム",
+        album4th: `0M_P 4thアルバム "Two-Side Voices"`,
+        albumTour: `"FLOWERS" 公式ツアーアルバム (2025.7.16 リリース)`,
+        officialTourAlbum: "公式ツアーアルバム",
+        releasing: "2025年7月16日 リリース",
+        learnMore: "詳細を見る &rarr;",
+        creditsArt: `メインビジュアル & アートディレクション: <span class="font-semibold">米山舞</span>`,
+        creditsWeb: `ウェブデザイン: <span class="font-semibold">AxM Production</span> / デザインディレクター: <span class="font-semibold">White</span> / コンセプトアーティスト: <span class="font-semibold">0M_P</span>`,
+        tourName: `0M_P WORLD TOUR 2025 "FLOWERS"`,
+        venues: {
+            beijing: "キャデラック・アリーナ (旧 五棵松体育館)", shanghai: "メルセデス・ベンツ・アリーナ", changsha: "湖南国際会議展示センター", chengdu: "四川省体育館", hongkong: "香港コロシアム", taipei: "台北アリーナ", tokyo: "国立競技場", osaka: "大阪城ホール", nagoya: "日本ガイシホール", fukuoka: "福岡国際センター", sendai: "仙台市体育館", saitama: "さいたまスーパーアリーナ", seoul: "オリンピック体操競技場 (KSPOドーム)", kunming: "雲南省体育館", london: "ウェンブリー・アリーナ", paris: "アコー・アリーナ", berlin: "メルセデス・ベンツ・アレーナ", berne: "ポストファイナンス・アレーナ", oslo: "オスロ・スペクトラム", la: "ザ・フォーラム", sf: "オークランド・アリーナ", ny: "マディソン・スクエア・ガーデン", vancouver: "ロジャーズ・アリーナ", sydney: "クードス・バンク・アリーナ", melbourne: "ロッド・レーバー・アリーナ"
+        }
+    },
+    'fr': {
+        langName: "Langue",
+        officialSite: "SITE OFFICIEL",
+        worldTour: "TOURNÉE MONDIALE",
+        tourDates: "FÉVRIER - JUILLET 2025",
+        asiaTour: "Asia Tour",
+        europeTour: "Europe Tour",
+        naTour: "North America Tour",
+        ausTour: "Australia Tour",
+        supportedBy: "Avec le soutien de ROLL MUSIC COMPANY",
+        reviewHeadline: `Un voyage de <span class="rainbow-text">5</span> mois, à travers <span class="rainbow-text">24</span> villes, touchant environ <span class="rainbow-text">350 000</span> personnes.`,
+        reviewSubheadline: "Y compris un concert historique de deux jours au Stade National du Japon, captivant 140 000 fans.",
+        comingSoon: "PROCHAINEMENT",
+        nextTourName: `0M_P WORLD TOUR 2026 "HERE,LIGHT"`,
+        nextTourDesc: "Prévue de février à juillet 2026, cette tournée couvrira plusieurs régions, dont la Chine, le Japon, les Amériques et l'Europe, et vise à mobiliser 400 000 personnes. Elle comprendra deux spectacles monumentaux au Tokyo Dome, avec un public attendu de 100 000 personnes.",
+        visitOfficialSite: "Visiter le Site Officiel",
+        artistRoles: "Producteur Sonore / Chanteur / Producteur VOCALOID / Écrivain",
+        artistDesc1: "Actif depuis 2017, 0M_P est réputé pour ses chansons VOCALOID mettant principalement en vedette Hatsune Miku.",
+        artistDesc2: "En 2022, 0M_P a fait ses débuts majeurs chez Polydor Records, sous l'égide d'Universal Music Japan, et est actuellement affilié au label.",
+        notableWorks: `Œuvres notables : <span class="font-medium text-gray-600">"You Need", "natural love", "Drama of Play"</span>`,
+        themeSongTitle: "Chanson Thème",
+        themeSongName: `"Printemps de Fleur"`,
+        creditLyrics: "Paroles, Musique & Chant",
+        creditMovie: "Vidéo",
+        watchMV: "Regarder le MV",
+        streaming: "Streaming / DL",
+        moreFrom: "Plus de 0M_P",
+        concertBrands: "Marques de Concerts",
+        chinaTour2025: `0M_P CHINA TOUR 2025 "今天的事情"`,
+        albums: "Albums",
+        album4th: `4ème Album de 0M_P "Two-Side Voices"`,
+        albumTour: `Album Officiel "FLOWERS" (Sortie le 16.7.2025)`,
+        officialTourAlbum: "Album Officiel de la Tournée",
+        releasing: "Sortie le 16 juillet 2025",
+        learnMore: "En savoir plus &rarr;",
+        creditsArt: `Visuel Principal & Direction Artistique par <span class="font-semibold">Yoneyama Mai</span>`,
+        creditsWeb: `Conception Web par <span class="font-semibold">AxM Production</span> / Directeur du Design : <span class="font-semibold">White</span> / Artiste Conceptuel : <span class="font-semibold">0M_P</span>`,
+        tourName: `0M_P WORLD TOUR 2025 "FLOWERS"`,
+        venues: {
+            beijing: "Cadillac Arena (anciennement Wukesong Arena)", shanghai: "Mercedes-Benz Arena", changsha: "Centre International des Congrès et Expositions du Hunan", chengdu: "Gymnase Provincial du Sichuan", hongkong: "Colisée de Hong Kong", taipei: "Taipei Arena", tokyo: "Stade National", osaka: "Osaka-jō Hall", nagoya: "Nippon Gaishi Hall", fukuoka: "Centre International de Fukuoka", sendai: "Gymnase de Sendai", saitama: "Saitama Super Arena", seoul: "Arène de Gymnastique Olympique (KSPO Dome)", kunming: "Gymnase Provincial du Yunnan", london: "Wembley Arena", paris: "Accor Arena", berlin: "Mercedes-Benz Arena", berne: "PostFinance-Arena", oslo: "Oslo Spektrum", la: "The Forum", sf: "Oakland Arena", ny: "Madison Square Garden", vancouver: "Rogers Arena", sydney: "Qudos Bank Arena", melbourne: "Rod Laver Arena"
+        }
+    },
+    'de': {
+        langName: "Sprache",
+        officialSite: "OFFIZIELLE SEITE",
+        worldTour: "WELTTOURNEE",
+        tourDates: "FEBRUAR - JULI 2025",
+        asiaTour: "Asia Tour",
+        europeTour: "Europe Tour",
+        naTour: "North America Tour",
+        ausTour: "Australia Tour",
+        supportedBy: "Unterstützt von ROLL MUSIC COMPANY",
+        reviewHeadline: `Eine Reise von <span class="rainbow-text">5</span> Monaten durch <span class="rainbow-text">24</span> Städte, die schätzungsweise <span class="rainbow-text">350.000</span> Menschen erreicht.`,
+        reviewSubheadline: "Einschließlich eines historischen zweitägigen Konzerts im Nationalstadion von Japan, das 140.000 Fans begeisterte.",
+        comingSoon: "KOMMT BALD",
+        nextTourName: `0M_P WELTTOURNEE 2026 "HERE,LIGHT"`,
+        nextTourDesc: "Diese Tour, die von Februar bis Juli 2026 geplant ist, wird mehrere Regionen wie China, Japan, Amerika und Europa umfassen und zielt darauf ab, 400.000 Menschen zu mobilisieren. Sie wird zwei monumentale Shows im Tokyo Dome beinhalten, mit einem erwarteten Publikum von 100.000.",
+        visitOfficialSite: "Offizielle Seite besuchen",
+        artistRoles: "Soundproduzent / Sänger / VOCALOID-Produzent / Autor",
+        artistDesc1: "Seit 2017 aktiv, ist 0M_P bekannt für VOCALOID-Songs, die hauptsächlich von Hatsune Miku gesungen werden.",
+        artistDesc2: "2022 machte 0M_P ein großes Debüt bei Polydor Records unter Universal Music Japan und ist derzeit dem Label angeschlossen.",
+        notableWorks: `Bekannte Werke: <span class="font-medium text-gray-600">"You Need", "natural love", "Drama of Play"</span>`,
+        themeSongTitle: "Titelsong",
+        themeSongName: `"Frühling der Blume"`,
+        creditLyrics: "Text, Musik & Gesang",
+        creditMovie: "Video",
+        watchMV: "MV ansehen",
+        streaming: "Streaming / DL",
+        moreFrom: "Mehr von 0M_P",
+        concertBrands: "Konzertmarken",
+        chinaTour2025: `0M_P CHINA TOUR 2025 "今天的事情"`,
+        albums: "Alben",
+        album4th: `0M_P 4. Album "Two-Side Voices"`,
+        albumTour: `Offizielles Album "FLOWERS" (Veröffentlichung am 16.7.2025)`,
+        officialTourAlbum: "Offizielles Tour-Album",
+        releasing: "Veröffentlichung am 16. Juli 2025",
+        learnMore: "Mehr erfahren &rarr;",
+        creditsArt: `Hauptvisual & Künstlerische Leitung von <span class="font-semibold">Yoneyama Mai</span>`,
+        creditsWeb: `Webdesign von <span class="font-semibold">AxM Production</span> / Design Director: <span class="font-semibold">White</span> / Konzeptkünstler: <span class="font-semibold">0M_P</span>`,
+        tourName: `0M_P WORLD TOUR 2025 "FLOWERS"`,
+        venues: {
+            beijing: "Cadillac Arena (ehemals Wukesong Arena)", shanghai: "Mercedes-Benz Arena", changsha: "Hunan International Convention and Exhibition Center", chengdu: "Sichuan Provincial Gymnasium", hongkong: "Hong Kong Coliseum", taipei: "Taipei Arena", tokyo: "Nationalstadion", osaka: "Osaka-jō Halle", nagoya: "Nippon Gaishi Halle", fukuoka: "Fukuoka International Center", sendai: "Sendai Gymnasium", saitama: "Saitama Super Arena", seoul: "Olympische Gymnastik-Arena (KSPO Dome)", kunming: "Yunnan Provincial Gymnasium", london: "Wembley Arena", paris: "Accor Arena", berlin: "Mercedes-Benz Arena", berne: "PostFinance-Arena", oslo: "Oslo Spektrum", la: "The Forum", sf: "Oakland Arena", ny: "Madison Square Garden", vancouver: "Rogers Arena", sydney: "Qudos Bank Arena", melbourne: "Rod Laver Arena"
+        }
+    }
+};
+
+const tourStops = {
+    asia: [
+        { city: { en: 'Beijing', 'zh-CN': '北京', 'zh-TW': '北京', ja: '北京', fr: 'Pékin', de: 'Peking' }, venueKey: 'beijing', dates: '2025.2.14 - 16', color: 'text-rose-500' },
+        { city: { en: 'Shanghai', 'zh-CN': '上海', 'zh-TW': '上海', ja: '上海', fr: 'Shanghai', de: 'Shanghai' }, venueKey: 'shanghai', dates: '2025.2.21 - 23', color: 'text-rose-500' },
+        { city: { en: 'Changsha', 'zh-CN': '长沙', 'zh-TW': '長沙', ja: '長沙', fr: 'Changsha', de: 'Changsha' }, venueKey: 'changsha', dates: '2025.3.1 - 2', color: 'text-rose-500' },
+        { city: { en: 'Chengdu', 'zh-CN': '成都', 'zh-TW': '成都', ja: '成都', fr: 'Chengdu', de: 'Chengdu' }, venueKey: 'chengdu', dates: '2025.3.8 - 9', color: 'text-rose-500' },
+        { city: { en: 'Hong Kong', 'zh-CN': '香港', 'zh-TW': '香港', ja: '香港', fr: 'Hong Kong', de: 'Hongkong' }, venueKey: 'hongkong', dates: '2025.3.14 - 16', color: 'text-rose-500' },
+        { city: { en: 'Taipei', 'zh-CN': '台北', 'zh-TW': '台北', ja: '台北', fr: 'Taipei', de: 'Taipeh' }, venueKey: 'taipei', dates: '2025.3.22 - 23', color: 'text-rose-500' },
+        { city: { en: 'Tokyo', 'zh-CN': '东京', 'zh-TW': '東京', ja: '東京', fr: 'Tokyo', de: 'Tokio' }, venueKey: 'tokyo', dates: '2025.3.29 - 30', color: 'text-rose-500' },
+        { city: { en: 'Osaka', 'zh-CN': '大阪', 'zh-TW': '大阪', ja: '大阪', fr: 'Osaka', de: 'Osaka' }, venueKey: 'osaka', dates: '2025.4.5 - 7', color: 'text-rose-500' },
+        { city: { en: 'Nagoya', 'zh-CN': '名古屋', 'zh-TW': '名古屋', ja: '名古屋', fr: 'Nagoya', de: 'Nagoya' }, venueKey: 'nagoya', dates: '2025.4.13 - 14', color: 'text-rose-500' },
+        { city: { en: 'Fukuoka', 'zh-CN': '福冈', 'zh-TW': '福岡', ja: '福岡', fr: 'Fukuoka', de: 'Fukuoka' }, venueKey: 'fukuoka', dates: '2025.4.20 - 21', color: 'text-rose-500' },
+        { city: { en: 'Sendai', 'zh-CN': '仙台', 'zh-TW': '仙台', ja: '仙台', fr: 'Sendai', de: 'Sendai' }, venueKey: 'sendai', dates: '2025.4.27 - 28', color: 'text-rose-500' },
+        { city: { en: 'Seoul', 'zh-CN': '首尔', 'zh-TW': '首爾', ja: 'ソウル', fr: 'Séoul', de: 'Seoul' }, venueKey: 'seoul', dates: '2025.5.11 - 12', color: 'text-rose-500' },
+        { city: { en: 'Kunming', 'zh-CN': '昆明', 'zh-TW': '昆明', ja: '昆明', fr: 'Kunming', de: 'Kunming' }, venueKey: 'kunming', dates: '2025.5.18 - 19', color: 'text-rose-500' },
+        { city: { en: 'Tokyo (Encore)', 'zh-CN': '东京 (安可场)', 'zh-TW': '東京 (安可場)', ja: '東京 (アンコール)', fr: 'Tokyo (Rappel)', de: 'Tokio (Zugabe)' }, venueKey: 'saitama', dates: '2025.8.15 - 17', color: 'text-rose-500' }
+    ],
+    europe: [
+        { city: { en: 'London', 'zh-CN': '伦敦', 'zh-TW': '倫敦', ja: 'ロンドン', fr: 'Londres', de: 'London' }, venueKey: 'london', dates: '2025.5.31 - 6.2', color: 'text-sky-500' },
+        { city: { en: 'Paris', 'zh-CN': '巴黎', 'zh-TW': '巴黎', ja: 'パリ', fr: 'Paris', de: 'Paris' }, venueKey: 'paris', dates: '2025.6.8 - 9', color: 'text-sky-500' },
+        { city: { en: 'Berlin', 'zh-CN': '柏林', 'zh-TW': '柏林', ja: 'ベルリン', fr: 'Berlin', de: 'Berlin' }, venueKey: 'berlin', dates: '2025.6.15 - 16', color: 'text-sky-500' },
+        { city: { en: 'Berne', 'zh-CN': '伯尔尼', 'zh-TW': '伯恩', ja: 'ベルン', fr: 'Berne', de: 'Bern' }, venueKey: 'berne', dates: '2025.6.21', color: 'text-sky-500' },
+        { city: { en: 'Norse land', 'zh-CN': '奥斯陆', 'zh-TW': '奧斯陸', ja: 'オスロ', fr: 'Oslo', de: 'Oslo' }, venueKey: 'oslo', dates: '2025.6.23', color: 'text-sky-500', fullWidth: true }
+    ],
+    northAmerica: [
+        { city: { en: 'Los Angeles', 'zh-CN': '洛杉矶', 'zh-TW': '洛杉磯', ja: 'ロサンゼルス', fr: 'Los Angeles', de: 'Los Angeles' }, venueKey: 'la', dates: '2025.6.28 - 30', color: 'text-green-500' },
+        { city: { en: 'San Francisco', 'zh-CN': '旧金山', 'zh-TW': '舊金山', ja: 'サンフランシスコ', fr: 'San Francisco', de: 'San Francisco' }, venueKey: 'sf', dates: '2025.7.6 - 7', color: 'text-green-500' },
+        { city: { en: 'New York', 'zh-CN': '纽约', 'zh-TW': '紐約', ja: 'ニューヨーク', fr: 'New York', de: 'New York' }, venueKey: 'ny', dates: '2025.7.12 - 14', color: 'text-green-500' },
+        { city: { en: 'Vancouver', 'zh-CN': '温哥华', 'zh-TW': '溫哥華', ja: 'バンクーバー', fr: 'Vancouver', de: 'Vancouver' }, venueKey: 'vancouver', dates: '2025.7.19 - 20', color: 'text-green-500' }
+    ],
+    australia: [
+        { city: { en: 'Sydney', 'zh-CN': '悉尼', 'zh-TW': '雪梨', ja: 'シドニー', fr: 'Sydney', de: 'Sydney' }, venueKey: 'sydney', dates: '2025.7.25 - 26', color: 'text-amber-500' },
+        { city: { en: 'Melbourne', 'zh-CN': '墨尔本', 'zh-TW': '墨爾本', ja: 'メルボルン', fr: 'Melbourne', de: 'Melbourne' }, venueKey: 'melbourne', dates: '2025.7.28 - 29', color: 'text-amber-500' }
+    ]
+};
+
+
+// --- Language Switching Logic ---
+const langToggleButton = document.getElementById('lang-toggle-btn');
+const langMenu = document.getElementById('lang-menu');
+const currentLangText = document.getElementById('current-lang-text');
+
+langToggleButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langMenu.classList.toggle('hidden');
+});
+
+document.addEventListener('click', () => {
+    langMenu.classList.add('hidden');
+});
+
+function createTourCard(city, venue, dates, color, fullWidth = false) {
+    const fullWidthClass = fullWidth ? 'sm:col-span-2' : '';
+    return `
+        <div class="m3-card ${fullWidthClass}">
+            <p class="font-bold text-xl mb-1">${city}</p>
+            <p class="text-gray-600">${venue}</p>
+            <p class="font-semibold ${color} mt-2">${dates}</p>
+        </div>
+    `;
+}
+
+function renderTourDates(lang) {
+    const langData = translations[lang];
+    const asiaContainer = document.getElementById('asia-tour-grid');
+    const europeContainer = document.getElementById('europe-tour-grid');
+    const naContainer = document.getElementById('na-tour-grid');
+    const ausContainer = document.getElementById('aus-tour-grid');
+
+    asiaContainer.innerHTML = tourStops.asia.map(stop => 
+        createTourCard(stop.city[lang] || stop.city.en, langData.venues[stop.venueKey], stop.dates, stop.color)
+    ).join('');
+
+    europeContainer.innerHTML = tourStops.europe.map(stop => 
+        createTourCard(stop.city[lang] || stop.city.en, langData.venues[stop.venueKey], stop.dates, stop.color, stop.fullWidth)
+    ).join('');
+
+    naContainer.innerHTML = tourStops.northAmerica.map(stop => 
+        createTourCard(stop.city[lang] || stop.city.en, langData.venues[stop.venueKey], stop.dates, stop.color)
+    ).join('');
+
+    ausContainer.innerHTML = tourStops.australia.map(stop => 
+        createTourCard(stop.city[lang] || stop.city.en, langData.venues[stop.venueKey], stop.dates, stop.color)
+    ).join('');
+}
+
+
+function changeLanguage(lang) {
+    const langData = translations[lang];
+    if (!langData) return;
+
+    // Update all elements with data-lang-key
+    document.querySelectorAll('[data-lang-key]').forEach(el => {
+        const key = el.getAttribute('data-lang-key');
+        if (langData[key]) {
+            // Keep specific titles in English
+            const fixedEnglishKeys = ['asiaTour', 'europeTour', 'naTour', 'ausTour', 'tourName'];
+            if (fixedEnglishKeys.includes(key)) {
+                 el.innerHTML = translations['en'][key];
+            } else {
+                el.innerHTML = langData[key];
+            }
+        }
+    });
+
+    // Update language switcher text
+    currentLangText.textContent = langData.langName;
+    
+    // Re-render tour dates with translated venue names
+    renderTourDates(lang);
+
+    // Hide menu after selection
+    langMenu.classList.add('hidden');
+    
+    // Set html lang attribute
+    document.documentElement.lang = lang.split('-')[0];
+}
+
+// Initial load
+document.addEventListener('DOMContentLoaded', () => {
+    // Detect browser language and set default if available
+    const userLang = navigator.language || navigator.userLanguage;
+    let initialLang = 'en';
+    if (userLang.startsWith('de')) initialLang = 'de';
+    else if (userLang.startsWith('zh-CN')) initialLang = 'zh-CN';
+    else if (userLang.startsWith('zh')) initialLang = 'zh-TW';
+    else if (userLang.startsWith('ja')) initialLang = 'ja';
+    else if (userLang.startsWith('fr')) initialLang = 'fr';
+    
+    changeLanguage(initialLang);
+});
+
+</script>
+
+</body>
+</html>
