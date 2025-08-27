@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0M_P ARENA TOUR 2025 "HERE&NOW" OFFICIAL SITE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans SC', 'Noto Sans TC', 'Noto Sans JP', sans-serif;
+            background-color: #f0f8ff; /* Alice Blue - a very light sky blue */
+            color: #1e3a8a; /* Darker blue for text */
+        }
+        .hero-section {
+            background-image: url('https://tour.0m-p.space/Arena25/images/KV.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .hero-logo {
+            filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.7));
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.3s ease;
+        }
+        .hero-logo:hover {
+            transform: translateY(4px);
+            filter: drop-shadow(0 6px 16px rgba(255, 255, 255, 0.9));
+        }
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 1,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+        .lang-switcher-btn {
+            transition: all 0.3s ease;
+        }
+        .lang-switcher-options {
+            transition: all 0.3s ease-in-out;
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Language Switcher -->
+    <div id="lang-switcher" class="fixed top-6 right-6 z-50">
+        <button id="lang-switcher-btn" class="lang-switcher-btn w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white">
+            <span class="material-symbols-outlined text-sky-500">language</span>
+        </button>
+        <div id="lang-switcher-options" class="lang-switcher-options absolute top-0 right-0 w-12 rounded-full bg-white shadow-xl overflow-hidden opacity-0 pointer-events-none">
+            <a href="#" class="lang-option block w-12 h-12 flex items-center justify-center text-sm font-bold text-sky-600 hover:bg-sky-100" data-lang="en">EN</a>
+            <a href="#" class="lang-option block w-12 h-12 flex items-center justify-center text-sm font-bold text-sky-600 hover:bg-sky-100" data-lang="zh-CN">简</a>
+            <a href="#" class="lang-option block w-12 h-12 flex items-center justify-center text-sm font-bold text-sky-600 hover:bg-sky-100" data-lang="zh-TW">繁</a>
+            <a href="#" class="lang-option block w-12 h-12 flex items-center justify-center text-sm font-bold text-sky-600 hover:bg-sky-100" data-lang="ja">日</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <img id="main-logo" src="https://tour.0m-p.space/Arena25/images/LOGO.svg" alt="0M_P ARENA TOUR 2025 HERE&NOW LOGO" class="hero-logo w-4/5 max-w-4xl mb-4">
+        <p id="official-site-text" class="text-white text-xl md:text-2xl tracking-widest font-light" style="text-shadow: 0 1px 4px rgba(0,0,0,0.3)"></p>
+    </header>
+
+    <main class="container mx-auto px-4 py-16 md:py-24 space-y-20 md:space-y-32">
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="scroll-reveal">
+            <h2 id="schedule-title" class="text-4xl md:text-5xl font-black text-center mb-12 md:mb-16 text-sky-600"></h2>
+            <div id="schedule-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- Schedule cards will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Retrospective & Next Tour Section -->
+        <section id="history" class="scroll-reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                <!-- Tour Retrospective Card -->
+                <div class="card rounded-3xl p-6 md:p-8 shadow-lg overflow-hidden">
+                    <h3 id="tour-retrospective-title" class="text-2xl font-bold mb-4 text-sky-700"></h3>
+                    <img src="https://links.0m-p.space/FLOWERS-MAIN-VISUAL.png" onerror="this.onerror=null;this.src='https://placehold.co/1600x900/a0e9ff/1e3a8a?text=FLOWERS+VISUAL';" alt="0M_P WORLD TOUR 2025 FLOWERS Main Visual" class="rounded-2xl mb-4 aspect-video object-cover">
+                    <p id="tour-retrospective-desc" class="text-base mb-4"></p>
+                    <a href="https://tour.0m-p.space/25" target="_blank" class="inline-block bg-sky-500 text-white font-bold py-2 px-5 rounded-full hover:bg-sky-600 transition-colors" data-translate="officialSiteLink"></a>
+                </div>
+
+                <!-- 10th Anniversary Tour Card -->
+                <div class="card rounded-3xl p-6 md:p-8 shadow-lg overflow-hidden">
+                    <h3 id="anniversary-tour-title" class="text-2xl font-bold mb-4 text-sky-700"></h3>
+                    <img src="https://tour.0m-p.space/26/26-TOUR-KV.png" onerror="this.onerror=null;this.src='https://placehold.co/1600x900/a0e9ff/1e3a8a?text=WHOLE+WORLD+VISUAL';" alt="0M_P 10th ANNIVERSARY TOUR 2026 WHOLE WORLD Main Visual" class="rounded-2xl mb-4 aspect-video object-cover">
+                    <p id="anniversary-tour-desc" class="text-base mb-4"></p>
+                    <a href="https://tour.0m-p.space/26" target="_blank" class="inline-block bg-sky-500 text-white font-bold py-2 px-5 rounded-full hover:bg-sky-600 transition-colors" data-translate="officialSiteLink"></a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About 0M_P Section -->
+        <section id="about" class="scroll-reveal">
+            <div class="card rounded-3xl p-8 md:p-12 shadow-lg flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                <img src="https://links.0m-p.space/Avatar.png" onerror="this.onerror=null;this.src='https://placehold.co/400x400/a0e9ff/1e3a8a?text=0M_P';" alt="0M_P Avatar" class="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover shadow-md flex-shrink-0">
+                <div class="text-center md:text-left">
+                    <h2 class="text-4xl font-black text-sky-600">0M_P</h2>
+                    <p id="about-roles" class="text-lg text-sky-800 mt-2 mb-4"></p>
+                    <p id="about-bio" class="text-base mb-4"></p>
+                    <p id="about-works" class="text-base"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other Info Section -->
+        <section id="other-info" class="scroll-reveal">
+             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                <!-- Projects -->
+                <div class="card rounded-3xl p-6 md:p-8 shadow-lg">
+                    <h3 id="projects-title" class="text-2xl font-bold mb-6 text-sky-700"></h3>
+                    <div class="space-y-4">
+                        <a href="https://anni.0m-p.space/10th" target="_blank" class="block font-medium hover:text-sky-500 transition-colors">0M_P 10th ANNIVERSARY PROJECT -「RE : WiND」</a>
+                        <a href="https://vlive.0m-p.space" target="_blank" class="block font-medium hover:text-sky-500 transition-colors">0M_P Virtual Live "On-Site"</a>
+                        <a href="https://tour.0m-p.space" target="_blank" class="block font-medium hover:text-sky-500 transition-colors">0M_P WORLD TOUR</a>
+                    </div>
+                </div>
+                <!-- Albums -->
+                 <div class="card rounded-3xl p-6 md:p-8 shadow-lg">
+                    <h3 id="albums-title" class="text-2xl font-bold mb-6 text-sky-700"></h3>
+                    <div class="space-y-4">
+                        <a href="https://album.0m-p.space/5th" target="_blank" class="block font-medium hover:text-sky-500 transition-colors">0M_P 5th Album "Brand New World" <span class="text-sm opacity-80">2025.9.10 Release</span></a>
+                        <a href="https://album.0m-p.space/10thBEST" target="_blank" class="block font-medium hover:text-sky-500 transition-colors">0M_P 10th ANNIVERSARY COMPLICATION ALBUM「BEST of 0M_P 2016-2026」 <span class="text-sm opacity-80">2026.8.12 Release</span></a>
+                        <a href="https://album.0m-p.space/tour_25" target="_blank" class="block font-medium hover:text-sky-500 transition-colors">0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM <span class="text-sm opacity-80">2025.7.16 Release</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/70 py-12">
+        <div class="container mx-auto px-4 text-center text-gray-600">
+            <div class="flex justify-center items-center gap-8 mb-8">
+                 <a href="https://records.0m-p.space" target="_blank">
+                    <img src="https://records.0m-p.space/assets/images/logo.svg" alt="Now2Future RECORDS Logo" class="h-10 opacity-70 hover:opacity-100 transition-opacity">
+                </a>
+                <a href="https://www.universal-music.co.jp/" target="_blank">
+                    <img src="https://tour.0m-p.space/Arena25/images/Universal_Music_Group_logo.svg" alt="Universal Music Group Logo" class="h-10 opacity-70 hover:opacity-100 transition-opacity">
+                </a>
+            </div>
+            <div class="text-sm space-y-2">
+                <p>Shot by Naoki Sato (Tokyo Camera Date Ltd.)</p>
+                <p>Web Designer : White (AxM) / Developed by MORO CODE CENTER</p>
+                <p class="mt-4 text-xs opacity-80">© 2025 UNIVERSAL MUSIC LLC / 0M_P ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // --- DATA ---
+        const scheduleData = [
+            { cityKey: 'shanghai', dates: '10.2-3', venueKey: 'mercedes', shows: 4 },
+            { cityKey: 'beijing', dates: '10.5', venueKey: 'cadillac', shows: 2 },
+            { cityKey: 'changsha', dates: '10.11-12', venueKey: 'helong', shows: 2 },
+            { cityKey: 'chenzhou', dates: '10.15', venueKey: 'chenzhou_olympic', shows: 1 },
+            { cityKey: 'guangzhou', dates: '10.22', venueKey: 'guangzhou_arena', shows: 1 },
+            { cityKey: 'hongkong', dates: '10.24', venueKey: 'asiaworld', shows: 1 },
+            { cityKey: 'taipei', dates: '10.26', venueKey: 'taipei_arena', shows: 1 },
+            { cityKey: 'tokyo', dates: '11.1-2', venueKey: 'ariake', shows: 4 },
+            { cityKey: 'osaka', dates: '11.5', venueKey: 'expo_arena', shows: 1 },
+            { cityKey: 'seoul', dates: '11.8', venueKey: 'kspo_dome', shows: 1 },
+            { cityKey: 'london', dates: '11.12', venueKey: 'o2_arena', shows: 1 },
+            { cityKey: 'paris', dates: '11.14', venueKey: 'accor_arena', shows: 1 },
+            { cityKey: 'los_angeles', dates: '11.16', venueKey: 'crypto_arena', shows: 1 },
+            { cityKey: 'dc', dates: '11.22', venueKey: 'capital_one_arena', shows: 1 },
+            { cityKey: 'nanning', dates: '11.29', venueKey: 'guangxi_gym', shows: 1 },
+            { cityKey: 'yokohama', dates: '12.6-7', venueKey: 'k_arena', shows: 3 },
+        ];
+
+        const translations = {
+            'en': {
+                officialSiteText: "OFFICIAL SITE",
+                scheduleTitle: "SCHEDULE",
+                tourRetrospectiveTitle: "TOUR RETROSPECTIVE",
+                tourRetrospectiveDesc: "A 5-month journey across 24 cities, captivating a total of 350,000 fans. Highlights include two monumental days at the Japan National Stadium, with 140,000 attendees.",
+                anniversaryTourTitle: "0M_P 10th ANNIVERSARY TOUR 2026 \"WHOLE WORLD\"",
+                anniversaryTourDesc: "Spanning from February to July 2026, this tour will cover Asia, the Americas, and Europe, with an estimated audience of 700,000. It features 3 shows at Tokyo Dome, 2 shows at Beijing National Stadium (Bird's Nest), and 2 shows at Kyocera Dome Osaka, totaling 350,000 attendees for these three venues alone.",
+                officialSiteLink: "Official Site",
+                aboutRoles: "Sound Producer / Singer / VOCALOID Producer / Writer",
+                aboutBio: "Active since 2017, primarily featuring Hatsune Miku in VOCALOID songs. Made a major debut in 2022 from Polydor Records under Universal Music Japan.",
+                aboutWorks: "Notable works include \"You Need\", \"natural love\", and \"Spring of Flowers\".",
+                projectsTitle: "PROJECTS",
+                albumsTitle: "ALBUMS",
+                shows: "Shows",
+                show: "Show",
+                cities: { shanghai: "Shanghai", beijing: "Beijing", changsha: "Changsha", chenzhou: "Chenzhou", guangzhou: "Guangzhou", hongkong: "Hong Kong", taipei: "Taipei", tokyo: "Tokyo", osaka: "Osaka", seoul: "Seoul", london: "London", paris: "Paris", los_angeles: "Los Angeles", dc: "D.C.", nanning: "Nanning", yokohama: "Yokohama" },
+                venues: { mercedes: "Mercedes-Benz Arena", cadillac: "Cadillac Arena", helong: "He Long Sports Center Gymnasium", chenzhou_olympic: "Chenzhou Olympic Sports Center Gymnasium", guangzhou_arena: "Guangzhou International Sports Arena", asiaworld: "AsiaWorld-Arena", taipei_arena: "Taipei Arena", ariake: "Ariake Arena", expo_arena: "EXPO Arena", kspo_dome: "KSPO Dome", o2_arena: "The O2 Arena", accor_arena: "Accor Arena", crypto_arena: "Crypto.com Arena", capital_one_arena: "Capital One Arena", guangxi_gym: "Guangxi Gymnasium", k_arena: "K-Arena Yokohama" },
+            },
+            'zh-CN': {
+                officialSiteText: "官方网站",
+                scheduleTitle: "巡演日程",
+                tourRetrospectiveTitle: "演唱会回顾 - 0M_P WORLD TOUR 2025 \"FLOWERS\"",
+                tourRetrospectiveDesc: "历时5个月，跨越24座城市，共计动员35万人。其中包括为期两天的日本国立竞技场演唱会，共动员14万人。",
+                anniversaryTourTitle: "0M_P 10周年纪念巡演 2026 \"WHOLE WORLD\"",
+                anniversaryTourDesc: "将于2026年2月至7月举办，覆盖亚洲、美洲、欧洲等地区，预计动员70万人。其中包含3天3场的东京巨蛋演出、1天2场的北京国家体育场（鸟巢）演出、2天2场的KYOCERA DOME OSAKA演出，三地演出预计共计动员35万人。",
+                officialSiteLink: "官方网站",
+                aboutRoles: "音乐制作人 / 歌手 / VOCALOID制作人 / 作家",
+                aboutBio: "2017年开始活动，VOCALOID歌曲主要由初音未来演唱。2022年从环球音乐旗下的Polydor Records主流出道，目前所属日本环球音乐旗下。",
+                aboutWorks: "作品有《You Need》、《natural love》、《Spring of Flowers》等。",
+                projectsTitle: "企划",
+                albumsTitle: "专辑",
+                shows: "场公演",
+                show: "场公演",
+                cities: { shanghai: "上海", beijing: "北京", changsha: "长沙", chenzhou: "郴州", guangzhou: "广州", hongkong: "香港", taipei: "台北", tokyo: "东京", osaka: "大阪", seoul: "首尔", london: "伦敦", paris: "巴黎", los_angeles: "洛杉矶", dc: "华盛顿", nanning: "南宁", yokohama: "横滨" },
+                venues: { mercedes: "梅赛德斯-奔驰文化中心", cadillac: "凯迪拉克中心", helong: "贺龙体育中心体育馆", chenzhou_olympic: "郴州奥林匹克体育中心体育馆", guangzhou_arena: "广州国际体育演艺中心", asiaworld: "亚洲国际博览馆", taipei_arena: "台北小巨蛋", ariake: "有明体育馆", expo_arena: "万博纪念公园竞技场", kspo_dome: "奥林匹克体操竞技场", o2_arena: "O2体育馆", accor_arena: "雅高体育馆", crypto_arena: "Crypto.com体育馆", capital_one_arena: "第一资本体育馆", guangxi_gym: "广西体育馆", k_arena: "K-Arena 横滨" },
+            },
+            'zh-TW': {
+                officialSiteText: "官方網站",
+                scheduleTitle: "巡演日程",
+                tourRetrospectiveTitle: "演唱會回顧 - 0M_P WORLD TOUR 2025 \"FLOWERS\"",
+                tourRetrospectiveDesc: "歷時5個月，跨越24座城市，共計動員35萬人。其中包括為期兩天的日本國立競技場演唱會，共動員14萬人。",
+                anniversaryTourTitle: "0M_P 10週年紀念巡演 2026 \"WHOLE WORLD\"",
+                anniversaryTourDesc: "將於2026年2月至7月舉辦，覆蓋亞洲、美洲、歐洲等地區，預計動員70萬人。其中包含3天3場的東京巨蛋演出、1天2場的北京國家體育場（鳥巢）演出、2天2場的KYOCERA DOME OSAKA演出，三地演出預計共計動員35萬人。",
+                officialSiteLink: "官方網站",
+                aboutRoles: "音樂製作人 / 歌手 / VOCALOID製作人 / 作家",
+                aboutBio: "2017年開始活動，VOCALOID歌曲主要由初音未來演唱。2022年從環球音樂旗下的Polydor Records主流出道，目前所屬日本環球音樂旗下。",
+                aboutWorks: "作品有《You Need》、《natural love》、《Spring of Flowers》等。",
+                projectsTitle: "企劃",
+                albumsTitle: "專輯",
+                shows: "場公演",
+                show: "場公演",
+                cities: { shanghai: "上海", beijing: "北京", changsha: "長沙", chenzhou: "郴州", guangzhou: "廣州", hongkong: "香港", taipei: "台北", tokyo: "東京", osaka: "大阪", seoul: "首爾", london: "倫敦", paris: "巴黎", los_angeles: "洛杉磯", dc: "華盛頓", nanning: "南寧", yokohama: "橫濱" },
+                venues: { mercedes: "梅賽德斯-奔馳文化中心", cadillac: "凱迪拉克中心", helong: "賀龍體育中心體育館", chenzhou_olympic: "郴州奧林匹克體育中心體育館", guangzhou_arena: "廣州國際體育演藝中心", asiaworld: "亞洲國際博覽館", taipei_arena: "台北小巨蛋", ariake: "有明體育館", expo_arena: "萬博紀念公園競技場", kspo_dome: "奧林匹克體操競技場", o2_arena: "O2體育館", accor_arena: "雅高體育館", crypto_arena: "Crypto.com體育館", capital_one_arena: "第一資本體育館", guangxi_gym: "廣西體育館", k_arena: "K-Arena 橫濱" },
+            },
+            'ja': {
+                officialSiteText: "公式サイト",
+                scheduleTitle: "スケジュール",
+                tourRetrospectiveTitle: "ツアー回顾 - 0M_P WORLD TOUR 2025 \"FLOWERS\"",
+                tourRetrospectiveDesc: "5ヶ月にわたり24都市を巡り、合計35万人を動員。日本の国立競技場での2日間の公演では14万人を動員しました。",
+                anniversaryTourTitle: "0M_P 10周年記念ツアー 2026 \"WHOLE WORLD\"",
+                anniversaryTourDesc: "2026年2月から7月にかけて、アジア、アメリカ、ヨーロッパをカバーし、推定70万人を動員。東京ドームでの3公演、北京国家体育場（鳥の巣）での2公演、京セラドーム大阪での2公演を含み、これら3会場だけで合計35万人を動員予定です。",
+                officialSiteLink: "公式サイト",
+                aboutRoles: "サウンドプロデューサー / シンガー / VOCALOIDプロデューサー / 作家",
+                aboutBio: "2017年から活動開始。VOCALOID楽曲は主に初音ミクが歌唱。2022年にユニバーサルミュージックジャパン傘下のPolydor Recordsからメジャーデビュー。",
+                aboutWorks: "代表作に「You Need」「natural love」「Spring of Flowers」など。",
+                projectsTitle: "プロジェクト",
+                albumsTitle: "アルバム",
+                shows: "公演",
+                show: "公演",
+                cities: { shanghai: "上海", beijing: "北京", changsha: "長沙", chenzhou: "郴州", guangzhou: "広州", hongkong: "香港", taipei: "台北", tokyo: "東京", osaka: "大阪", seoul: "ソウル", london: "ロンドン", paris: "パリ", los_angeles: "ロサンゼルス", dc: "ワシントンD.C.", nanning: "南寧", yokohama: "横浜" },
+                venues: { mercedes: "メルセデス・ベンツ・アリーナ", cadillac: "キャデラック・アリーナ", helong: "賀竜体育中心体育館", chenzhou_olympic: "郴州オリンピックスポーツセンター体育館", guangzhou_arena: "広州国際体育アリーナ", asiaworld: "アジアワールド・アリーナ", taipei_arena: "台北アリーナ", ariake: "有明アリーナ", expo_arena: "EXPOアリーナ", kspo_dome: "KSPOドーム", o2_arena: "O2アリーナ", accor_arena: "アコー・アリーナ", crypto_arena: "クリプト・ドットコム・アリーナ", capital_one_arena: "キャピタル・ワン・アリーナ", guangxi_gym: "広西体育館", k_arena: "Kアリーナ横浜" },
+            }
+        };
+
+        // --- FUNCTIONS ---
+        
+        function setLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            // Set logo based on language
+            const mainLogo = document.getElementById('main-logo');
+            if (lang.startsWith('zh')) {
+                mainLogo.src = 'https://tour.0m-p.space/Arena25/images/LOGO_ZH.svg';
+            } else {
+                mainLogo.src = 'https://tour.0m-p.space/Arena25/images/LOGO.svg';
+            }
+
+            // Update simple text elements
+            document.getElementById('official-site-text').textContent = t.officialSiteText;
+            document.getElementById('schedule-title').textContent = t.scheduleTitle;
+            document.getElementById('tour-retrospective-title').textContent = t.tourRetrospectiveTitle;
+            document.getElementById('tour-retrospective-desc').innerHTML = t.tourRetrospectiveDesc;
+            document.getElementById('anniversary-tour-title').textContent = t.anniversaryTourTitle;
+            document.getElementById('anniversary-tour-desc').innerHTML = t.anniversaryTourDesc;
+            document.getElementById('about-roles').textContent = t.aboutRoles;
+            document.getElementById('about-bio').textContent = t.aboutBio;
+            document.getElementById('about-works').textContent = t.aboutWorks;
+            document.getElementById('projects-title').textContent = t.projectsTitle;
+            document.getElementById('albums-title').textContent = t.albumsTitle;
+
+            // Update elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (t[key]) {
+                    el.textContent = t[key];
+                }
+            });
+
+            // Generate Schedule
+            generateSchedule(lang);
+            
+            // Store preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        function generateSchedule(lang) {
+            const grid = document.getElementById('schedule-grid');
+            const t = translations[lang];
+            grid.innerHTML = ''; // Clear existing cards
+
+            scheduleData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card text-center rounded-3xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300';
+                
+                let iconsHtml = '';
+                if (item.shows === 1) {
+                    iconsHtml = `<span class="material-symbols-outlined text-purple-500">dark_mode</span>`;
+                } else {
+                    iconsHtml = `<span class="material-symbols-outlined text-yellow-500">light_mode</span> <span class="material-symbols-outlined text-purple-500">dark_mode</span>`;
+                }
+
+                const showText = item.shows > 1 ? t.shows : t.show;
+
+                card.innerHTML = `
+                    <h4 class="text-xl font-bold text-sky-800">${t.cities[item.cityKey]}</h4>
+                    <p class="text-lg font-medium my-1">${item.dates}</p>
+                    <p class="text-sm opacity-80 min-h-[2.5rem]">${t.venues[item.venueKey]}</p>
+                    <div class="border-t my-4 border-sky-200"></div>
+                    <div class="flex items-center justify-center gap-2">
+                        ${iconsHtml}
+                        <span class="font-semibold">${item.shows} ${showText}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        function getInitialLanguage() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && translations[savedLang]) {
+                return savedLang;
+            }
+            const browserLang = navigator.language;
+            if (browserLang.startsWith('zh-CN')) return 'zh-CN';
+            if (browserLang.startsWith('zh-TW') || browserLang.startsWith('zh-HK')) return 'zh-TW';
+            if (browserLang.startsWith('ja')) return 'ja';
+            return 'en';
+        }
+
+        // --- EVENT LISTENERS & INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Language Switcher Logic
+            const langBtn = document.getElementById('lang-switcher-btn');
+            const langOptions = document.getElementById('lang-switcher-options');
+            let isLangMenuOpen = false;
+
+            langBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isLangMenuOpen = !isLangMenuOpen;
+                if(isLangMenuOpen) {
+                    langOptions.style.opacity = '1';
+                    langOptions.style.pointerEvents = 'auto';
+                    langOptions.style.height = `${4 * 3}rem`; // 4 options * 3rem height
+                } else {
+                    langOptions.style.opacity = '0';
+                    langOptions.style.pointerEvents = 'none';
+                    langOptions.style.height = '3rem';
+                }
+            });
+            
+            document.addEventListener('click', () => {
+                if(isLangMenuOpen) {
+                    isLangMenuOpen = false;
+                    langOptions.style.opacity = '0';
+                    langOptions.style.pointerEvents = 'none';
+                    langOptions.style.height = '3rem';
+                }
+            });
+
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setLanguage(e.target.dataset.lang);
+                });
+            });
+
+            // Set initial language
+            const initialLang = getInitialLanguage();
+            setLanguage(initialLang);
+
+            // Scroll Reveal Animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+    </script>
+</body>
+</html>
