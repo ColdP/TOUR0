@@ -1,0 +1,51 @@
+0M_P ARENA TOUR 2025 "HERE&NOW" OFFICIAL SITE
+0M_P 竞技场巡回演唱会 2025 "今天的事情" 官方网站
+
+界面设计风格、颜色、字体等要求符合"HERE&NOW"的主题（主题色为彩虹色+白色主题）
+采用WWDC25上推出的全新的Liquid Glass设计风格（https://developer.apple.com/documentation/TechnologyOverviews/liquid-glass）的设计语言
+页面语言为简体中文，繁体中文，英语，日语
+根据用户的系统语言自动设置语言，且提供一个language switcher进行切换（一开始为一个小地球图标，点击后展开）
+图标资源来自Material Symbols
+
+1.大标题+主视觉图
+主视觉图 https://tour.0m-p.space/Arena25/KV.png
+LOGO https://tour.0m-p.space/Arena25/LOGO.svg（图片包含0M_P WORLD TOUR 2025 "FLOWERS"，不需要重复文字，覆盖在主视觉图上面，且有白色阴影）
+OFFICIAL SITE （size小于LOGO）
+语言为中文的条件下LOGO为https://tour.0m-p.space/Arena25/LOGO_ZH.svg
+
+2.ARENA TOUR的举办时间为2025年10-12月，具体安排如下：
+Shanghai / 10.2-3 / Mercedes-Benz Arena / 4 Shows
+Beijing / 10.5 / Cadillac Arena / 2 Shows
+Changsha / 10.11-12 / He Long Sports Center Gymnasium / 2 Shows
+Chenzhou / 10.15 / Chenzhou Olympic Sports Center Gymnasium / 1 Show
+Guangzhou / 10.22 / Guangzhou International Sports Arena / 1 Show
+Hong Kong / 10.24 / AsiaWorld-Arena / 1 Show
+Taipei / 10.26 / Taipei Arena / 1 Show
+Tokyo / 11.1-11.2 / Ariake Arena / 4 Shows
+Osaka / 11.5 / EXPO Arena / 1 Show
+Seoul / 11.8 / KSPO Dome / 1 Show
+London / 11.12 / The O2 Arena / 1 Show
+Paris / 11.14 / Accor Arena / 1 Show
+Los Angeles / 11.16 / Crypto.com Arena / 1 Show
+D.C. / 11.22 / Capital One Arena / 1 Show
+Naning / 11.29 / Guangxi Gymnasium / 1 Shows
+Yokohama / 12.6-7 / K-Arena Yokohama / 3 Shows
+
+显示格式如以下示例（文本在每一个card里居中显示）
+
+London
+6.6-7
+OVO Arena Wembley
+
+太阳（黄）/月亮（紫）图标（来自Google Fonts Material Symbols)    4公演
+如果该城市公演场数等于1，则显示一个月亮图标，等于2或大于2，则显示一个太阳一个月亮
+
+3.演唱会回顾
+0M_P WORLD TOUR 2025 "FLOWERS"
+5个月，24座城市，共计动员35万人
+包含两天日本國立競技場演唱会，共动员14万人
+
+4.0M_P 10th ANNIVERSARY TOUR 2026 "HERE,LIGHT"宣传
+2026年2-7月举办，覆盖中国预计动员40万人
+包含2天2场的东京巨蛋演唱会，预计动员10万人
+Official Site: tour.0m-p.space/2026
