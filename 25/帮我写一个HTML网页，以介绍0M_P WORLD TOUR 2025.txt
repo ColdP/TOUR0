@@ -1,0 +1,76 @@
+帮我写一个HTML网页，以介绍0M_P WORLD TOUR 2025 "FLOWERS"，界面设计风格、颜色、字体等要求符合"FLOWERS"的主题（主题色为彩虹色+白色主题），采用Material 3 Expressive（https://m3.material.io/blog/building-with-m3-expressive）的设计语言，页面语言为英文
+
+分为以下几个部分：
+1.大标题+主视觉图
+主视觉图 https://links.0m-p.space/FLOWERS-MAIN-VISUAL.png
+LOGO https://links.0m-p.space/FLOWERS-LOGO.svg（图片包含0M_P WORLD TOUR 2025 "FLOWERS"，不需要重复文字，覆盖在主视觉图上面，且有白色阴影）
+OFFICIAL SITE （size小于LOGO）
+
+2.WORLD TOUR的举办时间为2025年2-7月，具体安排如下：
+Asia Tour
+Beijing 2025.2.14 - 16 at Cadillac Arena (formerly Wukesong Arena)
+Shanghai 2025.2.21 - 23 at Mercedes-Benz Arena
+Changsha 2025.3.1 - 3.2 at Hunan International Convention and Exhibition Center
+Chengdu 2025.3.8 - 3.9 at Sichuan Provincial Gymnasium
+Hong Kong 2025.3.14 - 16 at Hong Kong Coliseum
+Taipei 2025.3.22 - 23 at Taipei Arena
+Tokyo 2025.3.29 - 30 at 國立競技場 / National Stadium
+Osaka 2025.4.5 - 7 at Osaka-jō Hall
+Nagoya 2025.4.13 - 14 at Nippon Gaishi Hall
+Fukuoka 2025.4.20 - 21 at Fukuoka International Center,
+Sendai 2025.4.27 - 28 at Sendai Gymnasium
+Tokyo 2025.8.15 - 17 at Saitama Super Arena
+Seoul 2025.5.11 - 12 at Olympic Gymnastics Arena (KSPO Dome)
+Kunming 2025.5.18 -19 at Yunnan Provincial Gymnasium
+
+Europe Tour
+Supported by ROLL MUSIC COMPANY
+London 2025.5.31 - 6.2 at Wembley Arena
+Paris 2025.6.8 - 9 at Accor Arena
+Berlin 2025.6.15 - 16 at Mercedes-Benz Arena
+Berne 2025.6.21 at Post Finance Arena
+Norse land 2025.6.23 at Oslo Spektrum
+
+North America Tour
+Supported by ROLL MUSIC COMPANY
+Los Angeles 2025.6.28 - 30 at The Forum
+San Francisco 2025.7.6 - 7 at Oakland Arena
+New York 2025.7.12 - 14 at Madison Square Garden
+Vancouver 2025.7.19 - 20 at Rogers Arena
+
+Australia Tour
+Sydney 2025.7.25 - 26 at Qudos Bank Arena
+Melbourne 2025.7.28 - 29 at Rod Laver Arena
+
+
+3.演唱会回顾
+0M_P WORLD TOUR 2025 "FLOWERS"
+5个月 24座城市，预计动员35万人
+包含两天日本國立競技場演唱会，共动员14万人
+
+4.0M_P WORLD TOUR 2026 "HERE,LIGHT"宣传
+2026年2-7月举办，覆盖中国预计动员70万人
+包含3天3场的东京巨蛋演出、1天2场的北京国家体育场（鸟巢）演出、2天2场的KYOCERA DOME OSAKA演出，三地演出预计共计动员35万人
+Official Site: tour.0m-p.space/26
+
+5.0M_P介绍
+Avatar：https://links.0m-p.space/Avatar.png
+Sound Producer / Singer / VOCALOID Producer / Writer
+2017开始活动，VOCALOID歌曲主要由初音未来演唱
+2022从环球音乐旗下的Polydor Records主流出道，目前所属日本环球音乐旗下
+作品有"You Need" "natural love" "Drama of Play"
+
+6.0M_P其他信息
+演唱会品牌
+0M_P Virtual Live "On-Site" (vlive.0m-p.space)
+0M_P WORLD TOUR (tour.0m-p.space)
+0M_P CHINA TOUR 2025 "今天的事情" (tour.0m-p.space/China/2025)
+专辑
+0M_P 4th Album "Two-Side Voices" (album.0m-p.space/4th)
+0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM 2025.7.16 Release (album.0m-p.space/tour_25)
+
+7.版权信息
+https://www.universalmusic.com/wp-content/themes/umgcore2/assets/img/logo.png （UNVIERSAL MUSIC GROUP LOGO，指向https://www.universal-music.co.jp/）
+Main Visual & Art Directed by 米山舞
+Web Designed by AxM Production / Design Director : White / Concept Artist : 0M_P
+© 2025 UNIVERSAL MUSIC LLC / 0M_P ALL RIGHTS RESERVED.

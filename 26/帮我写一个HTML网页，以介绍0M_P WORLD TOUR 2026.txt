@@ -1,0 +1,122 @@
+帮我写一个HTML网页，以介绍0M_P 10th ANNIVERSARY WORLD TOUR "WHOLE WORLD"，界面设计风格、颜色、字体等要求符合"光"的主题（主题色为蓝色+暗色主题），采用Material 3 Expressive（https://m3.material.io/blog/building-with-m3-expressive）的设计语言，页面语言为英文、简体中文、繁体中文、日文、德语、意大利语、法语，且支持切换语言
+整个页面有丝滑的动画效果
+Language Switcher默认为小地球图标（来自Google Material symbols）点击后出现语言列表，，背景有Liquid Glass效果，示例如下，基于以下代码加大模糊半径：
+html,body{height:100%;min-height:500vh;margin:0;font-family:system-ui,sans-serif;overflow-x:hidden}
+.bg{position:absolute;inset:0;z-index:-1}
+.bg img{width:100%;display:block}
+
+.glass{
+  position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-50%);
+  width:20rem;height:20rem;border-radius:50%;
+  background:rgba(255,255,255,.08);border:2px solid transparent;
+  box-shadow:0 0 0 2px rgba(255,255,255,.6),0 16px 32px rgba(0,0,0,.12);
+  backdrop-filter:url(#frosted);-webkit-backdrop-filter:url(#frosted);
+  display:grid;place-items:center;cursor:pointer;outline:0;
+}
+
+.glass::before,
+.glass::after{
+  content:"";position:absolute;width:40%;height:10px;background:#fff;border-radius:10px;
+}
+.glass::after{transform:rotate(90deg)}
+
+分为以下几个部分：
+1.大标题 主视觉图（header，铺满整个屏幕顶端）
+LOGO https://tour.0m-p.space/26/26-TOUR-LOGO.png（图片包含0M_P 10th ANNIVERSARY WORLD TOUR "WHOLE WORLD"，不需要重复文字）
+主视觉图 https://tour.0m-p.space/26/26-TOUR-KV.png (加入半径很小的高斯模糊效果，5px左右）
+Finding myself in the Whole World. / 在整个世界里，找寻自我。（size小于LOGO，会忽明忽暗，请你自动翻译为其它语言并嵌入代码）
+
+2.WORLD TOUR的举办时间为2026年2-6月，总共经过44座城市，举办104场公演。具体信息如下（城市名默认需要翻译，当选项语言为简体中文时场馆翻译为简体中文，其他语言环境保持英文）
+Tokyo / 2.14-16 / TOKYO DOME / 3公演
+Osaka / 2.21-22 / KYOCERA DOME OSAKA / 2公演
+Hokkaido / 2.24-25 / Hokkai Kitayell / 4公演
+Okinawa / 2.27 / Okinawa Arena / 2公演
+Nagoya / 3.1 / Nippon Gaishi Hall / 2公演
+Fukuoka / 3.4 / Fukuoka Kokusai Center / 2公演
+Sendai / 3.6-7 / Sekisui Heim Super Arena / 3公演
+Beijing / 3.9 / National Stadium / 2公演
+Shanghai / 3.13-15 / Mercedes-Benz Arena / 6公演
+Guangzhou / 3.2 / Guangzhou Gymnasium / 2公演
+Shenzhen / 3.22 / Shenzhen Bay Sports Center Gymnasium / 2公演
+Chengdu / 3.25-26 / Chengdu Phoenix Hill Sports Park Gymnasium / 3公演
+Changsha / 3.28-29 / Helong Gymnasium / 4公演
+Wuhan / 3.3 / / 1公演
+Nanchang / 4.3 / Nanchang International Sports Center / 1公演
+Kunming / 4.4 / Yunnan Provincial Gymnasium / 1公演
+Xi'an / 4.5 / Xi'an International Football Center / 1公演
+Hangzhou / 4.9-10 / Yellow Dragon Sports Center Gymnasium / 2公演
+Nanning / 4.11 / Guangxi Sports Centre Stadium / 1公演
+Hong Kong / 4.17-18 / AsiaWorld-Arena / 3公演
+Taipei / 4.25-26 / Taipei Arena / 4公演
+Macau / 4.19 / The Venetian Arena / 1公演
+Sydney / 4.28-29 / ICC Sydney Theatre / 3公演
+Melbourne / 4.3 / John Cain Arena / 2公演
+Singapore / 5.1-2 / Singapore Indoor Stadium / 3公演
+Bangkok / 5.4 / IMPACT Arena / 2公演
+Los Angeles / 5.7-9 / Peacock Theater / 5公演
+Chicago / 5.1 / Wintrust Arena / 2公演
+Washington / 5.13-14 / EagleBank Arena / 3公演
+Boston / 5.15 / Agganis Arena / 1公演
+San Francisco / 5.16 / Bill Graham Civic Auditorium / 2公演
+Toronto / 5.17 / Coca-Cola Coliseum / 1公演
+Vancouver / 5.19-20 / Doug Mitchell Thunderbird Sports Centre / 3公演
+Mexico City / 5.23-24 / Auditorio Nacional / 3公演
+Brasília / 6.1-2 / Ginásio Nilson Nelson / 2公演
+Buenos Aires / 6.4 / Movistar Arena / 1公演
+London / 6.6-7 / OVO Arena Wembley / 4公演
+Paris / 6.8-9 / Adidas Arena / 3公演
+Berlin / 6.11-12 / Max-Schmeling-Halle / 3公演
+Madrid / 6.13 / WiZink Center / 1公演
+Barcelona / 6.14 / Palau Sant Jordi / 1公演
+Rome / 6.16-17 / Palazzo dello Sport / 2公演
+Milan / 6.19-20 / Mediolanum Forum / 3公演
+Moscow / 6.21 / VTB Arena / 2公演
+
+显示格式如以下示例（文本在每一个card里居中显示）
+
+London
+6.6-7
+OVO Arena Wembley
+-------------
+太阳（黄）/月亮（紫）图标（来自Google Fonts Material Symbols)    4公演
+
+如果该城市公演场数等于1，则显示一个月亮图标，等于2或大于2，则显示一个太阳一个月亮
+
+3.购票信息
+根据当地习惯进行演出门票售卖
+购票链接：https://0m-p.lnk.to/26Tour_Ticket
+
+4.0M_P 10th ANNIVERSARY PROJECT -「RE : WiND」
+为纪念0M_P活动的10周年，环球音乐、0M_P以及0M_P STAFFS共同策划0M_P 10周年纪念企划，包含了全球巡回演唱会、10周年纪念音乐合辑等内容
+Official Page: https://anni.0m-p.space/10th
+
+5.往年回顾
+0M_P WORLD TOUR 2025 "FLOWERS"
+5个月 24座城市，总共动员35万人
+包含两天日本國立競技場演唱会，共动员14万人
+Official Site: tour.0m-p.space/2025
+
+6.0M_P介绍
+Avatar：https://links.0m-p.space/Avatar.png
+Sound Producer / Singer / VOCALOID Producer / Writer
+2017开始活动，VOCALOID歌曲主要由初音未来演唱
+2022从环球音乐旗下的Polydor Records主流出道，目前所属日本环球音乐旗下
+作品有"You Need" "natural love" "Spring of Flowers"
+
+7.0M_P其他信息
+PROJECTS
+0M_P 10th ANNIVERSARY PROJECT -「RE : WiND」(https://anni.0m-p.space/10th)
+0M_P Virtual Live "On-Site" (vlive.0m-p.space)
+0M_P WORLD TOUR (tour.0m-p.space)
+0M_P CHINA TOUR 2025 "今天的事情" (tour.0m-p.space/China/2025)
+
+专辑
+0M_P 5th Album "Brand New World" 2025.9.10 Release (https://album.0m-p.space/5th)
+0M_P 10th ANNIVERSARY COMPLICATION ALBUM「BEST of 0M_P 2016-2026」2026.8.12 Release (https://album.0m-p.space/10thBEST)
+0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM 2025.7.16 Release (album.0m-p.space/tour_25)
+
+8.版权信息 （不要翻译，保持英文）
+https://www.universalmusic.com/wp-content/themes/umgcore2/assets/img/logo.png （UNVIERSAL MUSIC GROUP LOGO，指向https://www.universal-music.co.jp/）
+Key Visual by スタジオジブリ
+Web Designer : White (AxM) / Developed by MORO CODE CENTER
+© 2025 UNIVERSAL MUSIC LLC / 0M_P ALL RIGHTS RESERVED.
