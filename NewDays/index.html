@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0M_P COUNTDOWN TOUR 2025-2026</title>
+    <!-- 1. 加载 Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. 加载 Google Fonts (Arvo 作为 Rockwell 的后备, Inter 为默认) --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- 3. 自定义样式 --><style>
+        /* 定义自定义字体类 */
+        .font-rockwell {
+            font-family: 'Rockwell', 'Arvo', serif;
+        }
+
+        /* * 新增: 自适应字体大小 
+         * ---------------------------
+        */
+        html {
+            font-size: clamp(14px, 1.5vw, 16px);
+        }
+
+        /* 应用背景颜色和精细的对角线纹理 */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #92b45e; /* 海报的底色 */
+            background-image: repeating-linear-gradient(
+                -45deg,
+                rgba(0, 0, 0, 0.04) 0,
+                rgba(0, 0, 0, 0.04) 1px,
+                transparent 1px,
+                transparent 5px
+            );
+        }
+        
+        /* 确保在长屏幕上内容也不会过度拉伸 */
+        .poster-container {
+            max-width: 900px; /* 限制最大宽度 */
+            margin: 0 auto; /* 居中容器 */
+        }
+
+        /* NEW DAYS 叠加效果容器 */
+        .new-days-stack {
+            position: relative;
+            display: inline-block; /* 确保宽度只包裹内容 */
+        }
+
+        /* 深色 NEW DAYS (在前) */
+        .new-days-dark {
+            position: relative; 
+            top: 0px;
+            left: 0px;
+            color: #38501e; /* 深绿色 */
+            font-family: 'Rockwell', 'Arvo', serif;
+            font-weight: 700; /* Bold */
+            font-style: italic;
+            letter-spacing: -0.05em; /* 紧凑字间距 */
+            font-size: clamp(4.5rem, 18vw, 8rem); 
+            line-height: 1; 
+            white-space: nowrap; 
+        }
+
+        /* 浅色 NEW DAYS (在后) */
+        .new-days-light {
+            position: absolute; 
+            top: -6px; /* 向上和向左偏移 */
+            left: -6px;
+            color: #f5f5f0; /* 米白色 */
+            font-family: 'Rockwell', 'Arvo', serif;
+            font-weight: 700; /* Bold */
+            font-style: italic;
+            letter-spacing: -0.05em; /* 紧凑字间距 */
+            font-size: clamp(4.5rem, 18vw, 8rem);
+            line-height: 1; 
+            white-space: nowrap; 
+        }
+
+        /* 响应式调整 NEW DAYS 字体大小 (桌面端) */
+        @media (min-width: 768px) {
+            .new-days-dark, .new-days-light {
+                font-size: clamp(8rem, 15vw, 9rem);
+            }
+            .new-days-light {
+                top: -8px; /* 调整偏移量 */
+                left: -8px; /* 调整偏移量 */
+            }
+        }
+
+        /* * 丝滑的加载动画 
+         * ---------------------------
+        */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 应用动画的通用类 */
+        .animate-load {
+            opacity: 0; /* 初始隐藏 */
+            animation: fadeInSlideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* 允许通过内联样式 var(--delay) 设置动画延迟 */
+        [style*="--delay"] {
+            animation-delay: var(--delay);
+        }
+
+        /* * 巡演日期悬停效果 
+         * ---------------------------
+        */
+        .tour-date-item {
+            transition: transform 0.3s ease-out; /* 平滑过渡 */
+        }
+        .tour-date-item:hover {
+            transform: scale(1.02); /* 轻微放大 */
+        }
+
+        /* * 新增: 弹窗样式 
+         * ---------------------------
+        */
+        #eventModalOverlay {
+            background-color: rgba(56, 80, 30, 0.5); /* 使用深绿色作为半透明背景 */
+            backdrop-filter: blur(8px); /* 模糊效果 */
+            -webkit-backdrop-filter: blur(8px); /* 兼容 Safari */
+            
+            /* 隐藏时的状态 (用于过渡) */
+            opacity: 0;
+            transition: opacity 0.2s ease-out;
+        }
+
+        #eventModalBox {
+            /* 隐藏时的状态 (用于过渡) */
+            opacity: 0;
+            transform: scale(0.95) translateY(10px);
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+        }
+
+        /* 显示时的状态 */
+        #eventModalOverlay.show {
+            opacity: 1;
+        }
+        #eventModalOverlay.show #eventModalBox {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- 
+      海报容器 
+    -->
+    <main class="poster-container w-full bg-transparent overflow-hidden text-[#f5f5f0] flex flex-col justify-between p-8 md:p-12 space-y-12 md:space-y-16">
+        
+        <!-- 左上角标题 (添加动画) -->
+        <header class="animate-load" style="--delay: 0.1s">
+            <h2 class="font-rockwell text-xl tracking-wide">0M_P COUNTDOWN TOUR 2025-2026</h2>
+            <!-- NEW DAYS 叠加效果 -->
+            <div class="new-days-stack mt-1">
+                <div class="new-days-light">NEW DAYS</div>
+                <div class="new-days-dark">NEW DAYS</div>
+            </div>
+        </header>
+
+        <!-- 
+          中间内容区域 
+        -->
+        <div class="flex flex-col md:flex-row justify-between space-y-12 md:space-y-0">
+            <!-- 左下角巡演日期 (添加动画) -->
+            <section class="space-y-5 animate-load" style="--delay: 0.3s">
+                <!-- 更新: 添加 .tour-date-item, data-event 和 cursor-pointer -->
+                <div class="tour-date-item cursor-pointer" data-event="shanghai">
+                    <p class="text-lg"><span class="font-rockwell text-base">12.20</span> <span class="font-semibold">上海</span></p>
+                    <p class="text-2xl font-semibold">浦发银行东方体育中心</p>
+                </div>
+                <div class="tour-date-item cursor-pointer" data-event="tokyo">
+                    <p class="text-lg"><span class="font-rockwell text-base">12.25</span> <span class="font-semibold">東京</span></p>
+                    <p class="text-2xl font-semibold">国立代々木競技場 第一体育館</p>
+                </div>
+                <div class="tour-date-item cursor-pointer" data-event="changsha">
+                    <p class="text-lg"><span class="font-rockwell text-base">12.31-1.1</span> <span class="font-semibold">长沙</span></p>
+                    <p class="text-2xl font-semibold">贺龙体育场</p>
+                </div>
+            </section>
+            
+            <!-- 右侧标语 (添加动画) -->
+            <aside class="text-left md:text-right text-lg leading-snug font-rockwell animate-load" style="--delay: 0.5s">
+                <p>New Days</p>
+                <p>Future is Shining</p>
+                <p>With the Hope</p>
+                <p>Drawn in the Distant Sky</p>
+            </aside>
+        </div>
+
+        <!-- 右下角页脚 (添加动画) -->
+        <footer class="text-xs text-[#38501e] flex flex-col items-start md:items-end space-y-2 animate-load" style="--delay: 0.7s">
+            <img src="https://links.btm-m.site/UMGLOGO.svg" alt="Universal Music Group Logo" class="h-8 w-auto mb-2">
+            <p class="opacity-80 font-rockwell">©2025-2026 UNIVERSAL MUSIC LLC / 0M_P All rights reserved.</p>
+            <p class="opacity-80 font-rockwell">Powered by BUSHIROAD Inc. / Organized by Now2Future ROCORDS</p>
+        </footer>
+
+    </main>
+
+    <!-- * 新增: 弹窗 Modal * -->
+    <!-- 遮罩层 (初始为 hidden) -->
+    <div id="eventModalOverlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <!-- 弹窗内容 -->
+        <div id="eventModalBox" class="bg-[#f5f5f0] text-[#38501e] rounded-lg shadow-2xl p-6 md:p-8 w-full max-w-lg">
+            <header class="flex justify-between items-start mb-4">
+                <div>
+                    <!-- 弹窗内容将由 JS 填充 -->
+                    <p id="modalDate" class="font-rockwell text-xl"></p>
+                    <h3 id="modalCity" class="text-3xl font-semibold"></h3>
+                </div>
+                <button id="closeModalButton" class="text-4xl font-light text-[#92b45e] hover:text-[#38501e] transition-colors">&times;</button>
+            </header>
+            
+            <section class="space-y-4">
+                <div>
+                    <p id="modalVenueLabel" class="font-semibold text-lg">场馆</p>
+                    <p id="modalVenue" class="text-xl"></p>
+                </div>
+                <div>
+                    <p id="modalAddressLabel" class="font-semibold text-lg">地址</p>
+                    <p id="modalAddress" class="text-base"></p>
+                </div>
+                <div>
+                    <p id="modalTransportLabel" class="font-semibold text-lg">交通</p>
+                    <!-- whitespace-pre-line 会保留 JS 字符串中的换行符 -->
+                    <p id="modalTransport" class="text-base whitespace-pre-line"></p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- * 新增: JavaScript * -->
+    <script>
+        // 确保 DOM 加载完毕
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. 定义场次信息
+            const eventDetails = {
+                shanghai: {
+                    city: "上海",
+                    date: "12.20",
+                    venue: "浦发银行东方体育中心",
+                    address: "上海市浦东新区三林镇泳耀路300号",
+                    transport: "地铁：6号线 | 8号线 | 11号线 东方体育中心站 / 5号口"
+                },
+                tokyo: {
+                    city: "東京",
+                    date: "12.25",
+                    venue: "国立代々木競技場 第一体育館",
+                    address: "東京都渋谷区神南2-1-1",
+                    // 在 JS 字符串中使用 \n 来实现换行
+                    transport: "地下鉄：東京メトロ千代田線/副都心線 明治神宮前駅 \nJR山手線 原宿駅 \nJR 渋谷駅 ハチ公口"
+                },
+                changsha: {
+                    city: "长沙",
+                    date: "12.31-1.1",
+                    venue: "贺龙体育场",
+                    address: "湖南省长沙市天心区芙蓉中路二段188号",
+                    transport: "地铁：1号线 | 3号线 侯家塘站 / 4号口"
+                }
+            };
+
+            // 2. 获取 DOM 元素
+            const modalOverlay = document.getElementById('eventModalOverlay');
+            const modalBox = document.getElementById('eventModalBox');
+            const closeModalButton = document.getElementById('closeModalButton');
+            const clickableItems = document.querySelectorAll('.tour-date-item');
+
+            // 3. 获取 Modal 内部用于填充内容的元素
+            const modalDate = document.getElementById('modalDate');
+            const modalCity = document.getElementById('modalCity');
+            const modalVenue = document.getElementById('modalVenue');
+            const modalAddress = document.getElementById('modalAddress');
+            const modalTransport = document.getElementById('modalTransport');
+
+            // 3b. 获取 Modal 内部的 *标签* 元素
+            const modalVenueLabel = document.getElementById('modalVenueLabel');
+            const modalAddressLabel = document.getElementById('modalAddressLabel');
+            const modalTransportLabel = document.getElementById('modalTransportLabel');
+
+            // 4. 打开 Modal 的函数
+            function openModal(eventKey) {
+                const details = eventDetails[eventKey];
+                if (!details) return;
+
+                // 填充内容
+                modalDate.textContent = details.date;
+                modalCity.textContent = details.city;
+                modalVenue.textContent = details.venue;
+                modalAddress.textContent = details.address;
+                modalTransport.textContent = details.transport;
+
+                // *新增*: 根据 eventKey 更新弹窗标签语言
+                if (eventKey === 'tokyo') {
+                    // 设置为日语
+                    modalVenueLabel.textContent = "会場";
+                    modalAddressLabel.textContent = "住所";
+                    modalTransportLabel.textContent = "アクセス";
+                } else {
+                    // 默认设置为中文
+                    modalVenueLabel.textContent = "场馆";
+                    modalAddressLabel.textContent = "地址";
+                    modalTransportLabel.textContent = "交通";
+                }
+
+                // 显示 Modal (带动画)
+                modalOverlay.classList.remove('hidden');
+                // 使用 requestAnimationFrame 确保 "display" 属性在 "opacity" 切换前生效
+                requestAnimationFrame(() => {
+                    modalOverlay.classList.add('show');
+                });
+            }
+
+            // 5. 关闭 Modal 的函数
+            function closeModal() {
+                modalOverlay.classList.remove('show');
+                
+                // 设置一个短暂的延迟来隐藏 display: none, 
+                // 允许 fade-out 动画播放完毕
+                // CSS 过渡时间为 0.2s (200ms), 延迟 250ms 比较安全
+                setTimeout(() => {
+                    modalOverlay.classList.add('hidden');
+                }, 250); 
+            }
+
+            // 6. 绑定事件监听
+            
+            // 为每个场次信息块添加点击事件
+            clickableItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const eventKey = item.dataset.event;
+                    openModal(eventKey);
+                });
+            });
+
+            // 关闭按钮
+            closeModalButton.addEventListener('click', closeModal);
+
+            // 点击遮罩层关闭
+            modalOverlay.addEventListener('click', (e) => {
+                // 仅当点击的是遮罩层本身 (而不是弹窗内容) 时关闭
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
+
+
+
