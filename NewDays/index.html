@@ -6,17 +6,28 @@
     <title>0M_P COUNTDOWN TOUR 2025-2026</title>
     <!-- 1. 加载 Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- 2. 加载 Google Fonts (Arvo 作为 Rockwell 的后备, Inter 为默认) --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- 2. 加载 Google Fonts (Arvo, Inter, Noto Serif JP) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Inter:wght@400;600;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
 
-    <!-- 3. 自定义样式 --><style>
+    <!-- [修复] 3. 加载 Material Symbols Rounded 字体库 -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <!-- 4. 自定义样式 -->
+    <style>
         /* 定义自定义字体类 */
         .font-rockwell {
             font-family: 'Rockwell', 'Arvo', serif;
         }
 
-        /* * 新增: 自适应字体大小 
+        /* [新增] 版权字体 */
+        .font-noto-serif-jp {
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 700; /* 粗体 */
+        }
+
+        /* * 自适应字体大小 
          * ---------------------------
         */
         html {
@@ -60,9 +71,7 @@
             letter-spacing: -0.05em; /* 紧凑字间距 */
             font-size: clamp(4.5rem, 18vw, 8rem); 
             line-height: 1; 
-            /* * 关键改动: 移除 white-space: nowrap; 
-             * 允许在移动端（默认）换行 
-             */
+            /* 允许在移动端（默认）换行 */
         }
 
         /* 浅色 NEW DAYS (在后) */
@@ -77,18 +86,14 @@
             letter-spacing: -0.05em; /* 紧凑字间距 */
             font-size: clamp(4.5rem, 18vw, 8rem);
             line-height: 1; 
-            /* * 关键改动: 移除 white-space: nowrap; 
-             * 允许在移动端（默认）换行 
-             */
+            /* 允许在移动端（默认）换行 */
         }
 
         /* 响应式调整 NEW DAYS 字体大小 (桌面端) */
         @media (min-width: 768px) {
             .new-days-dark, .new-days-light {
                 font-size: clamp(8rem, 15vw, 9rem);
-                /* * 关键改动: 在桌面端 (min-width: 768px) 
-                 * 添加 white-space: nowrap; 来防止换行
-                 */
+                /* 在桌面端 (min-width: 768px) 添加 white-space: nowrap; 来防止换行 */
                 white-space: nowrap; 
             }
             .new-days-light {
@@ -132,24 +137,24 @@
             transform: scale(1.02); /* 轻微放大 */
         }
 
-        /* * 新增: 弹窗样式 
+        /* * 场馆弹窗样式 
          * ---------------------------
         */
         #eventModalOverlay {
             background-color: rgba(56, 80, 30, 0.5); /* 使用深绿色作为半透明背景 */
             backdrop-filter: blur(8px); /* 模糊效果 */
             -webkit-backdrop-filter: blur(8px); /* 兼容 Safari */
-            
-            /* 隐藏时的状态 (用于过渡) */
             opacity: 0;
-            transition: opacity 0.2s ease-out;
+            transition: opacity 0.3s ease-out;
         }
 
         #eventModalBox {
-            /* 隐藏时的状态 (用于过渡) */
             opacity: 0;
             transform: scale(0.95) translateY(10px);
-            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+            /* [修改] 添加 max-width 的过渡动画 */
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 平滑的宽度变化 */
         }
 
         /* 显示时的状态 */
@@ -161,7 +166,7 @@
             transform: scale(1) translateY(0);
         }
 
-        /* * 新增: 票务按钮样式 * */
+        /* * 票务按钮样式 * */
         .modal-ticket-button {
             background-color: #38501e; /* 深绿色 */
             color: #f5f5f0; /* 米白色 */
@@ -180,6 +185,112 @@
             box-shadow: 0 6px 16px rgba(56, 80, 30, 0.3);
         }
 
+        /* [新增] GUEST 按钮样式 */
+        .modal-secondary-button {
+            background-color: transparent;
+            color: #38501e; /* 深绿色 */
+            border: 2px solid #38501e;
+            padding: 10px 20px; /* 12px (padding) - 2px (border) = 10px */
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: background-color 0.2s ease-out, color 0.2s ease-out, transform 0.2s ease-out;
+        }
+        .modal-secondary-button:hover {
+            background-color: #38501e;
+            color: #f5f5f0; /* 米白色 */
+            transform: translateY(-2px);
+        }
+        /* GUEST 按钮激活状态 */
+        .modal-secondary-button.active {
+            background-color: #38501e;
+            color: #f5f5f0;
+        }
+
+        /* [新增] GUEST 列表项样式 */
+        .modal-guest-item {
+            transition: background-color 0.2s ease-out;
+        }
+        .modal-guest-item:hover {
+            background-color: #e9e9e3; /* 悬停时更深的米色 */
+        }
+
+        /* * --- [新增] About 弹窗样式 --- */
+        #aboutModalOverlay {
+            background-color: rgba(56, 80, 30, 0.5); /* 深绿色半透明背景 */
+            backdrop-filter: blur(8px); /* 模糊效果 */
+            -webkit-backdrop-filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+
+        #aboutModalBox {
+            opacity: 0;
+            transform: scale(0.95) translateY(10px);
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* About 弹窗显示时的状态 */
+        #aboutModalOverlay.show {
+            opacity: 1;
+        }
+        #aboutModalOverlay.show #aboutModalBox {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        /* --- 结束 [新增] About 弹窗样式 --- */
+
+        /* --- [新增] 语言切换按钮样式 --- */
+        .lang-btn {
+            color: #92b45e; /* 默认颜色 */
+            opacity: 0.7;
+            transition: opacity 0.2s, color 0.2s, transform 0.2s;
+            font-weight: 600;
+        }
+        .lang-btn:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        .lang-btn.active {
+            color: #38501e; /* 激活颜色 */
+            opacity: 1;
+            font-weight: 700;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        /* --- 结束 [新增] 语言切换按钮样式 --- */
+
+        /* [新增] Material Symbols 图标基类 */
+        .material-symbols-rounded {
+          font-family: 'Material Symbols Rounded'; /* [修复] 移除 , sans-serif */
+          font-weight: normal;
+          font-style: normal;
+          font-size: 22px; /* 调整大小以匹配文本 */
+          line-height: 1;
+          letter-spacing: normal;
+          text-transform: none;
+          display: inline-block;
+          white-space: nowrap;
+          word-wrap: normal;
+          direction: ltr;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
+          font-feature-settings: 'liga';
+          vertical-align: -5px; /* 手动微调垂直对齐 */
+          user-select: none; /* 防止选中 */
+        }
+
+        /* [新增] 场次时间图标颜色 */
+        .icon-sun {
+            color: #f59e0b; /* text-amber-500 */
+        }
+        .icon-moon {
+            color: #a855f7; /* text-purple-500 */
+        }
+
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
@@ -191,7 +302,6 @@
         
         <!-- 左上角标题 (添加动画) -->
         <header class="animate-load" style="--delay: 0.1s">
-            <!-- * 关键改动: 添加了 <br class="md:hidden"> 来实现响应式换行 -->
             <h2 class="font-rockwell text-xl tracking-wide">0M_P COUNTDOWN <br class="md:hidden">TOUR 2025-2026</h2>
             <!-- NEW DAYS 叠加效果 -->
             <div class="new-days-stack mt-1">
@@ -206,7 +316,7 @@
         <div class="flex flex-col md:flex-row justify-between space-y-12 md:space-y-0">
             <!-- 左下角巡演日期 (添加动画) -->
             <section class="space-y-5 animate-load" style="--delay: 0.3s">
-                <!-- 更新: 添加 .tour-date-item, data-event 和 cursor-pointer -->
+                <!-- 场馆信息 -->
                 <div class="tour-date-item cursor-pointer" data-event="shanghai">
                     <p class="text-lg"><span class="font-rockwell text-base">12.20</span> <span class="font-semibold">上海</span></p>
                     <p class="text-2xl font-semibold">浦发银行东方体育中心</p>
@@ -219,6 +329,17 @@
                     <p class="text-lg"><span class="font-rockwell text-base">12.31-1.1</span> <span class="font-semibold">长沙</span></p>
                     <p class="text-2xl font-semibold">贺龙体育场</p>
                 </div>
+
+                <!-- --- [修改] "About 0M_P" 按钮 (添加箭头) --- -->
+                <div id="openAboutModalButton" class="mt-8 cursor-pointer group" style="--delay: 0.4s">
+                    <p class="text-xl font-rockwell text-[#f5f5f0] group-hover:text-white transition-colors duration-200 opacity-90 group-hover:opacity-100 flex items-center space-x-2">
+                        <span>About 0M_P</span>
+                        <!-- 箭头, 带悬停动画 -->
+                        <span class="transform transition-transform duration-200 group-hover:translate-x-1.5 text-2xl">&rarr;</span>
+                    </p>
+                </div>
+                <!-- --- 结束 [修改] 按钮 --- -->
+
             </section>
             
             <!-- 右侧标语 (添加动画) -->
@@ -233,57 +354,236 @@
         <!-- 右下角页脚 (添加动画) -->
         <footer class="text-xs text-[#38501e] flex flex-col items-start md:items-end space-y-2 animate-load" style="--delay: 0.7s">
             <img src="https://links.btm-m.site/UMGLOGO.svg" alt="Universal Music Group Logo" class="h-8 w-auto mb-2">
-            <p class="opacity-80 font-rockwell">©2025-2026 UNIVERSAL MUSIC LLC / 0M_P All rights reserved.</p>
+            
+            <!-- [修改] 更新版权信息 -->
+            <p class="opacity-80 font-rockwell">Art Design by 0M_P / Web Developed by MORO Code Center</p>
+            <p class="opacity-80 font-rockwell">© 2025-2026 UNIVERSAL MUSIC LLC / 0M_P All rights reserved.</p>
             <p class="opacity-80 font-rockwell">Powered by BUSHIROAD Inc. / Organized by Now2Future ROCORDS</p>
+            <p class="opacity-80 font-rockwell flex items-center space-x-2">
+                <!-- [修改] 应用新字体 -->
+                <span><span class="font-noto-serif-jp">初音ミク</span> © Crypton Future Media, INC. <a href="https://www.piapro.net" target="_blank" rel="noopener noreferrer" class="hover:underline">www.piapro.net</a></span>
+                <img src="https://nbcuni-music.com/deco27/assets/footer_credit-_Tgk5uBR.svg" alt="piapro logo" class="h-4 w-auto">
+            </p>
+            <!-- [修改] 应用新字体 -->
+            <p class="opacity-80 font-rockwell">Mori Calliope / <span class="font-noto-serif-jp">星街すいせい</span> © 2016 COVER corp.</p>
+            
         </footer>
 
     </main>
 
-    <!-- * 新增: 弹窗 Modal * -->
-    <!-- 遮罩层 (初始为 hidden) -->
+    <!-- * 场馆弹窗 Modal * -->
     <div id="eventModalOverlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
-        <!-- 弹窗内容 -->
-        <div id="eventModalBox" class="bg-[#f5f5f0] text-[#38501e] rounded-lg shadow-2xl p-6 md:p-8 w-full max-w-lg">
-            <header class="flex justify-between items-start mb-4">
-                <div>
-                    <!-- 弹窗内容将由 JS 填充 -->
-                    <p id="modalDate" class="font-rockwell text-xl"></p>
-                    <h3 id="modalCity" class="text-3xl font-semibold"></h3>
-                </div>
-                <button id="closeModalButton" class="text-4xl font-light text-[#92b45e] hover:text-[#38501e] transition-colors">&times;</button>
-            </header>
+        
+        <!-- [修改] 弹窗内容: 添加 flex 布局 和 GUEST 面板 -->
+        <div id="eventModalBox" class="bg-[#f5f5f0] text-[#38501e] rounded-lg shadow-2xl w-full max-w-lg flex overflow-hidden">
             
-            <section class="space-y-4">
-                <div>
-                    <p id="modalVenueLabel" class="font-semibold text-lg">场馆</p>
-                    <p id="modalVenue" class="text-xl"></p>
-                </div>
-                <div>
-                    <p id="modalAddressLabel" class="font-semibold text-lg">地址</p>
-                    <p id="modalAddress" class="text-base"></p>
-                </div>
-                <div>
-                    <p id="modalTransportLabel" class="font-semibold text-lg">交通</p>
-                    <!-- whitespace-pre-line 会保留 JS 字符串中的换行符 -->
-                    <p id="modalTransport" class="text-base whitespace-pre-line"></p>
-                </div>
-            </section>
+            <!-- [修改] 主要内容区域 -->
+            <div id="modalMainContent" class="w-full md:w-auto flex-1 p-6 md:p-8 flex flex-col">
+                <header class="flex justify-between items-start mb-4">
+                    <div>
+                        <p id="modalDate" class="font-rockwell text-xl"></p>
+                        <h3 id="modalCity" class="text-3xl font-semibold"></h3>
+                    </div>
+                    <button id="closeModalButton" class="text-4xl font-light text-[#92b45e] hover:text-[#38501e] transition-colors">&times;</button>
+                </header>
+                
+                <section class="space-y-4 flex-1">
+                    <div>
+                        <p id="modalVenueLabel" class="font-semibold text-lg">场馆</p>
+                        <p id="modalVenue" class="text-xl"></p>
+                    </div>
+                    
+                    <!-- 
+                      [=== GOOGLE MAPS 修改 1/2 ===]
+                      将原来的 <p id="modalAddress">...</p> 
+                      修改为下面的 <a> 标签结构，以添加导航链接和图标。
+                    -->
+                    <div>
+                        <p id="modalAddressLabel" class="font-semibold text-lg">地址</p>
+                        <a id="modalAddress" 
+                           href="#" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="text-base group inline-flex items-center space-x-1.5 text-[#38501e] hover:text-[#92b45e] hover:underline transition-colors duration-200 ease-out">
+                            <!-- 地址文本将通过 JS 注入这里 -->
+                            <span id="modalAddressText" class="leading-snug"></span> 
+                            <!-- 导航图标 -->
+                            <span class="material-symbols-rounded text-lg opacity-70 group-hover:opacity-100 transition-opacity" style="vertical-align: -3px;">open_in_new</span>
+                        </a>
+                    </div>
+                    <!-- [=== GOOGLE MAPS 修改 1/2 结束 ===] -->
 
-            <!-- * 新增: 票务按钮 * -->
-            <footer class="mt-6">
-                <a id="modalTicketButton" href="#" target="_blank" rel="noopener noreferrer" class="modal-ticket-button block w-full text-center">
-                    TICKETS
-                </a>
-            </footer>
+                    <div>
+                        <p id="modalTransportLabel" class="font-semibold text-lg">交通</p>
+                        <p id="modalTransport" class="text-base whitespace-pre-line"></p>
+                    </div>
+
+                    <!-- [新增] 场次时间 -->
+                    <div id="modalTimesContainer" class="space-y-1 pt-2">
+                        <!-- 场次时间将由 JS 注入 -->
+                    </div>
+                </section>
+
+                <!-- [修改] 页脚: 添加 GUEST 按钮 -->
+                <footer class="mt-6 grid grid-cols-2 gap-4">
+                    <a id="modalTicketButton" href="#" target="_blank" rel="noopener noreferrer" class="modal-ticket-button block w-full text-center">
+                        TICKETS
+                    </a>
+                    <button id="modalGuestButton" class="modal-secondary-button block w-full">
+                        GUESTS
+                    </button>
+                </footer>
+            </div>
+
+            <!-- [新增] GUEST 面板 (默认隐藏) -->
+            <aside id="modalGuestPanel" class="w-72 flex-shrink-0 border-l border-gray-300 bg-[#e9e9e3] hidden">
+                <div class="flex flex-col h-full">
+                    <!-- [修改] 添加 ID -->
+                    <h4 id="modalGuestPanelTitle" class="text-xl font-rockwell p-4 border-b border-gray-400/50 text-center font-semibold">
+                        SPECIAL GUEST
+                    </h4>
+                    <div id="modalGuestListContainer" class="flex-1 overflow-y-auto p-4 space-y-3">
+                        <!-- Guest 列表将由 JS 注入 -->
+                    </div>
+                </div>
+            </aside>
+
         </div>
     </div>
 
-    <!-- * 新增: JavaScript * -->
+    <!-- --- "About 0M_P" 弹窗 Modal --- -->
+    <div id="aboutModalOverlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <!-- 弹窗内容 -->
+        <div id="aboutModalBox" class="bg-[#f5f5f0] text-[#38501e] rounded-lg shadow-2xl p-6 md:p-8 w-full max-w-lg">
+            <header class="flex justify-between items-start mb-4">
+                <h3 id="aboutModalTitle" class="text-3xl font-semibold font-rockwell">About 0M_P</h3>
+                <button id="closeAboutModalButton" class="text-4xl font-light text-[#92b45e] hover:text-[#38501e] transition-colors">&times;</button>
+            </header>
+            
+            <!-- 视图 1: "About" (默认显示) -->
+            <section id="aboutModalContentAbout" class="space-y-4 text-left">
+                <!-- Avatar Image -->
+                <img src="https://links.btm-m.site/Avatar.png" 
+                     alt="0M_P Avatar" 
+                     class="w-32 h-32 rounded-full mx-auto shadow-lg border-4 border-white/50"
+                     onerror="this.src='https://placehold.co/128x128/92b45e/f5f5f0?text=0M_P'">
+
+                <!-- Info (添加 ID) -->
+                <div class="text-center mt-4">
+                    <p id="aboutModalName" class="text-2xl font-semibold">0M_P</p>
+                    <p id="aboutModalRoles" class="text-lg text-[#92b45e] font-medium">Sound Producer / Singer / VOCALOID Producer / Writer</p>
+                </div>
+
+                <!-- Bio (添加 ID) -->
+                <div class="text-base text-gray-700 leading-relaxed mt-4 space-y-3">
+                    <p id="aboutModalBio1">Born in Chenzhou, Hunan Province, China in 2025. Active since 2017, 0M_P is renowned for VOCALOID songs primarily featuring Hatsune Miku.</p>
+                    <p id="aboutModalBio2">In 2022, 0M_P made a major debut from Polydor Records under Universal Music Japan and is currently affiliated with the label.</p>
+                    <p id="aboutModalBio3"></p> <!-- 新增的段落 -->
+                    <p class="font-semibold text-gray-800">
+                        <span id="aboutModalWorksLabel">Notable Works:</span>
+                        <span id="aboutModalWorks" class="font-normal">"You Need", "natural love", "Drama of Play"</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- 视图 2: "More Info" (默认隐藏) -->
+            <section id="aboutModalContentMoreInfo" class="space-y-6 text-left hidden">
+                
+                <!-- Projects -->
+                <div>
+                    <h4 id="moreInfoProjectsTitle" class="text-xl font-rockwell font-semibold mb-3 text-[#38501e]">PROJECTS</h4>
+                    <ul class="space-y-2 list-disc list-inside text-gray-700">
+                        <li>
+                            <a id="moreInfoProject1" href="https://anni.btm-m.site/10th" target="_blank" rel="noopener noreferrer" class="text-[#92b45e] hover:text-[#38501e] hover:underline transition-colors">
+                                0M_P 10th ANNIVERSARY PROJECT -「RE : WiND」
+                            </a>
+                        </li>
+                        <li>
+                            <a id="moreInfoProject2" href="https://tour.btm-m.site/26" target="_blank" rel="noopener noreferrer" class="text-[#92b45e] hover:text-[#38501e] hover:underline transition-colors">
+                                0M_P 10th ANNIVERSARY WORLD TOUR "WHOLE WORLD"
+                            </a>
+                        </li>
+                        <li>
+                            <a id="moreInfoProject3" href="https://vlive.btm-m.site" target="_blank" rel="noopener noreferrer" class="text-[#92b45e] hover:text-[#38501e] hover:underline transition-colors">
+                                0M_P Virtual Live "On-Site"
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Albums -->
+                <div>
+                    <h4 id="moreInfoAlbumsTitle" class="text-xl font-rockwell font-semibold mb-3 text-[#38501e]">ALBUMS</h4>
+                    <ul class="space-y-2 list-disc list-inside text-gray-700">
+                        <li>
+                            <a id="moreInfoAlbum1" href="https://album.btm-m.site/5th" target="_blank" rel="noopener noreferrer" class="text-[#92b45e] hover:text-[#38501e] hover:underline transition-colors">
+                                0M_P 5th Album "Brand New World" 2025.9.10 Release
+                            </a>
+                        </li>
+                        <li>
+                            <a id="moreInfoAlbum2" href="https://album.btm-m.site/10thBEST" target="_blank" rel="noopener noreferrer" class="text-[#92b45e] hover:text-[#38501e] hover:underline transition-colors">
+                                0M_P 10th ANNIVERSARY COMPLICATION ALBUM「BEST of 0M_P 2016-2026」2026.8.12 Release
+                            </a>
+                        </li>
+                        <li>
+                            <a id="moreInfoAlbum3" href="https://album.btm-m.site/tour_25" target="_blank" rel="noopener noreferrer" class="text-[#92b45e] hover:text-[#38501e] hover:underline transition-colors">
+                                0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM 2025.7.16 Release
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
+            
+            <!-- 页脚 -->
+            <footer class="mt-6 flex justify-between items-center">
+                <!-- 左侧: 视图切换 -->
+                <div class="space-x-3">
+                    <button id="aboutBtn" data-view="about" class="view-btn lang-btn font-rockwell text-lg active">ABOUT</button>
+                    <button id="moreInfoBtn" data-view="moreInfo" class="view-btn lang-btn font-rockwell text-lg">MORE INFO</button>
+                </div>
+                <!-- 右侧: 语言切换 -->
+                <div class="space-x-3">
+                    <button data-lang="en" class="lang-btn font-rockwell text-lg">EN</button>
+                    <button data-lang="zh" class="lang-btn font-rockwell text-lg">ZH</button>
+                    <button data-lang="jp" class="lang-btn font-rockwell text-lg">JP</button>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- --- 结束 "About 0M_P" 弹窗 --- -->
+
+
+    <!-- * JavaScript * -->
     <script>
         // 确保 DOM 加载完毕
         document.addEventListener('DOMContentLoaded', () => {
             
-            // 1. 定义场次信息 (已添加 ticketUrl)
+            // --- 场馆弹窗逻辑 (Event Modal) ---
+
+            // [新增] 1. 定义所有 GUEST 的数据
+            const guestData = {
+                syc: { name: "单依纯", img: "https://tour.btm-m.site/NewDays/images/syc.png" },
+                gem: { name: "G.E.M. 邓紫棋", img: "https://tour.btm-m.site/NewDays/images/GEM.jpg" },
+                lala: { name: "徐佳莹", img: "https://tour.btm-m.site/NewDays/images/lala.jpg" },
+                cheer: { name: "陈绮贞", img: "https://tour.btm-m.site/NewDays/images/cheer.jpg" },
+                kaze: { name: "藤井风", img: "https://tour.btm-m.site/NewDays/images/kaze.jpg" },
+                calli: { name: "Mori Calliope", img: "https://tour.btm-m.site/NewDays/images/calli.webp" },
+                tac: { name: "TAKU INOUE", img: "https://tour.btm-m.site/NewDays/images/tac.png" },
+                miku: { name: "初音ミク", img: "https://tour.btm-m.site/NewDays/images/miku.webp" },
+                twinf: { name: "Twinfield", img: "https://tour.btm-m.site/NewDays/images/twinf.jpg" },
+                taylor: { name: "Taylor Swift", img: "https://tour.btm-m.site/NewDays/images/taylor.jpg" },
+                vaundy: { name: "Vaundy", img: "https://tour.btm-m.site/NewDays/images/vaundy.jpg" },
+                utada: { name: "宇多田光", img: "https://tour.btm-m.site/NewDays/images/utada.jpg" },
+                teddy: { name: "TeddyLoid", img: "https://tour.btm-m.site/NewDays/images/teddy.png" },
+                jin: { name: "じん", img: "https://tour.btm-m.site/NewDays/images/jin.jpg" },
+                suisei: { name: "星街すいせい", img: "https://tour.btm-m.site/NewDays/images/suisei.jpg" },
+                jj: { name: "林俊杰", img: "https://tour.btm-m.site/NewDays/images/jj.jpg" },
+                reol: { name: "Reol", img: "https://tour.btm-m.site/NewDays/images/reol.jpg" },
+                kz: { name: "kz", img: "https://tour.btm-m.site/NewDays/images/kz.png" }
+            };
+
+            // [修改] 2. 定义场次信息, GUESTS 使用新的数据结构
             const eventDetails = {
                 shanghai: {
                     city: "上海",
@@ -291,16 +591,37 @@
                     venue: "浦发银行东方体育中心",
                     address: "上海市浦东新区三林镇泳耀路300号",
                     transport: "地铁：6号线 | 8号线 | 11号线 东方体育中心站 / 5号口",
-                    ticketUrl: "https://links.btm-m.site/2526SHTS"
+                    ticketUrl: "https://links.btm-m.site/2526SHTS",
+                    // [新增] 场次时间
+                    dayTime: "12:00 OPEN / 13:00 START",
+                    nightTime: "18:00 OPEN / 19:00 START",
+                    guests: [
+                        guestData.gem,
+                        guestData.lala,
+                        guestData.cheer,
+                        guestData.kaze,
+                        guestData.calli,
+                        { name: "TAKU INOUE (Warm-up DJ Set)", img: guestData.tac.img }
+                    ]
                 },
                 tokyo: {
                     city: "東京",
                     date: "12.25",
                     venue: "国立代々木競技場 第一体育館",
                     address: "東京都渋谷区神南2-1-1",
-                    // 在 JS 字符串中使用 \n 来实现换行
                     transport: "地下鉄：東京メトロ千代田線/副都心線 明治神宮前駅 \nJR山手線 原宿駅 \nJR 渋谷駅 ハチ公口",
-                    ticketUrl: "https://links.btm-m.site/2526TKTS"
+                    ticketUrl: "https://links.btm-m.site/2526TKTS",
+                    // [新增] 场次时间
+                    dayTime: "12:00 OPEN / 13:00 START",
+                    nightTime: "16:00 OPEN / 17:00 START",
+                    guests: [
+                        { name: "初音ミク&Twinfield", img: guestData.miku.img },
+                        guestData.taylor,
+                        guestData.vaundy,
+                        guestData.utada,
+                        guestData.lala,
+                        { name: "TeddyLoid (Warm-up DJ Set)", img: guestData.teddy.img }
+                    ]
                 },
                 changsha: {
                     city: "长沙",
@@ -308,100 +629,396 @@
                     venue: "贺龙体育场",
                     address: "湖南省长沙市天心区芙蓉中路二段188号",
                     transport: "地铁：1号线 | 3号线 侯家塘站 / 4号口",
-                    ticketUrl: "https://links.btm-m.site/2526CSTS"
+                    ticketUrl: "https://links.btm-m.site/2526CSTS",
+                    // [新增] 场次时间
+                    dayTime: "11:00 OPEN / 12:00 START",
+                    nightTime: "19:00 OPEN / 22:00 START",
+                    guests: [
+                        guestData.syc,
+                        { name: "初音ミク&じん", img: guestData.miku.img },
+                        { name: "星街すいせい&kz", img: guestData.suisei.img },
+                        guestData.lala,
+                        guestData.jj,
+                        guestData.reol,
+                        { name: "kz (Warm-up DJ Set)", img: guestData.kz.img }
+                    ]
                 }
             };
 
-            // 2. 获取 DOM 元素
+            // 3. 获取场馆弹窗 DOM 元素
             const modalOverlay = document.getElementById('eventModalOverlay');
-            const modalBox = document.getElementById('eventModalBox');
+            const eventModalBox = document.getElementById('eventModalBox'); // [新增]
             const closeModalButton = document.getElementById('closeModalButton');
             const clickableItems = document.querySelectorAll('.tour-date-item');
 
-            // 3. 获取 Modal 内部用于填充内容的元素
+            // 4. 获取场馆 Modal 内部用于填充内容的元素
             const modalDate = document.getElementById('modalDate');
             const modalCity = document.getElementById('modalCity');
             const modalVenue = document.getElementById('modalVenue');
+            
+            // [=== GOOGLE MAPS 修改 2/2 ===]
+            // 获取 <a> 标签本身和用于显示文本的 <span>
             const modalAddress = document.getElementById('modalAddress');
-            const modalTransport = document.getElementById('modalTransport');
-            const modalTicketButton = document.getElementById('modalTicketButton'); // *新增*
+            const modalAddressText = document.getElementById('modalAddressText');
+            // [=== GOOGLE MAPS 修改 2/2 结束 ===]
 
-            // 3b. 获取 Modal 内部的 *标签* 元素
+            const modalTransport = document.getElementById('modalTransport');
+            const modalTicketButton = document.getElementById('modalTicketButton');
             const modalVenueLabel = document.getElementById('modalVenueLabel');
             const modalAddressLabel = document.getElementById('modalAddressLabel');
             const modalTransportLabel = document.getElementById('modalTransportLabel');
+            
+            // [新增] GUEST 面板元素
+            const modalGuestButton = document.getElementById('modalGuestButton');
+            const modalGuestPanel = document.getElementById('modalGuestPanel');
+            const modalGuestListContainer = document.getElementById('modalGuestListContainer');
+            const modalGuestPanelTitle = document.getElementById('modalGuestPanelTitle'); // [新增]
 
-            // 4. 打开 Modal 的函数
-            function openModal(eventKey) {
+            // [新增] 场次时间元素
+            const modalTimesContainer = document.getElementById('modalTimesContainer');
+
+
+            // 5. 打开场馆 Modal 的函数
+            function openEventModal(eventKey) {
                 const details = eventDetails[eventKey];
                 if (!details) return;
 
-                // 填充内容
+                // [新增] 重置 GUEST 面板状态
+                modalGuestPanel.classList.add('hidden');
+                eventModalBox.classList.remove('max-w-4xl');
+                eventModalBox.classList.add('max-w-lg');
+                modalGuestButton.classList.remove('active');
+
+                // 填充主要内容
                 modalDate.textContent = details.date;
                 modalCity.textContent = details.city;
                 modalVenue.textContent = details.venue;
-                modalAddress.textContent = details.address;
-                modalTransport.textContent = details.transport;
-                modalTicketButton.href = details.ticketUrl; // *新增: 设置按钮链接*
+                
+                // [修改] 填充地址并创建 Google Maps 链接
+                modalAddressText.textContent = details.address; // 设置显示的文本
+                // 使用 encodeURIComponent 对地址进行编码，确保 URL 安全
+                modalAddress.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(details.address)}`;
 
-                // *更新*: 根据 eventKey 更新弹窗标签和按钮语言
+                modalTransport.textContent = details.transport;
+                modalTicketButton.href = details.ticketUrl; 
+                
+                // [新增] 填充场次时间
+                modalTimesContainer.innerHTML = ''; // 清空
+                
+                // 确定语言
+                const isTokyo = (eventKey === 'tokyo');
+                const dayLabel = isTokyo ? "昼公演" : "昼场";
+                const nightLabel = isTokyo ? "夜公演" : "夜场";
+
+                // 创建 HTML
+                if (details.dayTime) {
+                    const dayHtml = `
+                        <div class="flex items-center space-x-2">
+                            <span class="material-symbols-rounded icon-sun">light_mode</span>
+                            <span class="font-semibold text-base">${dayLabel}</span>
+                            <span class="text-base text-gray-700">${details.dayTime}</span>
+                        </div>
+                    `;
+                    modalTimesContainer.insertAdjacentHTML('beforeend', dayHtml);
+                }
+
+                if (details.nightTime) {
+                    const nightHtml = `
+                        <div class="flex items-center space-x-2">
+                            <span class="material-symbols-rounded icon-moon">dark_mode</span>
+                            <span class="font-semibold text-base">${nightLabel}</span>
+                            <span class="text-base text-gray-700">${details.nightTime}</span>
+                        </div>
+                    `;
+                    modalTimesContainer.insertAdjacentHTML('beforeend', nightHtml);
+                }
+                
+                // [修改] 动态生成 GUEST 列表
+                modalGuestListContainer.innerHTML = ''; // 清空旧列表
+                if (details.guests && details.guests.length > 0) {
+                    details.guests.forEach(guest => {
+                        const guestHtml = `
+                            <div class="modal-guest-item flex items-center space-x-3 p-2 rounded-lg cursor-default">
+                                <img src="${guest.img}" alt="${guest.name}" 
+                                     class="w-10 h-10 rounded-full object-cover border-2 border-white/50 shadow-sm"
+                                     onerror="this.src='https://placehold.co/40x40/92b45e/f5f5f0?text=?'; this.onerror=null;">
+                                <span class="font-semibold text-sm text-[#38501e]">${guest.name}</span>
+                            </div>
+                        `;
+                        modalGuestListContainer.insertAdjacentHTML('beforeend', guestHtml);
+                    });
+                } else {
+                    modalGuestListContainer.innerHTML = '<p class="p-2 text-sm text-gray-500">No special guests announced.</p>';
+                }
+
+
+                // 设置语言
                 if (eventKey === 'tokyo') {
-                    // 设置为日语
                     modalVenueLabel.textContent = "会場";
                     modalAddressLabel.textContent = "住所";
                     modalTransportLabel.textContent = "アクセス";
-                    modalTicketButton.textContent = "チケット"; // *新增*
+                    modalTicketButton.textContent = "チケット";
+                    modalGuestButton.textContent = "ゲスト"; // [修改]
+                    modalGuestPanelTitle.textContent = "SPECIAL GUEST"; // [新增]
                 } else {
-                    // 默认设置为中文
                     modalVenueLabel.textContent = "场馆";
                     modalAddressLabel.textContent = "地址";
                     modalTransportLabel.textContent = "交通";
-                    modalTicketButton.textContent = "TICKETS"; // *新增*
+                    modalTicketButton.textContent = "TICKETS";
+                    modalGuestButton.textContent = "GUESTS"; // [修改]
+                    modalGuestPanelTitle.textContent = "SPECIAL GUEST"; // [新增]
                 }
 
-                // 显示 Modal (带动画)
+                // 显示 Modal
                 modalOverlay.classList.remove('hidden');
-                // 使用 requestAnimationFrame 确保 "display" 属性在 "opacity" 切换前生效
                 requestAnimationFrame(() => {
                     modalOverlay.classList.add('show');
                 });
             }
 
-            // 5. 关闭 Modal 的函数
-            function closeModal() {
+            // 6. 关闭场馆 Modal 的函数
+            function closeEventModal() {
                 modalOverlay.classList.remove('show');
                 
-                // 设置一个短暂的延迟来隐藏 display: none, 
-                // 允许 fade-out 动画播放完毕
-                // CSS 过渡时间为 0.2s (200ms), 延迟 250ms 比较安全
                 setTimeout(() => {
                     modalOverlay.classList.add('hidden');
-                }, 250); 
+                    
+                    // [新增] 确保 GUEST 面板在下次打开时重置
+                    modalGuestPanel.classList.add('hidden');
+                    eventModalBox.classList.remove('max-w-4xl');
+                    eventModalBox.classList.add('max-w-lg');
+                    modalGuestButton.classList.remove('active');
+                }, 350); // 匹配 CSS 动画
             }
 
-            // 6. 绑定事件监听
-            
-            // 为每个场次信息块添加点击事件
+            // 7. 绑定场馆 Modal 事件监听
             clickableItems.forEach(item => {
                 item.addEventListener('click', () => {
                     const eventKey = item.dataset.event;
-                    openModal(eventKey);
+                    openEventModal(eventKey);
                 });
             });
 
-            // 关闭按钮
-            closeModalButton.addEventListener('click', closeModal);
+            closeModalButton.addEventListener('click', closeEventModal);
 
-            // 点击遮罩层关闭
             modalOverlay.addEventListener('click', (e) => {
-                // 仅当点击的是遮罩层本身 (而不是弹窗内容) 时关闭
+                // [修改] 确保点击 GUEST 面板内部不会关闭
                 if (e.target === modalOverlay) {
-                    closeModal();
+                    closeEventModal();
                 }
             });
+
+
+
+            // [新增] 8. GUEST 按钮点击事件
+            modalGuestButton.addEventListener('click', () => {
+                modalGuestPanel.classList.toggle('hidden');
+                // 切换 modal box 的宽度
+                eventModalBox.classList.toggle('max-w-lg');
+                eventModalBox.classList.toggle('max-w-4xl');
+                // 切换按钮的激活状态
+                modalGuestButton.classList.toggle('active');
+            });
+
+
+            // --- "About 0M_P" Modal 逻辑 ---
+
+            // 9. 定义 "About" 弹窗的多语言内容
+            const bioTranslations = {
+                en: {
+                    title: "About 0M_P",
+                    roles: "Sound Producer / Singer / VOCALOID Producer / Writer",
+                    bio1: "Born in Chenzhou, Hunan Province, China in 2025. Active since 2017, 0M_P is renowned for VOCALOID songs primarily featuring Hatsune Miku.",
+                    bio2: "In 2022, 0M_P made a major debut from Polydor Records under Universal Music Japan and is currently affiliated with the label.",
+                    bio3: "In 2025, co-founded the label Now2Future RECORDS with Universal Music Japan.",
+                    worksLabel: "Notable Works:",
+                    works: '"You Need", "natural love", "Drama of Play"',
+                    aboutBtn: "ABOUT",
+                    moreInfoBtn: "MORE INFO",
+                    projectsTitle: "PROJECTS",
+                    project1: "0M_P 10th ANNIVERSARY PROJECT -「RE : WiND」",
+                    project2: '0M_P 10th ANNIVERSARY WORLD TOUR "WHOLE WORLD"',
+                    project3: '0M_P Virtual Live "On-Site"',
+                    albumsTitle: "ALBUMS",
+                    album1: '0M_P 5th Album "Brand New World" 2025.9.10 Release',
+                    album2: '0M_P 10th ANNIVERSARY COMPLICATION ALBUM「BEST of 0M_P 2016-2026」2026.8.12 Release',
+                    album3: '0M_P WORLD TOUR 2025 "FLOWERS" OFFICIAL ALBUM 2025.7.16 Release'
+                },
+                zh: {
+                    title: "关于 0M_P",
+                    roles: "声音制作人 / 歌手 / VOCALOID制作人 / 作家",
+                    bio1: "2005年出生于中国湖南省郴州市。自2017年开始活跃，0M_P以主要使用初音未来的VOCALOID歌曲而闻名。",
+                    bio2: "2022年，0M_P在日本环球音乐旗下的Polydor Records主流出道，目前隶属于该厂牌。",
+                    bio3: "2025年与环球音乐日本共同创建Now2Future RECORDS厂牌。",
+                    worksLabel: "主要作品：",
+                    works: '《You Need》、《natural love》、《Drama of Play》',
+                    aboutBtn: "关于",
+                    moreInfoBtn: "更多信息",
+                    projectsTitle: "项目",
+                    project1: "0M_P 10周年纪念项目 -「RE : WiND」",
+                    project2: '0M_P 10周年纪念世界巡演 "WHOLE WORLD"',
+                    project3: '0M_P 虚拟演唱会 "On-Site"',
+                    albumsTitle: "专辑",
+                    album1: '0M_P 第5张专辑 "Brand New World" 2025.9.10 发行',
+                    album2: '0M_P 10周年纪念精选专辑「BEST of 0M_P 2016-2026」2026.8.12 发行',
+                    album3: '0M_P 2025年世界巡演 "FLOWERS" 官方专辑 2025.7.16 发行'
+                },
+                jp: {
+                    title: "0M_Pについて",
+                    roles: "サウンドプロデューサー / 歌手 / ボカロP / 作家",
+                    bio1: "2005年、中国湖南省郴州市生まれ。2017年から活動を開始し、主に初音ミクをフィーチャーしたVOCALOID楽曲で知られる。",
+                    bio2: "2022年、ユニバーサルミュージックジャパン傘下のPolydor Recordsよりメジャーデビューし、現在も同レーベルに所属している。",
+                    bio3: "2025年、ユニバーサルミュージックジャパンと共同でレーベル「Now2Future RECORDS」を設立。",
+                    worksLabel: "主な作品：",
+                    works: '「You Need」、「natural love」、「Drama of Play」',
+                    aboutBtn: "概要",
+                    moreInfoBtn: "詳細情報",
+                    projectsTitle: "プロジェクト",
+                    project1: "0M_P 10周年記念プロジェクト -「RE : WiND」",
+                    project2: '0M_P 10周年記念ワールドツアー "WHOLE WORLD"',
+                    project3: '0M_P バーチャルライブ "On-Site"',
+                    albumsTitle: "アルバム",
+                    album1: '0M_P 5thアルバム "Brand New World" 2025.9.10 リリース',
+                    album2: '0M_P 10周年記念コンピレーションアルバム「BEST of 0M_P 2016-2026」2026.8.12 リリース',
+                    album3: '0M_P WORLD TOUR 2025 "FLOWERS" オフィシャルアルバム 2025.7.16 リリース'
+                }
+            };
+
+            // 10. 获取 "About" Modal 的 DOM 元素
+            const openAboutButton = document.getElementById('openAboutModalButton');
+            const aboutModalOverlay = document.getElementById('aboutModalOverlay');
+            const closeAboutButton = document.getElementById('closeAboutModalButton');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const viewButtons = document.querySelectorAll('.view-btn');
+ 
+            // 11. 获取 "About" Modal 内部用于填充内容的元素
+            const aboutModalTitle = document.getElementById('aboutModalTitle');
+            const aboutModalRoles = document.getElementById('aboutModalRoles');
+            const aboutModalBio1 = document.getElementById('aboutModalBio1');
+            const aboutModalBio2 = document.getElementById('aboutModalBio2');
+            const aboutModalBio3 = document.getElementById('aboutModalBio3');
+            const aboutModalWorksLabel = document.getElementById('aboutModalWorksLabel');
+            const aboutModalWorks = document.getElementById('aboutModalWorks');
+
+            const aboutModalContentAbout = document.getElementById('aboutModalContentAbout');
+            const aboutModalContentMoreInfo = document.getElementById('aboutModalContentMoreInfo');
+            const aboutBtn = document.getElementById('aboutBtn');
+            const moreInfoBtn = document.getElementById('moreInfoBtn');
+            const moreInfoProjectsTitle = document.getElementById('moreInfoProjectsTitle');
+            const moreInfoProject1 = document.getElementById('moreInfoProject1');
+            const moreInfoProject2 = document.getElementById('moreInfoProject2');
+            const moreInfoProject3 = document.getElementById('moreInfoProject3');
+            const moreInfoAlbumsTitle = document.getElementById('moreInfoAlbumsTitle');
+            const moreInfoAlbum1 = document.getElementById('moreInfoAlbum1');
+            const moreInfoAlbum2 = document.getElementById('moreInfoAlbum2');
+            const moreInfoAlbum3 = document.getElementById('moreInfoAlbum3');
+
+
+            // 12. 打开 "About" Modal 的函数
+            function openAboutModal() {
+                if (!aboutModalOverlay) return;
+                aboutModalOverlay.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    aboutModalOverlay.classList.add('show');
+                });
+            }
+
+            // 13. 关闭 "About" Modal 的函数
+            function closeAboutModal() {
+                if (!aboutModalOverlay) return;
+                aboutModalOverlay.classList.remove('show');
+                setTimeout(() => {
+                    aboutModalOverlay.classList.add('hidden');
+                }, 350); // 匹配 CSS 过渡时间
+            }
+
+            // 14. setLanguage 函数
+            function setLanguage(lang) {
+                const content = bioTranslations[lang];
+                if (!content) return; // 如果语言不存在，则不执行任何操作
+
+                // 填充 "About" 视图的文本
+                aboutModalRoles.textContent = content.roles;
+                aboutModalBio1.textContent = content.bio1;
+                aboutModalBio2.textContent = content.bio2;
+                aboutModalBio3.textContent = content.bio3;
+                aboutModalWorksLabel.textContent = content.worksLabel;
+                aboutModalWorks.textContent = content.works;
+
+                // 更新 "More Info" 视图的文本
+                moreInfoProject1.textContent = content.project1;
+                moreInfoProject2.textContent = content.project2;
+                moreInfoProject3.textContent = content.project3;
+                moreInfoAlbum1.textContent = content.album1;
+                moreInfoAlbum2.textContent = content.album2;
+                moreInfoAlbum3.textContent = content.album3;
+
+                // 更新按钮的激活状态
+                langButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === lang);
+                });
+            }
+
+            // 15. 获取用户浏览器偏好语言
+            function getInitialLang() {
+                const userLang = navigator.language.split('-')[0]; // 'en', 'zh', 'ja', etc.
+                if (userLang === 'zh') return 'zh';
+                if (userLang === 'ja') return 'jp';
+                return 'en'; // 默认为英语
+            }
+
+            // 16. 切换 "About" 视图的函数
+            function setView(viewName) {
+                if (viewName === 'about') {
+                    aboutModalContentAbout.classList.remove('hidden');
+                    aboutModalContentMoreInfo.classList.add('hidden');
+                } else if (viewName === 'moreInfo') {
+                    aboutModalContentAbout.classList.add('hidden');
+                    aboutModalContentMoreInfo.classList.remove('hidden');
+                }
+
+                // 更新视图按钮的激活状态
+                viewButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.view === viewName);
+                });
+            }
+
+            // 17. 绑定 "About" Modal 的事件监听
+            if (openAboutButton) {
+                openAboutButton.addEventListener('click', openAboutModal);
+            }
+            if (closeAboutButton) {
+                closeAboutButton.addEventListener('click', closeAboutModal);
+            }
+            if (aboutModalOverlay) {
+                aboutModalOverlay.addEventListener('click', (e) => {
+                    if (e.target === aboutModalOverlay) {
+                        closeAboutModal();
+                    }
+                });
+            }
+            
+            // 18. 为语言按钮绑定点击事件
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setLanguage(btn.dataset.lang);
+                });
+            });
+
+            // 19. 为视图切换按钮绑定点击事件
+            viewButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setView(btn.dataset.view);
+                });
+            });
+
+            // 20. 在页面加载时设置初始语言和视图
+            setLanguage(getInitialLang()); 
+            setView('about'); // 默认显示 'about' 视图
+
+            // --- 结束 "About 0M_P" Modal 逻辑 ---
 
         });
     </script>
 </body>
 </html>
-
