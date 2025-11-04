@@ -178,6 +178,11 @@
             letter-spacing: 0.05em;
             transition: background-color 0.2s ease-out, transform 0.2s ease-out;
             box-shadow: 0 4px 12px rgba(56, 80, 30, 0.2);
+            /* [修改] 确保按钮在网格中垂直居中 (尤其是在文本换行时) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
         }
         .modal-ticket-button:hover {
             background-color: #2a3b16; /* 悬停时深一点 */
@@ -185,25 +190,31 @@
             box-shadow: 0 6px 16px rgba(56, 80, 30, 0.3);
         }
 
-        /* [新增] GUEST 按钮样式 */
+        /* [修改] GUEST / SETLIST 按钮样式 */
         .modal-secondary-button {
             background-color: transparent;
             color: #38501e; /* 深绿色 */
             border: 2px solid #38501e;
-            padding: 10px 20px; /* 12px (padding) - 2px (border) = 10px */
+            padding: 10px 16px; /* 调整内边距以适应3个按钮 */
             border-radius: 8px;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem; /* [修改] 字体从 1.1rem 调整为 1rem */
             text-transform: uppercase;
             letter-spacing: 0.05em;
             transition: background-color 0.2s ease-out, color 0.2s ease-out, transform 0.2s ease-out;
+            /* [新增] 确保按钮在网格中垂直居中 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
         }
         .modal-secondary-button:hover {
             background-color: #38501e;
             color: #f5f5f0; /* 米白色 */
             transform: translateY(-2px);
         }
-        /* GUEST 按钮激活状态 */
+        /* GUEST / SETLIST 按钮激活状态 */
         .modal-secondary-button.active {
             background-color: #38501e;
             color: #f5f5f0;
@@ -214,8 +225,53 @@
             transition: background-color 0.2s ease-out;
         }
         .modal-guest-item:hover {
-            background-color: #e9e9e3; /* 悬停时更深的米色 */
+            background-color: #e0e0d4; /* 悬停时更深的米色 */
         }
+        
+        /* [新增] Setlist 样式 */
+        .setlist-item {
+            font-weight: 500;
+            color: #38501e;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .setlist-item:hover {
+            background-color: #e0e0d4;
+        }
+        .setlist-mc {
+            font-weight: 700;
+            color: #92b45e;
+            text-align: center;
+            margin: 8px 0;
+            font-family: 'Rockwell', 'Arvo', serif;
+            letter-spacing: 0.05em;
+        }
+        .setlist-variation-wrapper {
+            border-left: 3px solid #b8c7a9;
+            padding-left: 10px;
+            margin: 6px 0 10px 4px;
+        }
+        .setlist-variation-title {
+            font-weight: 600;
+            color: #2a3b16;
+        }
+        .setlist-variation-guest {
+            font-style: italic;
+            color: #5f7848;
+            padding-left: 1.25rem; /* indent */
+        }
+        .setlist-variation-location {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #38501e;
+            background-color: #d1dcc3;
+            padding: 0 5px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-left: 6px;
+        }
+
 
         /* * --- [新增] About 弹窗样式 --- */
         #aboutModalOverlay {
@@ -374,8 +430,8 @@
     <!-- * 场馆弹窗 Modal * -->
     <div id="eventModalOverlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
         
-        <!-- [修改] 弹窗内容: 添加 flex 布局 和 GUEST 面板 -->
-        <div id="eventModalBox" class="bg-[#f5f5f0] text-[#38501e] rounded-lg shadow-2xl w-full max-w-lg flex overflow-hidden">
+        <!-- [修改] 弹窗内容: 添加 max-h-[90vh] -->
+        <div id="eventModalBox" class="bg-[#f5f5f0] text-[#38501e] rounded-lg shadow-2xl w-full max-w-lg flex overflow-hidden max-h-[90vh]">
             
             <!-- [修改] 主要内容区域 -->
             <div id="modalMainContent" class="w-full md:w-auto flex-1 p-6 md:p-8 flex flex-col">
@@ -387,6 +443,7 @@
                     <button id="closeModalButton" class="text-4xl font-light text-[#92b45e] hover:text-[#38501e] transition-colors">&times;</button>
                 </header>
                 
+                <!-- [修改] section: 移除 overflow-y-auto -->
                 <section class="space-y-4 flex-1">
                     <div>
                         <p id="modalVenueLabel" class="font-semibold text-lg">场馆</p>
@@ -424,19 +481,23 @@
                     </div>
                 </section>
 
-                <!-- [修改] 页脚: 添加 GUEST 按钮 -->
-                <footer class="mt-6 grid grid-cols-2 gap-4">
+                <!-- [修改] 页脚: 添加 GUEST 和 SETLIST 按钮 -->
+                <footer class="mt-6 grid grid-cols-3 gap-3">
                     <a id="modalTicketButton" href="#" target="_blank" rel="noopener noreferrer" class="modal-ticket-button block w-full text-center">
                         TICKETS
                     </a>
                     <button id="modalGuestButton" class="modal-secondary-button block w-full">
                         GUESTS
                     </button>
+                    <!-- [新增] SETLIST 按钮 -->
+                    <button id="modalSetlistButton" class="modal-secondary-button block w-full">
+                        SETLIST
+                    </button>
                 </footer>
             </div>
 
-            <!-- [新增] GUEST 面板 (默认隐藏) -->
-            <aside id="modalGuestPanel" class="w-72 flex-shrink-0 border-l border-gray-300 bg-[#e9e9e3] hidden">
+            <!-- [修改] GUEST 面板 (w-72 -> w-96) -->
+            <aside id="modalGuestPanel" class="w-96 flex-shrink-0 border-l border-gray-300 bg-[#e9e9e3] hidden">
                 <div class="flex flex-col h-full">
                     <!-- [修改] 添加 ID -->
                     <h4 id="modalGuestPanelTitle" class="text-xl font-rockwell p-4 border-b border-gray-400/50 text-center font-semibold">
@@ -444,6 +505,18 @@
                     </h4>
                     <div id="modalGuestListContainer" class="flex-1 overflow-y-auto p-4 space-y-3">
                         <!-- Guest 列表将由 JS 注入 -->
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- [新增] SETLIST 面板 (默认隐藏) -->
+            <aside id="modalSetlistPanel" class="w-96 flex-shrink-0 border-l border-gray-300 bg-[#e9e9e3] hidden">
+                <div class="flex flex-col h-full">
+                    <h4 id="modalSetlistPanelTitle" class="text-xl font-rockwell p-4 border-b border-gray-400/50 text-center font-semibold">
+                        SETLIST
+                    </h4>
+                    <div id="modalSetlistContainer" class="flex-1 overflow-y-auto p-4 space-y-1 text-sm">
+                        <!-- Setlist content will be injected by JS -->
                     </div>
                 </div>
             </aside>
@@ -574,7 +647,7 @@
                 twinf: { name: "Twinfield", img: "https://tour.btm-m.site/NewDays/images/twinf.jpg" },
                 taylor: { name: "Taylor Swift", img: "https://tour.btm-m.site/NewDays/images/taylor.jpg" },
                 vaundy: { name: "Vaundy", img: "https://tour.btm-m.site/NewDays/images/vaundy.jpg" },
-                utada: { name: "宇多田光", img: "https://tour.btm-m.site/NewDays/images/utada.jpg" },
+                utada: { name: "宇多田ヒカル", img: "https://tour.btm-m.site/NewDays/images/utada.jpg" },
                 teddy: { name: "TeddyLoid", img: "https://tour.btm-m.site/NewDays/images/teddy.png" },
                 jin: { name: "じん", img: "https://tour.btm-m.site/NewDays/images/jin.jpg" },
                 suisei: { name: "星街すいせい", img: "https://tour.btm-m.site/NewDays/images/suisei.jpg" },
@@ -583,7 +656,147 @@
                 kz: { name: "kz", img: "https://tour.btm-m.site/NewDays/images/kz.png" }
             };
 
-            // [修改] 2. 定义场次信息, GUESTS 使用新的数据结构
+            // [新增] 2. 定义 SETLIST 数据
+            const setlistData = {
+                shanghai: `
+                    <p class="setlist-item">01. You Need - Reloaded</p>
+                    <p class="setlist-item">02. Candying</p>
+                    <p class="setlist-item">03. Times</p>
+                    <p class="setlist-mc">- MC -</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">04. Flow <span class="setlist-variation-location">SHANGHAI</span></p>
+                        <p class="setlist-variation-guest">(with G.E.M. 邓紫棋)</p>
+                    </div>
+                    <p class="setlist-item">05. 恋の歌</p>
+                    <p class="setlist-item">06. NEXT NEXT</p>
+                    <p class="setlist-item">07. 君のこと</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">08. Blue, and Us - Reloaded <span class="setlist-variation-location">SHANGHAI</span></p>
+                        <p class="setlist-variation-guest">(with 陈绮贞)</p>
+                    </div>
+                    <p class="setlist-item">09. 花の春</p>
+                    <p class="setlist-item">10. ナナナン</p>
+                    <p class="setlist-item">11. Love Letter</p>
+                    <p class="setlist-item">12. 第一次见面</p>
+                    <p class="setlist-item">13. Let’s Jump Up!</p>
+                    <p class="setlist-mc">- BAND MEMBERS -</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">14. Tears Rolling Down <span class="setlist-variation-location">SHANGHAI</span></p>
+                        <p class="setlist-variation-guest">(with 藤井风)</p>
+                    </div>
+                    <p class="setlist-item">15. Pros</p>
+                    <p class="setlist-item">16. 这是一首写给回忆的摇滚 (with 徐佳莹)</p>
+                    <p class="setlist-item">17. Drama of Play (with 徐佳莹)</p>
+                    <p class="setlist-item">18. Clear Sky</p>
+                    <p class="setlist-mc">- ENCORE -</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">19. Reach Here <span class="setlist-variation-location">SHANGHAI</span></p>
+                        <p class="setlist-variation-guest">(with Mori Calliope)</p>
+                    </div>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">20. Utopia <span class="setlist-variation-location">SHANGHAI</span></p>
+                    </div>
+                    <p class="setlist-item">21. げんきがでるきょく</p>
+                    <p class="setlist-item">22. ボロボロだ</p>
+                    <p class="setlist-item">23. natural love</p>
+                    <p class="setlist-item">24. Echo of Late Summer</p>
+                `,
+                tokyo: `
+                    <p class="setlist-item">01. You Need - Reloaded</p>
+                    <p class="setlist-item">02. Candying</p>
+                    <p class="setlist-item">03. Times</p>
+                    <p class="setlist-mc">- MC -</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">04. α2β <span class="setlist-variation-location">TOKYO</span></p>
+                        <p class="setlist-variation-guest">(with Taylor Swift)</p>
+                    </div>
+                    <p class="setlist-item">05. 恋の歌</p>
+                    <p class="setlist-item">06. NEXT NEXT</p>
+                    <p class="setlist-item">07. 君のこと</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">08. A ROCK SONG FOR MEMORIES <span class="setlist-variation-location">TOKYO</span></p>
+                        <p class="setlist-variation-guest">(with Vaundy)</p>
+                    </div>
+                    <p class="setlist-item">09. 花の春</p>
+                    <p class="setlist-item">10. ナナナン</p>
+                    <p class="setlist-item">11. Love Letter</p>
+                    <p class="setlist-item">12. 第一次见面</p>
+                    <p class="setlist-item">13. Let’s Jump Up!</p>
+                    <p class="setlist-mc">- BAND MEMBERS -</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">14. この歌は、私たちだけに聴こえる <span class="setlist-variation-location">TOKYO</span></p>
+                        <p class="setlist-variation-guest">(with 宇多田ヒカル)</p>
+                    </div>
+                    <p class="setlist-item">15. Pros</p>
+                    <p class="setlist-item">16. 这是一首写给回忆的摇滚 (with 徐佳莹)</p>
+                    <p class="setlist-item">17. Drama of Play (with 徐佳莹)</p>
+                    <p class="setlist-item">18. Clear Sky</p>
+                    <p class="setlist-mc">- ENCORE -</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">19. Sing Again <span class="setlist-variation-location">TOKYO</span></p>
+                        <p class="setlist-variation-guest">(with 初音ミク)</p>
+                    </div>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">20. Utopia <span class="setlist-variation-location">TOKYO</span></p>
+                    </div>
+                    <p class="setlist-item">21. げんきがでるきょく</p>
+                    <p class="setlist-item">22. ボロボロだ</p>
+                    <p class="setlist-item">23. natural love</p>
+                    <p class="setlist-item">24. Echo of Late Summer</p>
+                `,
+                changsha: `
+                    <p class="setlist-item">01. You Need - Reloaded</p>
+                    <p class="setlist-item">02. Candying</p>
+                    <p class="setlist-item">03. Times</p>
+                    <p class="setlist-mc">- MC -</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">04. Past and Now <span class="setlist-variation-location">CHANGSHA</span></p>
+                        <p class="setlist-variation-guest">(with 单依纯)</p>
+                    </div>
+                    <p class="setlist-item">05. 恋の歌</p>
+                    <p class="setlist-item">06. NEXT NEXT</p>
+                    <p class="setlist-item">07. 君のこと</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">08. 不要再孤独了 <span class="setlist-variation-location">CHANGSHA</span></p>
+                        <p class="setlist-variation-guest">(with 林俊杰)</p>
+                    </div>
+                    <p class="setlist-item">09. 花の春</p>
+                    <p class="setlist-item">10. ナナナン</p>
+                    <p class="setlist-item">11. Love Letter</p>
+                    <p class="setlist-item">12. 第一次见面</p>
+                    <p class="setlist-item">13. Let’s Jump Up!</p>
+                    <p class="setlist-mc">- BAND MEMBERS -</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">14. Follow Me <span class="setlist-variation-location">CHANGSHA</span></p>
+                        <p class="setlist-variation-guest">(with Reol)</p>
+                    </div>
+                    <p class="setlist-item">15. Pros</p>
+                    <p class="setlist-item">16. 这是一首写给回忆的摇滚 (with 徐佳莹)</p>
+                    <p class="setlist-item">17. Drama of Play (with 徐佳莹)</p>
+                    <p class="setlist-item">18. Clear Sky</p>
+                    <p class="setlist-mc">- ENCORE -</p>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">19. Sing Again <span class="setlist-variation-location">CHANGSHA</span></p>
+                        <p class="setlist-variation-guest">(with 初音ミク)</p>
+                    </div>
+                    <div class="setlist-variation-wrapper">
+                        <p class="setlist-variation-title">20. Utopia (kz Remix) <span class="setlist-variation-location">CHANGSHA</span></p>
+                        <p class="setlist-variation-guest">(with 星街すいせい)</p>
+                    </div>
+                    <p class="setlist-item">21. げんきがでるきょく</p>
+                    <p class="setlist-item">22. ボロボロだ</p>
+                    <p class="setlist-item">23. natural love</p>
+                    <p class="setlist-item">24. Echo of Late Summer</p>
+                    <p class="setlist-mc">- 2nd ENCORE -</p>
+                    <p class="setlist-item">25. Summering (with 初音ミク)</p>
+                    <p class="setlist-item">26. Dream</p>
+                    <p class="setlist-item">27. 就在那时候</p>
+                    <p class="setlist-item">28. The End</p>
+                `
+            };
+
+
+            // [修改] 3. 定义场次信息, GUESTS 使用新的数据结构
             const eventDetails = {
                 shanghai: {
                     city: "上海",
@@ -592,7 +805,6 @@
                     address: "上海市浦东新区三林镇泳耀路300号",
                     transport: "地铁：6号线 | 8号线 | 11号线 东方体育中心站 / 5号口",
                     ticketUrl: "https://links.btm-m.site/2526SHTS",
-                    // [新增] 场次时间
                     dayTime: "12:00 OPEN / 13:00 START",
                     nightTime: "18:00 OPEN / 19:00 START",
                     guests: [
@@ -611,7 +823,6 @@
                     address: "東京都渋谷区神南2-1-1",
                     transport: "地下鉄：東京メトロ千代田線/副都心線 明治神宮前駅 \nJR山手線 原宿駅 \nJR 渋谷駅 ハチ公口",
                     ticketUrl: "https://links.btm-m.site/2526TKTS",
-                    // [新增] 场次时间
                     dayTime: "12:00 OPEN / 13:00 START",
                     nightTime: "16:00 OPEN / 17:00 START",
                     guests: [
@@ -630,7 +841,6 @@
                     address: "湖南省长沙市天心区芙蓉中路二段188号",
                     transport: "地铁：1号线 | 3号线 侯家塘站 / 4号口",
                     ticketUrl: "https://links.btm-m.site/2526CSTS",
-                    // [新增] 场次时间
                     dayTime: "11:00 OPEN / 12:00 START",
                     nightTime: "19:00 OPEN / 22:00 START",
                     guests: [
@@ -645,13 +855,13 @@
                 }
             };
 
-            // 3. 获取场馆弹窗 DOM 元素
+            // 4. 获取场馆弹窗 DOM 元素
             const modalOverlay = document.getElementById('eventModalOverlay');
             const eventModalBox = document.getElementById('eventModalBox'); // [新增]
             const closeModalButton = document.getElementById('closeModalButton');
             const clickableItems = document.querySelectorAll('.tour-date-item');
 
-            // 4. 获取场馆 Modal 内部用于填充内容的元素
+            // 5. 获取场馆 Modal 内部用于填充内容的元素
             const modalDate = document.getElementById('modalDate');
             const modalCity = document.getElementById('modalCity');
             const modalVenue = document.getElementById('modalVenue');
@@ -672,22 +882,33 @@
             const modalGuestButton = document.getElementById('modalGuestButton');
             const modalGuestPanel = document.getElementById('modalGuestPanel');
             const modalGuestListContainer = document.getElementById('modalGuestListContainer');
-            const modalGuestPanelTitle = document.getElementById('modalGuestPanelTitle'); // [新增]
+            const modalGuestPanelTitle = document.getElementById('modalGuestPanelTitle'); 
+
+            // [新增] SETLIST 面板元素
+            const modalSetlistButton = document.getElementById('modalSetlistButton');
+            const modalSetlistPanel = document.getElementById('modalSetlistPanel');
+            const modalSetlistContainer = document.getElementById('modalSetlistContainer');
+            const modalSetlistPanelTitle = document.getElementById('modalSetlistPanelTitle');
 
             // [新增] 场次时间元素
             const modalTimesContainer = document.getElementById('modalTimesContainer');
 
 
-            // 5. 打开场馆 Modal 的函数
+            // 6. 打开场馆 Modal 的函数
             function openEventModal(eventKey) {
                 const details = eventDetails[eventKey];
                 if (!details) return;
 
-                // [新增] 重置 GUEST 面板状态
+                // [修改] 重置 GUEST 和 SETLIST 面板状态
                 modalGuestPanel.classList.add('hidden');
-                eventModalBox.classList.remove('max-w-4xl');
-                eventModalBox.classList.add('max-w-lg');
                 modalGuestButton.classList.remove('active');
+                modalSetlistPanel.classList.add('hidden');
+                modalSetlistButton.classList.remove('active');
+                
+                // [修改] 重置 Modal 宽度
+                eventModalBox.classList.remove('max-w-4xl'); // 移除侧边栏宽度
+                eventModalBox.classList.add('max-w-lg'); // 重置为默认宽度
+
 
                 // 填充主要内容
                 modalDate.textContent = details.date;
@@ -751,6 +972,14 @@
                     modalGuestListContainer.innerHTML = '<p class="p-2 text-sm text-gray-500">No special guests announced.</p>';
                 }
 
+                // [新增] 动态生成 SETLIST
+                const setlistHtml = setlistData[eventKey];
+                if (setlistHtml) {
+                    modalSetlistContainer.innerHTML = setlistHtml;
+                } else {
+                    modalSetlistContainer.innerHTML = '<p class="p-2 text-sm text-gray-500">Setlist not available.</p>';
+                }
+
 
                 // 设置语言
                 if (eventKey === 'tokyo') {
@@ -758,15 +987,19 @@
                     modalAddressLabel.textContent = "住所";
                     modalTransportLabel.textContent = "アクセス";
                     modalTicketButton.textContent = "チケット";
-                    modalGuestButton.textContent = "ゲスト"; // [修改]
-                    modalGuestPanelTitle.textContent = "SPECIAL GUEST"; // [新增]
+                    modalGuestButton.textContent = "ゲスト"; 
+                    modalGuestPanelTitle.textContent = "SPECIAL GUEST";
+                    modalSetlistButton.textContent = "セットリスト"; // [新增]
+                    modalSetlistPanelTitle.textContent = "セットリスト"; // [新增]
                 } else {
                     modalVenueLabel.textContent = "场馆";
                     modalAddressLabel.textContent = "地址";
                     modalTransportLabel.textContent = "交通";
                     modalTicketButton.textContent = "TICKETS";
-                    modalGuestButton.textContent = "GUESTS"; // [修改]
-                    modalGuestPanelTitle.textContent = "SPECIAL GUEST"; // [新增]
+                    modalGuestButton.textContent = "GUESTS"; 
+                    modalGuestPanelTitle.textContent = "SPECIAL GUEST";
+                    modalSetlistButton.textContent = "SETLIST"; // [新增]
+                    modalSetlistPanelTitle.textContent = "SETLIST"; // [新增]
                 }
 
                 // 显示 Modal
@@ -776,22 +1009,26 @@
                 });
             }
 
-            // 6. 关闭场馆 Modal 的函数
+            // 7. 关闭场馆 Modal 的函数
             function closeEventModal() {
                 modalOverlay.classList.remove('show');
                 
                 setTimeout(() => {
                     modalOverlay.classList.add('hidden');
                     
-                    // [新增] 确保 GUEST 面板在下次打开时重置
+                    // [修改] 确保 GUEST 和 SETLIST 面板在下次打开时重置
                     modalGuestPanel.classList.add('hidden');
+                    modalGuestButton.classList.remove('active');
+                    modalSetlistPanel.classList.add('hidden');
+                    modalSetlistButton.classList.remove('active');
+
+                    // [修改] 重置 modal box 宽度
                     eventModalBox.classList.remove('max-w-4xl');
                     eventModalBox.classList.add('max-w-lg');
-                    modalGuestButton.classList.remove('active');
                 }, 350); // 匹配 CSS 动画
             }
 
-            // 7. 绑定场馆 Modal 事件监听
+            // 8. 绑定场馆 Modal 事件监听
             clickableItems.forEach(item => {
                 item.addEventListener('click', () => {
                     const eventKey = item.dataset.event;
@@ -802,7 +1039,7 @@
             closeModalButton.addEventListener('click', closeEventModal);
 
             modalOverlay.addEventListener('click', (e) => {
-                // [修改] 确保点击 GUEST 面板内部不会关闭
+                // [修改] 确保点击 GUEST/SETLIST 面板内部不会关闭
                 if (e.target === modalOverlay) {
                     closeEventModal();
                 }
@@ -810,20 +1047,61 @@
 
 
 
-            // [新增] 8. GUEST 按钮点击事件
+            // [修改] 9. GUEST 按钮点击事件 (互斥切换)
             modalGuestButton.addEventListener('click', () => {
+                const isOpening = modalGuestPanel.classList.contains('hidden');
+                
+                // 1. 关闭 Setlist (如果它开了)
+                if (!modalSetlistPanel.classList.contains('hidden')) {
+                    modalSetlistPanel.classList.add('hidden');
+                    modalSetlistButton.classList.remove('active');
+                    eventModalBox.classList.remove('max-w-4xl'); // 移除宽度
+                }
+
+                // 2. 切换 Guest
                 modalGuestPanel.classList.toggle('hidden');
-                // 切换 modal box 的宽度
-                eventModalBox.classList.toggle('max-w-lg');
-                eventModalBox.classList.toggle('max-w-4xl');
-                // 切换按钮的激活状态
                 modalGuestButton.classList.toggle('active');
+                
+                // 3. 切换宽度
+                if (isOpening) {
+                    eventModalBox.classList.add('max-w-4xl');
+                    eventModalBox.classList.remove('max-w-lg');
+                } else {
+                    eventModalBox.classList.remove('max-w-4xl');
+                    eventModalBox.classList.add('max-w-lg');
+                }
+            });
+
+            // [新增] 10. SETLIST 按钮点击事件 (互斥切换)
+            modalSetlistButton.addEventListener('click', () => {
+                const isOpening = modalSetlistPanel.classList.contains('hidden');
+
+                // 1. 关闭 Guest (如果它开了)
+                if (!modalGuestPanel.classList.contains('hidden')) {
+                    modalGuestPanel.classList.add('hidden');
+                    modalGuestButton.classList.remove('active');
+                    eventModalBox.classList.remove('max-w-4xl'); // 移除宽度
+                }
+
+                // 2. 切换 Setlist
+                modalSetlistPanel.classList.toggle('hidden');
+                modalSetlistButton.classList.toggle('active');
+
+                // 3. 切换宽度
+                if (isOpening) {
+                    eventModalBox.classList.add('max-w-4xl');
+                    eventModalBox.classList.remove('max-w-lg');
+                } else {
+                    eventModalBox.classList.remove('max-w-4xl');
+                    eventModalBox.classList.add('max-w-lg');
+                }
             });
 
 
             // --- "About 0M_P" Modal 逻辑 ---
+            // (序号顺延)
 
-            // 9. 定义 "About" 弹窗的多语言内容
+            // 11. 定义 "About" 弹窗的多语言内容
             const bioTranslations = {
                 en: {
                     title: "About 0M_P",
@@ -884,14 +1162,14 @@
                 }
             };
 
-            // 10. 获取 "About" Modal 的 DOM 元素
+            // 12. 获取 "About" Modal 的 DOM 元素
             const openAboutButton = document.getElementById('openAboutModalButton');
             const aboutModalOverlay = document.getElementById('aboutModalOverlay');
             const closeAboutButton = document.getElementById('closeAboutModalButton');
             const langButtons = document.querySelectorAll('.lang-btn');
             const viewButtons = document.querySelectorAll('.view-btn');
  
-            // 11. 获取 "About" Modal 内部用于填充内容的元素
+            // 13. 获取 "About" Modal 内部用于填充内容的元素
             const aboutModalTitle = document.getElementById('aboutModalTitle');
             const aboutModalRoles = document.getElementById('aboutModalRoles');
             const aboutModalBio1 = document.getElementById('aboutModalBio1');
@@ -914,7 +1192,7 @@
             const moreInfoAlbum3 = document.getElementById('moreInfoAlbum3');
 
 
-            // 12. 打开 "About" Modal 的函数
+            // 14. 打开 "About" Modal 的函数
             function openAboutModal() {
                 if (!aboutModalOverlay) return;
                 aboutModalOverlay.classList.remove('hidden');
@@ -923,7 +1201,7 @@
                 });
             }
 
-            // 13. 关闭 "About" Modal 的函数
+            // 15. 关闭 "About" Modal 的函数
             function closeAboutModal() {
                 if (!aboutModalOverlay) return;
                 aboutModalOverlay.classList.remove('show');
@@ -932,7 +1210,7 @@
                 }, 350); // 匹配 CSS 过渡时间
             }
 
-            // 14. setLanguage 函数
+            // 16. setLanguage 函数
             function setLanguage(lang) {
                 const content = bioTranslations[lang];
                 if (!content) return; // 如果语言不存在，则不执行任何操作
@@ -959,7 +1237,7 @@
                 });
             }
 
-            // 15. 获取用户浏览器偏好语言
+            // 17. 获取用户浏览器偏好语言
             function getInitialLang() {
                 const userLang = navigator.language.split('-')[0]; // 'en', 'zh', 'ja', etc.
                 if (userLang === 'zh') return 'zh';
@@ -967,7 +1245,7 @@
                 return 'en'; // 默认为英语
             }
 
-            // 16. 切换 "About" 视图的函数
+            // 18. 切换 "About" 视图的函数
             function setView(viewName) {
                 if (viewName === 'about') {
                     aboutModalContentAbout.classList.remove('hidden');
@@ -983,7 +1261,7 @@
                 });
             }
 
-            // 17. 绑定 "About" Modal 的事件监听
+            // 19. 绑定 "About" Modal 的事件监听
             if (openAboutButton) {
                 openAboutButton.addEventListener('click', openAboutModal);
             }
@@ -998,21 +1276,21 @@
                 });
             }
             
-            // 18. 为语言按钮绑定点击事件
+            // 20. 为语言按钮绑定点击事件
             langButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     setLanguage(btn.dataset.lang);
                 });
             });
 
-            // 19. 为视图切换按钮绑定点击事件
+            // 21. 为视图切换按钮绑定点击事件
             viewButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     setView(btn.dataset.view);
                 });
             });
 
-            // 20. 在页面加载时设置初始语言和视图
+            // 22. 在页面加载时设置初始语言和视图
             setLanguage(getInitialLang()); 
             setView('about'); // 默认显示 'about' 视图
 
@@ -1022,3 +1300,6 @@
     </script>
 </body>
 </html>
+
+
+
