@@ -60,7 +60,9 @@
             letter-spacing: -0.05em; /* 紧凑字间距 */
             font-size: clamp(4.5rem, 18vw, 8rem); 
             line-height: 1; 
-            white-space: nowrap; 
+            /* * 关键改动: 移除 white-space: nowrap; 
+             * 允许在移动端（默认）换行 
+             */
         }
 
         /* 浅色 NEW DAYS (在后) */
@@ -75,13 +77,19 @@
             letter-spacing: -0.05em; /* 紧凑字间距 */
             font-size: clamp(4.5rem, 18vw, 8rem);
             line-height: 1; 
-            white-space: nowrap; 
+            /* * 关键改动: 移除 white-space: nowrap; 
+             * 允许在移动端（默认）换行 
+             */
         }
 
         /* 响应式调整 NEW DAYS 字体大小 (桌面端) */
         @media (min-width: 768px) {
             .new-days-dark, .new-days-light {
                 font-size: clamp(8rem, 15vw, 9rem);
+                /* * 关键改动: 在桌面端 (min-width: 768px) 
+                 * 添加 white-space: nowrap; 来防止换行
+                 */
+                white-space: nowrap; 
             }
             .new-days-light {
                 top: -8px; /* 调整偏移量 */
@@ -153,6 +161,25 @@
             transform: scale(1) translateY(0);
         }
 
+        /* * 新增: 票务按钮样式 * */
+        .modal-ticket-button {
+            background-color: #38501e; /* 深绿色 */
+            color: #f5f5f0; /* 米白色 */
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: background-color 0.2s ease-out, transform 0.2s ease-out;
+            box-shadow: 0 4px 12px rgba(56, 80, 30, 0.2);
+        }
+        .modal-ticket-button:hover {
+            background-color: #2a3b16; /* 悬停时深一点 */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(56, 80, 30, 0.3);
+        }
+
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
@@ -164,7 +191,8 @@
         
         <!-- 左上角标题 (添加动画) -->
         <header class="animate-load" style="--delay: 0.1s">
-            <h2 class="font-rockwell text-xl tracking-wide">0M_P COUNTDOWN TOUR 2025-2026</h2>
+            <!-- * 关键改动: 添加了 <br class="md:hidden"> 来实现响应式换行 -->
+            <h2 class="font-rockwell text-xl tracking-wide">0M_P COUNTDOWN <br class="md:hidden">TOUR 2025-2026</h2>
             <!-- NEW DAYS 叠加效果 -->
             <div class="new-days-stack mt-1">
                 <div class="new-days-light">NEW DAYS</div>
@@ -240,6 +268,13 @@
                     <p id="modalTransport" class="text-base whitespace-pre-line"></p>
                 </div>
             </section>
+
+            <!-- * 新增: 票务按钮 * -->
+            <footer class="mt-6">
+                <a id="modalTicketButton" href="#" target="_blank" rel="noopener noreferrer" class="modal-ticket-button block w-full text-center">
+                    TICKETS
+                </a>
+            </footer>
         </div>
     </div>
 
@@ -248,14 +283,15 @@
         // 确保 DOM 加载完毕
         document.addEventListener('DOMContentLoaded', () => {
             
-            // 1. 定义场次信息
+            // 1. 定义场次信息 (已添加 ticketUrl)
             const eventDetails = {
                 shanghai: {
                     city: "上海",
                     date: "12.20",
                     venue: "浦发银行东方体育中心",
                     address: "上海市浦东新区三林镇泳耀路300号",
-                    transport: "地铁：6号线 | 8号线 | 11号线 东方体育中心站 / 5号口"
+                    transport: "地铁：6号线 | 8号线 | 11号线 东方体育中心站 / 5号口",
+                    ticketUrl: "https://links.btm-m.site/2526SHTS"
                 },
                 tokyo: {
                     city: "東京",
@@ -263,14 +299,16 @@
                     venue: "国立代々木競技場 第一体育館",
                     address: "東京都渋谷区神南2-1-1",
                     // 在 JS 字符串中使用 \n 来实现换行
-                    transport: "地下鉄：東京メトロ千代田線/副都心線 明治神宮前駅 \nJR山手線 原宿駅 \nJR 渋谷駅 ハチ公口"
+                    transport: "地下鉄：東京メトロ千代田線/副都心線 明治神宮前駅 \nJR山手線 原宿駅 \nJR 渋谷駅 ハチ公口",
+                    ticketUrl: "https://links.btm-m.site/2526TKTS"
                 },
                 changsha: {
                     city: "长沙",
                     date: "12.31-1.1",
                     venue: "贺龙体育场",
                     address: "湖南省长沙市天心区芙蓉中路二段188号",
-                    transport: "地铁：1号线 | 3号线 侯家塘站 / 4号口"
+                    transport: "地铁：1号线 | 3号线 侯家塘站 / 4号口",
+                    ticketUrl: "https://links.btm-m.site/2526CSTS"
                 }
             };
 
@@ -286,6 +324,7 @@
             const modalVenue = document.getElementById('modalVenue');
             const modalAddress = document.getElementById('modalAddress');
             const modalTransport = document.getElementById('modalTransport');
+            const modalTicketButton = document.getElementById('modalTicketButton'); // *新增*
 
             // 3b. 获取 Modal 内部的 *标签* 元素
             const modalVenueLabel = document.getElementById('modalVenueLabel');
@@ -303,18 +342,21 @@
                 modalVenue.textContent = details.venue;
                 modalAddress.textContent = details.address;
                 modalTransport.textContent = details.transport;
+                modalTicketButton.href = details.ticketUrl; // *新增: 设置按钮链接*
 
-                // *新增*: 根据 eventKey 更新弹窗标签语言
+                // *更新*: 根据 eventKey 更新弹窗标签和按钮语言
                 if (eventKey === 'tokyo') {
                     // 设置为日语
                     modalVenueLabel.textContent = "会場";
                     modalAddressLabel.textContent = "住所";
                     modalTransportLabel.textContent = "アクセス";
+                    modalTicketButton.textContent = "チケット"; // *新增*
                 } else {
                     // 默认设置为中文
                     modalVenueLabel.textContent = "场馆";
                     modalAddressLabel.textContent = "地址";
                     modalTransportLabel.textContent = "交通";
+                    modalTicketButton.textContent = "TICKETS"; // *新增*
                 }
 
                 // 显示 Modal (带动画)
@@ -362,6 +404,4 @@
     </script>
 </body>
 </html>
-
-
 
