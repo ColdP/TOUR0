@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0M_P DOME TOUR 2026</title>
+    <!-- Google Fonts for fallbacks if local fonts aren't available -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Serif+TC:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* 提取自原图的色调 */
+            --bg-color: #dbe9f0; 
+            --text-color: #111111;
+            --sketch-line: rgba(0, 50, 80, 0.08);
+        }
+
+        body {
+            background-color: #eef2f5;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            font-family: "Rockwell", "Roboto Slab", serif; /* 默认主要字体 */
+        }
+
+        /* 主要卡片容器 
+           使用CSS repeating-linear-gradient 模拟手绘素描背景纹理
+        */
+        .poster-container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: var(--bg-color);
+            /* 斜线纹理 */
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 4px,
+                var(--sketch-line) 4px,
+                var(--sketch-line) 5px
+            ), repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.4) 10px,
+                rgba(255,255,255,0.4) 12px
+            );
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid white; /* 模拟相框或边缘 */
+            
+            /* 横向布局 Flex */
+            display: flex;
+            flex-direction: row;
+            padding: 40px;
+        }
+
+        /* 左侧区域：Logo + 主标题 */
+        .left-section {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 2px solid rgba(0,0,0,0.1); /* 分隔线 */
+            padding-right: 40px;
+        }
+
+        /* 右侧区域：日程表 */
+        .right-section {
+            flex: 3;
+            padding-left: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* --- 元素样式 --- */
+
+        .logo-container {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        .logo-img {
+            height: 50px; /* 控制Logo大小 */
+            width: auto;
+            opacity: 0.9;
+        }
+
+        .main-title {
+            font-family: "Rockwell", "Roboto Slab", serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        /* 巨大的 thoughts 标题 */
+        .hero-text {
+            font-family: "Times New Roman", "Times", serif; /* 衬线体 */
+            font-size: 8rem;
+            line-height: 1;
+            font-weight: normal;
+            margin: 10px 0 30px 0;
+            letter-spacing: -0.02em;
+        }
+
+        /* 日程列表样式 */
+        .tour-list {
+            list-style: none;
+            width: 100%;
+        }
+
+        .tour-item {
+            margin-bottom: 25px;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+        }
+        
+        .tour-item:last-child {
+            border-bottom: none;
+        }
+
+        .tour-date {
+            font-family: "Rockwell", "Roboto Slab", serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .tour-location {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: #444;
+            font-family: "Rockwell", "Roboto Slab", serif;
+            margin-left: 10px;
+            font-size: 1rem;
+        }
+
+        .venue-name {
+            /* 指定为明朝体 */
+            font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "HGS Mincho E", "MS PMincho", "MS Mincho", "Noto Serif JP", "Noto Serif TC", serif;
+            font-size: 1.8rem;
+            display: block;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        /* 底部信息 */
+        .footer-info {
+            margin-top: auto;
+            text-align: right;
+            font-family: "Rockwell", "Roboto Slab", serif;
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .more-info-link {
+            display: block;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            border-bottom: 1px solid currentColor;
+            display: inline-block;
+        }
+
+        .copyright {
+            font-size: 0.7rem;
+            color: #555;
+            text-transform: uppercase;
+        }
+
+        /* --- 响应式布局 (Mobile/Tablet) --- */
+        @media (max-width: 900px) {
+            .poster-container {
+                flex-direction: column; /* 变为垂直堆叠 */
+                padding: 20px;
+                border-width: 0;
+            }
+
+            .left-section {
+                border-right: none;
+                border-bottom: 2px solid rgba(0,0,0,0.1);
+                padding-right: 0;
+                padding-bottom: 30px;
+                margin-bottom: 30px;
+                text-align: center;
+                flex: unset;
+            }
+
+            .right-section {
+                padding-left: 0;
+                flex: unset;
+            }
+
+            .logo-container {
+                text-align: right;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+
+            .hero-text {
+                font-size: 5rem; /* 缩小大标题 */
+                margin-top: 40px;
+            }
+
+            .venue-name {
+                font-size: 1.5rem;
+            }
+
+            .footer-info {
+                text-align: center;
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="poster-container">
+        
+        <!-- 左侧：视觉主导区 -->
+        <section class="left-section">
+            <div class="logo-container">
+                <img src="https://links.btm-m.site/UMGLOGO.svg" alt="Universal Music Group" class="logo-img">
+            </div>
+            
+            <div class="title-group">
+                <h2 class="main-title">0M_P Dome Tour 2026</h2>
+                <h1 class="hero-text">thoughts</h1>
+            </div>
+
+            <!-- 版权/底部信息在桌面端显示在左侧底部，作为视觉平衡 -->
+            <div class="footer-info">
+                <div>MORE INFORMATION</div>
+                <a href="https://tour.btm-m.site/dome26" target="_blank" class="more-info-link">https://tour.btm-m.site/dome26</a>
+                <div class="copyright">© 2025 UNIVERSAL MUSIC LLC / 0M_P All rights reserved.</div>
+            </div>
+        </section>
+
+        <!-- 右侧：信息区 -->
+        <section class="right-section">
+            <ul class="tour-list">
+                <!-- Osaka -->
+                <li class="tour-item">
+                    <span class="tour-date">2026.2.28-3.1 <span class="tour-location">[OSAKA]</span></span>
+                    <span class="venue-name">京セラドーム</span>
+                </li>
+
+                <!-- Tokyo -->
+                <li class="tour-item">
+                    <span class="tour-date">2026.3.8-9 <span class="tour-location">[TOKYO]</span></span>
+                    <span class="venue-name">東京ドーム</span>
+                </li>
+
+                <!-- Nagoya -->
+                <li class="tour-item">
+                    <span class="tour-date">2026.3.15 <span class="tour-location">[NAGOYA]</span></span>
+                    <span class="venue-name">バンテリンドーム</span>
+                </li>
+
+                <!-- Fukuoka -->
+                <li class="tour-item">
+                    <span class="tour-date">2026.3.21 <span class="tour-location">[FUKUOKA]</span></span>
+                    <span class="venue-name">大和ハウス プレミストドーム</span>
+                </li>
+
+                <!-- Taipei -->
+                <li class="tour-item">
+                    <span class="tour-date">2026.3.28 <span class="tour-location">[TAIPEI]</span></span>
+                    <span class="venue-name">台北大巨蛋</span>
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+</body>
+</html>

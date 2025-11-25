@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0M_P DOME TOUR 2026</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Serif+TC:wght@400;700&family=Roboto+Slab:wght@400;700&family=Rockwell&display=swap" rel="stylesheet">
+    <!-- Material Symbols for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    
+    <style>
+        /* --- 全局重置 & 变量 --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #dbe9f0; 
+            --text-color: #111111;
+            --accent-blue: #003250; /* 深蓝色强调 */
+            --light-blue: #eef2f5;
+            --sketch-line: rgba(0, 50, 80, 0.08);
+            --modal-bg: #f8fafc;
+            --border-color: #cbd5e1;
+        }
+
+        body {
+            background-color: #eef2f5;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            font-family: "Rockwell", "Roboto Slab", serif;
+        }
+
+        /* [修复] Material Symbols 图标类定义 */
+        .material-symbols-rounded {
+            font-family: 'Material Symbols Rounded';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'liga';
+            vertical-align: middle; /* 优化对齐 */
+        }
+
+        /* --- 主海报容器 --- */
+        .poster-container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: var(--bg-color);
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 4px,
+                var(--sketch-line) 4px,
+                var(--sketch-line) 5px
+            ), repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.4) 10px,
+                rgba(255,255,255,0.4) 12px
+            );
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid white;
+            display: flex;
+            flex-direction: row;
+            padding: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        /* 左侧区域 */
+        .left-section {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 2px solid rgba(0,0,0,0.1);
+            padding-right: 40px;
+        }
+
+        /* 右侧区域 */
+        .right-section {
+            flex: 3;
+            padding-left: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* 元素样式 */
+        .logo-container {
+            text-align: left;
+            margin-bottom: 20px;
+            cursor: pointer; /* Logo 可点击打开 About */
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        .logo-img:hover {
+            opacity: 1;
+        }
+
+        .main-title {
+            font-family: "Rockwell", "Roboto Slab", serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .hero-text {
+            font-family: "Times New Roman", "Times", serif;
+            font-size: 8rem;
+            line-height: 1;
+            font-weight: normal;
+            margin: 10px 0 30px 0;
+            letter-spacing: -0.02em;
+            color: var(--accent-blue);
+        }
+
+        /* --- 列表样式 --- */
+        .tour-list {
+            list-style: none;
+            width: 100%;
+        }
+
+        .tour-item {
+            margin-bottom: 25px;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+            cursor: pointer; /* 可点击 */
+            transition: transform 0.2s, border-color 0.2s;
+            position: relative;
+        }
+        
+        .tour-item:hover {
+            transform: translateX(10px);
+            border-bottom-color: var(--accent-blue);
+        }
+
+        .tour-item:last-child {
+            border-bottom: none;
+        }
+
+        .tour-date {
+            font-family: "Rockwell", "Roboto Slab", serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .tour-location {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: #444;
+            font-family: "Rockwell", "Roboto Slab", serif;
+            margin-left: 10px;
+            font-size: 1rem;
+        }
+
+        .venue-name {
+            font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "HGS Mincho E", "MS PMincho", "MS Mincho", "Noto Serif JP", "Noto Serif TC", serif;
+            font-size: 1.8rem;
+            display: block;
+            margin-top: 5px;
+            font-weight: 500;
+            color: var(--accent-blue);
+        }
+
+        /* 底部信息 */
+        .footer-info {
+            margin-top: auto;
+            text-align: right;
+            font-family: "Rockwell", "Roboto Slab", serif;
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .more-info-link {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            border-bottom: 1px solid currentColor;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .more-info-link:hover {
+            color: var(--accent-blue);
+        }
+
+        .copyright {
+            font-size: 0.7rem;
+            color: #555;
+            text-transform: uppercase;
+        }
+
+        /* --- Modal 弹窗通用样式 --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 50, 80, 0.6); /* 蓝色系遮罩 */
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background-color: var(--modal-bg);
+            width: 90%;
+            max-width: 500px; /* 默认宽度 */
+            max-height: 90vh;
+            border-radius: 4px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column; /* [修改] 始终垂直排列 */
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1px solid white;
+        }
+
+        .modal-overlay.show .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-main {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            min-width: 300px; /* 调整最小宽度 */
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--sketch-line);
+            padding-bottom: 15px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+            color: var(--accent-blue);
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        .modal-title-group h3 {
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+            font-family: "Rockwell", serif;
+        }
+        .modal-title-group p {
+            font-size: 1.1rem;
+            color: #666;
+            font-family: "Rockwell", serif;
+        }
+
+        .info-row {
+            margin-bottom: 15px;
+        }
+        .info-label {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #666;
+            display: block;
+            margin-bottom: 2px;
+            font-family: "Noto Serif JP", serif;
+        }
+        .info-content {
+            font-size: 1.1rem;
+            color: #222;
+            font-family: "Noto Serif JP", sans-serif;
+            line-height: 1.4;
+        }
+        .info-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: text-decoration 0.2s;
+        }
+        .info-link:hover {
+            text-decoration: underline;
+        }
+
+        /* [修改] 弹窗底部按钮 */
+        .modal-footer {
+            margin-top: auto;
+            padding-top: 20px;
+            display: flex; /* 改为 Flex 以适应单个按钮 */
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 30px; /* 加宽按钮 */
+            border: 2px solid var(--accent-blue);
+            background: transparent;
+            color: var(--accent-blue);
+            font-family: "Rockwell", serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.2s;
+            border-radius: 2px;
+            width: 100%; /* 占满宽度 */
+        }
+        .btn:hover, .btn.active {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #004060;
+            border-color: #004060;
+        }
+
+        /* --- About Modal 特有样式 --- */
+        .about-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background-color: #ddd;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: "Rockwell", serif;
+            color: #999;
+            font-weight: bold;
+            padding: 2px 5px;
+        }
+        .lang-btn.active {
+            color: var(--accent-blue);
+            text-decoration: underline;
+        }
+
+        /* --- 响应式 --- */
+        @media (max-width: 900px) {
+            .poster-container {
+                flex-direction: column;
+                padding: 20px;
+                border-width: 0;
+            }
+            .left-section {
+                border-right: none;
+                border-bottom: 2px solid rgba(0,0,0,0.1);
+                padding-right: 0;
+                padding-bottom: 30px;
+                margin-bottom: 30px;
+                text-align: center;
+                flex: unset;
+            }
+            .right-section {
+                padding-left: 0;
+                flex: unset;
+            }
+            .logo-container {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                margin: 0;
+            }
+            .hero-text {
+                font-size: 5rem;
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="poster-container">
+        
+        <!-- 左侧：视觉主导区 -->
+        <section class="left-section">
+            <div class="logo-container" id="logoTrigger">
+                <img src="https://links.btm-m.site/UMGLOGO.svg" alt="Universal Music Group" class="logo-img">
+            </div>
+            
+            <div class="title-group">
+                <h2 class="main-title">0M_P Dome Tour 2026</h2>
+                <h1 class="hero-text">thoughts</h1>
+            </div>
+
+            <div class="footer-info">
+                <div>MORE INFORMATION</div>
+                <!-- 修改：添加 ID 用于触发 About 弹窗 -->
+                <span id="openAboutBtn" class="more-info-link">ABOUT 0M_P / TOUR INFO &rarr;</span>
+                <div class="copyright">© 2025 UNIVERSAL MUSIC LLC / 0M_P All rights reserved.</div>
+            </div>
+        </section>
+
+        <!-- 右侧：信息区 -->
+        <section class="right-section">
+            <ul class="tour-list">
+                <!-- Osaka -->
+                <li class="tour-item" data-event="osaka">
+                    <span class="tour-date">2026.2.28-3.1 <span class="tour-location">[OSAKA]</span></span>
+                    <span class="venue-name">京セラドーム</span>
+                </li>
+
+                <!-- Tokyo -->
+                <li class="tour-item" data-event="tokyo">
+                    <span class="tour-date">2026.3.8-9 <span class="tour-location">[TOKYO]</span></span>
+                    <span class="venue-name">東京ドーム</span>
+                </li>
+
+                <!-- Nagoya -->
+                <li class="tour-item" data-event="nagoya">
+                    <span class="tour-date">2026.3.15 <span class="tour-location">[NAGOYA]</span></span>
+                    <span class="venue-name">バンテリンドーム</span>
+                </li>
+
+                <!-- Fukuoka -->
+                <li class="tour-item" data-event="fukuoka">
+                    <span class="tour-date">2026.3.21 <span class="tour-location">[FUKUOKA]</span></span>
+                    <span class="venue-name">みずほPayPayドーム福岡</span>
+                </li>
+
+                <!-- Taipei -->
+                <li class="tour-item" data-event="taipei">
+                    <span class="tour-date">2026.3.28 <span class="tour-location">[TAIPEI]</span></span>
+                    <span class="venue-name">台北大巨蛋</span>
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+    <!-- ================= 弹窗结构 ================= -->
+
+    <!-- 1. 场馆信息弹窗 (Event Modal) -->
+    <div id="eventModal" class="modal-overlay">
+        <div class="modal-box" id="eventModalBox">
+            
+            <!-- 主内容 -->
+            <div class="modal-main">
+                <header class="modal-header">
+                    <div class="modal-title-group">
+                        <p id="modalDate">DATE</p>
+                        <h3 id="modalCity">CITY</h3>
+                    </div>
+                    <button class="modal-close" id="closeEventModal">&times;</button>
+                </header>
+
+                <div class="info-row">
+                    <span class="info-label" id="labelVenue">VENUE</span>
+                    <div class="info-content" id="modalVenue">Venue Name</div>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label" id="labelAddress">ADDRESS</span>
+                    <!-- [修改] 已删除图标 -->
+                    <a href="#" target="_blank" id="modalAddressLink" class="info-link info-content">
+                        <span id="modalAddress">Address text</span>
+                    </a>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label" id="labelTransport">ACCESS</span>
+                    <div class="info-content" id="modalTransport" style="white-space: pre-line;">Transport info</div>
+                </div>
+
+                <!-- [修改] 底部只保留 TICKETS 按钮 -->
+                <div class="modal-footer">
+                    <a href="#" target="_blank" id="btnTickets" class="btn btn-primary">TICKETS</a>
+                </div>
+            </div>
+
+            <!-- [已删除] Guests 和 Setlist 侧边栏 -->
+
+        </div>
+    </div>
+
+    <!-- 2. 关于弹窗 (About Modal) -->
+    <div id="aboutModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-main">
+                <header class="modal-header">
+                    <div class="modal-title-group">
+                        <h3>About 0M_P</h3>
+                    </div>
+                    <div class="lang-switch">
+                        <button class="lang-btn active" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="zh">ZH</button>
+                        <button class="lang-btn" data-lang="jp">JP</button>
+                    </div>
+                    <button class="modal-close" id="closeAboutModal" style="margin-left: 15px;">&times;</button>
+                </header>
+
+                <div style="text-align: center;">
+                    <img src="https://links.btm-m.site/Avatar.png" 
+                         alt="0M_P" 
+                         class="about-avatar"
+                         onerror="this.src='https://placehold.co/100x100/dbe9f0/003250?text=0M_P'">
+                    <h4 style="font-size: 1.4rem; font-family: 'Rockwell'; margin-bottom: 5px;">0M_P</h4>
+                    <p id="aboutRoles" style="color: var(--accent-blue); font-size: 0.9rem; font-weight: bold; margin-bottom: 20px;">
+                        Sound Producer / Singer
+                    </p>
+                </div>
+
+                <div id="aboutBio" class="info-content" style="text-align: justify; font-size: 1rem; margin-bottom: 20px;">
+                    <!-- JS Injected -->
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label" id="labelWorks">NOTABLE WORKS</span>
+                    <div class="info-content" style="font-size: 0.95rem;">"You Need", "natural love", "Drama of Play"</div>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label" id="labelProjects">2026 PROJECTS</span>
+                    <div class="info-content" style="font-size: 0.95rem;">
+                        <ul style="list-style: disc; padding-left: 20px;">
+                            <li>DOME TOUR 2026 "thoughts"</li>
+                            <li>10th Anniversary Project「RE : WiND」</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= JavaScript ================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 数据定义 ---
+
+            // 1. 场馆数据 (基于 Google Search 结果)
+            // [修改] 移除了 guests 数据
+            const eventDetails = {
+                osaka: {
+                    date: "2026.2.28-3.1",
+                    city: "OSAKA",
+                    venue: "Kyocera Dome Osaka (京セラドーム大阪)",
+                    address: "3 Chome-Na-2-1 Chiyozaki, Nishi Ward, Osaka",
+                    transport: "Subway: Nagahori Tsurumi-ryokuchi Line 'Dome-mae Chiyozaki' \nHanshin Namba Line 'Dome-mae' \nJR Osaka Loop Line 'Taisho' (7 min walk)",
+                    ticketLink: "https://l-tike.com/"
+                },
+                tokyo: {
+                    date: "2026.3.8-9",
+                    city: "TOKYO",
+                    venue: "Tokyo Dome (東京ドーム)",
+                    address: "1-3-61 Koraku, Bunkyo City, Tokyo",
+                    transport: "JR Chuo-Sobu Line 'Suidobashi' \nSubway Marunouchi/Namboku Line 'Korakuen' \nSubway Toei Mita Line 'Suidobashi'",
+                    ticketLink: "https://eplus.jp/"
+                },
+                nagoya: {
+                    date: "2026.3.15",
+                    city: "NAGOYA",
+                    venue: "Vantelin Dome Nagoya (バンテリンドーム ナゴヤ)",
+                    address: "1-1-1 Daikominami, Higashi Ward, Nagoya, Aichi",
+                    transport: "Subway Meijo Line 'Nagoya Dome-mae Yada' (5 min walk) \nJR Chuo Line 'Ozone' (15 min walk)",
+                    ticketLink: "https://t.pia.jp/",
+                    guests: [
+                        { name: "Fujii Kaze", img: "https://tour.btm-m.site/NewDays/images/kaze.jpg" }
+                    ]
+                },
+                fukuoka: { 
+                    date: "2026.3.21",
+                    city: "FUKUOKA", 
+                    venue: "Mizuho PayPay Dome Fukuoka (みずほPayPayドーム福岡)",
+                    address: "2-2-2 Jigyohama, Chuo Ward, Fukuoka",
+                    transport: "Subway Kuko Line 'Tojinmachi' (15 min walk) \nNishitetsu Bus 'Mizuho PayPay Dome'",
+                    ticketLink: "https://l-tike.com/",
+                    guests: [
+                        { name: "[Alexandros]", img: "" },
+                        { name: "Sakanaction", img: "" }
+                    ]
+                },
+                taipei: {
+                    date: "2026.3.28",
+                    city: "TAIPEI",
+                    venue: "Taipei Dome (臺北大巨蛋)",
+                    address: "No. 505, Sec. 4, Zhongxiao E. Rd., Xinyi Dist., Taipei City",
+                    transport: "MRT Blue Line (Bannan Line) 'Sun Yat-Sen Memorial Hall' (Exit 5) \nBus stops along Zhongxiao East Road",
+                    ticketLink: "https://tixcraft.com/"
+                }
+            };
+
+            // 3. About 多语言数据
+            const bioData = {
+                en: {
+                    roles: "Sound Producer / Singer / Writer",
+                    bio: "0M_P is a sound producer and singer active since 2017. Known for blending rock elements with emotional storytelling. In 2026, marking the 10th anniversary with the 'thoughts' Dome Tour.",
+                    worksLabel: "NOTABLE WORKS",
+                    projectsLabel: "2026 PROJECTS"
+                },
+                zh: {
+                    roles: "音乐制作人 / 歌手 / 作家",
+                    bio: "0M_P 是一位自 2017 年开始活跃的音乐制作人和歌手。以将摇滚元素与感性叙事相结合而闻名。2026 年，以 'thoughts' 巨蛋巡演纪念出道 10 周年。",
+                    worksLabel: "代表作品",
+                    projectsLabel: "2026 年度计划"
+                },
+                jp: {
+                    roles: "サウンドプロデューサー / 歌手 / 作家",
+                    bio: "2017年より活動するサウンドプロデューサー・歌手。ロックと感情豊かなストーリーテリングを融合させたスタイルで知られる。2026年、10周年を記念して「thoughts」ドームツアーを開催。",
+                    worksLabel: "主な作品",
+                    projectsLabel: "2026 プロジェクト"
+                }
+            };
+
+            // --- 逻辑控制 ---
+
+            const modalOverlay = document.getElementById('eventModal');
+            const tourItems = document.querySelectorAll('.tour-item');
+            
+            // Elements inside Event Modal
+            const modalDate = document.getElementById('modalDate');
+            const modalCity = document.getElementById('modalCity');
+            const modalVenue = document.getElementById('modalVenue');
+            const modalAddress = document.getElementById('modalAddress');
+            const modalAddressLink = document.getElementById('modalAddressLink');
+            const modalTransport = document.getElementById('modalTransport');
+            const btnTickets = document.getElementById('btnTickets');
+
+            // Function: Open Event Modal
+            function openEventModal(eventKey) {
+                const data = eventDetails[eventKey];
+                if (!data) return;
+
+                modalDate.textContent = data.date;
+                modalCity.textContent = data.city;
+                modalVenue.textContent = data.venue;
+                modalAddress.textContent = data.address;
+                modalAddressLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.venue + " " + data.address)}`;
+                modalTransport.textContent = data.transport;
+                btnTickets.href = data.ticketLink;
+
+                modalOverlay.classList.add('show');
+            }
+
+            // Click Handlers for Tour Items
+            tourItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    openEventModal(item.dataset.event);
+                });
+            });
+
+            // Close Event Modal
+            document.getElementById('closeEventModal').addEventListener('click', () => {
+                modalOverlay.classList.remove('show');
+            });
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    modalOverlay.classList.remove('show');
+                }
+            });
+
+
+            // --- About Modal Logic ---
+            const aboutModal = document.getElementById('aboutModal');
+            const openAboutBtn = document.getElementById('openAboutBtn');
+            const logoTrigger = document.getElementById('logoTrigger');
+            const closeAboutModal = document.getElementById('closeAboutModal');
+            const langBtns = document.querySelectorAll('.lang-btn');
+
+            function updateLang(lang) {
+                const data = bioData[lang];
+                document.getElementById('aboutRoles').textContent = data.roles;
+                document.getElementById('aboutBio').textContent = data.bio;
+                document.getElementById('labelWorks').textContent = data.worksLabel;
+                document.getElementById('labelProjects').textContent = data.projectsLabel;
+                
+                langBtns.forEach(b => {
+                    b.classList.toggle('active', b.dataset.lang === lang);
+                });
+            }
+
+            function openAbout() {
+                aboutModal.classList.add('show');
+            }
+
+            openAboutBtn.addEventListener('click', openAbout);
+            logoTrigger.addEventListener('click', openAbout);
+            
+            closeAboutModal.addEventListener('click', () => {
+                aboutModal.classList.remove('show');
+            });
+            aboutModal.addEventListener('click', (e) => {
+                if (e.target === aboutModal) aboutModal.classList.remove('show');
+            });
+
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', () => updateLang(btn.dataset.lang));
+            });
+
+            // Init
+            updateLang('en');
+
+        });
+    </script>
+</body>
+</html>
