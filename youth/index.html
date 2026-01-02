@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0M_P CAMPUS LIVE TOUR 2026 - "Youth"</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+        :root {
+            --md-sys-color-primary: #005AC1;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #D8E2FF;
+            --md-sys-color-on-primary-container: #001A41;
+            --md-sys-color-surface: #FDFBFF;
+            --md-sys-color-surface-container: #F0F4FA;
+        }
+
+        body {
+            font-family: 'Lexend', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
+            background-color: var(--md-sys-color-surface);
+            color: #1a1c1e;
+        }
+
+        /* Material 3 Expressive Card */
+        .m3-card {
+            background-color: #ffffff;
+            border-radius: 1.75rem;
+            transition: all 0.3s cubic-bezier(0.2, 0.0, 0, 1.0);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .m3-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .m3-surface-container {
+            background-color: var(--md-sys-color-surface-container);
+            border-radius: 2rem;
+        }
+
+        /* Hero Text Shadow */
+        .hero-text-shadow {
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Tab Animation */
+        .tab-active {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+        
+        .bg-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #005AC1 0%, #0091EA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Modal Transitions */
+        .modal-enter {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal-enter .modal-content {
+            transform: scale(0.95);
+        }
+        .modal-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-active .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-200 selection:text-blue-900">
+
+    <!-- Navigation / Lang Switcher -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-4 py-4 flex justify-between items-center pointer-events-none">
+        <div class="pointer-events-auto">
+            <!-- Optional Home Link or Logo could go here -->
+        </div>
+        
+        <div class="relative pointer-events-auto">
+            <button id="lang-btn" class="bg-white/80 backdrop-blur-md shadow-lg rounded-full px-5 py-2.5 flex items-center gap-2 text-sm font-medium hover:bg-white transition-colors border border-white/50">
+                <span class="material-symbols-outlined text-blue-600 text-lg">language</span>
+                <span id="current-lang">中文</span>
+                <span class="material-symbols-outlined text-gray-500 text-sm">expand_more</span>
+            </button>
+            
+            <div id="lang-menu" class="absolute right-0 mt-2 w-32 bg-white rounded-2xl shadow-xl border border-gray-100 hidden overflow-hidden origin-top-right transition-all">
+                <button onclick="setLang('zh')" class="block w-full text-left px-4 py-3 text-sm hover:bg-blue-50 transition-colors">简体中文</button>
+                <button onclick="setLang('ja')" class="block w-full text-left px-4 py-3 text-sm hover:bg-blue-50 transition-colors">日本語</button>
+                <button onclick="setLang('en')" class="block w-full text-left px-4 py-3 text-sm hover:bg-blue-50 transition-colors">English</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative w-full h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden rounded-b-[3rem] shadow-xl">
+        <div class="absolute inset-0">
+            <img src="https://tour.btm-m.site/youth/youth_kv.png" 
+                 onerror="this.src='https://placehold.co/1920x1080/87CEEB/FFFFFF?text=Youth+KV+Placeholder'"
+                 alt="Youth Tour KV" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 flex flex-col items-center p-6 animate-fade-in-up">
+            <img src="https://tour.btm-m.site/youth/youth_logo.svg" 
+                 onerror="this.src='https://placehold.co/600x200/FFFFFF/005AC1?text=Youth+Logo'"
+                 alt="Youth Logo" 
+                 class="w-full max-w-2xl drop-shadow-2xl mb-6 hover:scale-105 transition-transform duration-700">
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20 pb-24">
+        
+        <!-- SECTION: MOVIE -->
+        <section class="mb-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Trailer -->
+                <a href="https://link.btm-m.site/tour26_trailer" target="_blank" class="group block relative w-full aspect-video rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white transition-transform hover:scale-[1.01]">
+                    <img src="https://tour.btm-m.site/youth/trailer_thumbnail.png" 
+                         onerror="this.src='https://placehold.co/1200x600/1e293b/FFFFFF?text=Trailer+Thumbnail'"
+                         alt="Trailer" class="w-full h-full object-cover group-hover:brightness-90 transition-all">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
+                        <div class="w-20 h-20 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-white text-5xl">play_arrow</span>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-6 left-8 text-white">
+                        <p class="text-sm font-bold uppercase tracking-widest opacity-80 mb-1" data-key="movie_label">OFFICIAL TRAILER</p>
+                        <h3 class="text-2xl md:text-3xl font-bold leading-tight">0M_P CAMPUS LIVE TOUR 2026 "Youth"</h3>
+                    </div>
+                </a>
+
+                <!-- Theme Song MV -->
+                <a href="https://link.btm-m.site/tour26_mv" target="_blank" class="group block relative w-full aspect-video rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white transition-transform hover:scale-[1.01]">
+                    <img src="https://tour.btm-m.site/youth/mv_thumbnail.png" 
+                         onerror="this.src='https://placehold.co/1200x600/005AC1/FFFFFF?text=Lifelong+Story+MV'"
+                         alt="Lifelong Story MV" class="w-full h-full object-cover group-hover:brightness-90 transition-all">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
+                        <div class="w-20 h-20 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-white text-5xl">play_arrow</span>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-6 left-8 text-white">
+                        <p class="text-sm font-bold uppercase tracking-widest opacity-80 mb-1" data-key="theme_song_label">THEME SONG MV</p>
+                        <h3 class="text-3xl font-bold">Lifelong Story</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- SECTION: SCHEDULE -->
+        <section id="schedule" class="mb-24">
+            <div class="text-center mb-12">
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-sm mb-2 block" data-key="schedule_subtitle">Tour Dates</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900" data-key="schedule_title">Schedule & Venues</h2>
+            </div>
+
+            <!-- Region Tabs -->
+            <div class="flex justify-center gap-2 mb-10 overflow-x-auto py-2">
+                <button onclick="switchTab('china')" id="tab-china" class="px-6 py-3 rounded-full text-sm font-bold transition-all border border-gray-200 hover:bg-gray-50 tab-active">
+                    China Leg
+                </button>
+                <button onclick="switchTab('japan')" id="tab-japan" class="px-6 py-3 rounded-full text-sm font-bold transition-all border border-gray-200 hover:bg-gray-50">
+                    Japan Leg
+                </button>
+                <button onclick="switchTab('world')" id="tab-world" class="px-6 py-3 rounded-full text-sm font-bold transition-all border border-gray-200 hover:bg-gray-50">
+                    World Leg
+                </button>
+            </div>
+
+            <!-- Venues Grid -->
+            <div id="venues-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Content injected by JS -->
+            </div>
+        </section>
+
+        <!-- SECTION: TICKETS -->
+        <section id="tickets" class="mb-24 m3-surface-container p-8 md:p-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                <div>
+                    <span class="text-blue-600 font-bold tracking-widest uppercase text-sm mb-2 block" data-key="ticket_subtitle">Get Your Pass</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900" data-key="ticket_title">Ticket Information</h2>
+                </div>
+                <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2">
+                    <span class="material-symbols-outlined text-lg">info</span>
+                    <span id="currency-display">CNY (¥)</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Ticket Tiers -->
+                <div class="lg:col-span-2 space-y-4" id="ticket-tiers">
+                    <!-- Injected by JS -->
+                </div>
+
+                <!-- Sales Info -->
+                <div class="bg-white p-8 rounded-[2rem] h-fit border border-gray-100 shadow-sm">
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-blue-600">calendar_month</span>
+                        <span data-key="sales_schedule">Sales Schedule</span>
+                    </h3>
+                    <div class="space-y-6 relative pl-2" id="sales-timeline">
+                        <!-- Timeline Injected by JS -->
+                    </div>
+                    
+                    <div class="mt-8 pt-8 border-t border-gray-100">
+                        <p class="text-sm font-bold text-gray-500 mb-3 uppercase" data-key="platforms">Official Platforms</p>
+                        <div class="flex flex-wrap gap-2" id="ticket-platforms">
+                            <!-- Platforms injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: SPECIAL -->
+        <section id="special" class="mb-24">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-sm mb-2 block">Special Events</span>
+                <h2 class="text-4xl font-bold text-gray-900 gradient-text">Beyond The Stage</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Apple Events -->
+                <div class="m3-card p-8 flex flex-col">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="https://tour.btm-m.site/youth/Apple_logo.svg" class="h-8 w-auto" alt="Apple">
+                        <h3 class="text-2xl font-bold">Special Events</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-key="apple_desc">Exclusive creative sessions at Apple Store locations worldwide.</p>
+                    <div class="space-y-3 overflow-y-auto max-h-[400px] pr-2 custom-scrollbar" id="apple-events-list">
+                        <!-- JS Injected -->
+                    </div>
+                </div>
+
+                <!-- Exhibitions -->
+                <div class="m3-card p-8 flex flex-col relative overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 text-white">
+                    <div class="absolute top-0 right-0 p-32 bg-blue-500 rounded-full blur-[100px] opacity-20"></div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold mb-2">Campus Exhibitions</h3>
+                        <p class="text-blue-200 mb-6 text-sm">Pop-up galleries featuring tour artworks & history.</p>
+                        <div class="space-y-4" id="exhibition-list">
+                            <!-- JS Injected -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Illustrators -->
+                <div class="lg:col-span-2 m3-card p-10 text-center bg-blue-50 border-none">
+                    <h3 class="text-xl font-bold mb-6 text-blue-900">0M_P x 15 Illustrators Collaboration</h3>
+                    <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm md:text-base font-medium text-gray-700 leading-relaxed" id="illustrator-list">
+                        <!-- JS Injected -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: SPONSORS -->
+        <section id="sponsors" class="mb-20 pt-10 border-t border-gray-200">
+            <h2 class="text-center text-sm font-bold text-gray-400 uppercase tracking-[0.2em] mb-12" data-key="partners_title">Official Partners</h2>
+            
+            <div class="space-y-16" id="sponsors-container">
+                <!-- Sponsors injected here -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#0f1115] text-white pt-20 pb-10 rounded-t-[3rem]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
+                <div class="flex gap-8 items-center opacity-80 hover:opacity-100 transition-opacity">
+                    <a href="https://www.universal-music.co.jp/" target="_blank">
+                        <img src="https://records.btm-m.site/assets/images/UMG.svg" class="h-8 md:h-10 w-auto brightness-0 invert" alt="Universal Music">
+                    </a>
+                    <div class="h-8 w-px bg-gray-700"></div>
+                    <a href="https://records.btm-m.site/" target="_blank">
+                        <img src="https://records.btm-m.site/assets/images/logo.svg" class="h-6 md:h-8 w-auto brightness-0 invert" alt="Now2Future">
+                    </a>
+                </div>
+                <div class="text-gray-400 text-sm font-medium">
+                    <button onclick="openModal('terms')" class="hover:text-white transition-colors mr-6" data-key="terms_of_use">Terms of Use</button>
+                    <button onclick="openModal('privacy')" class="hover:text-white transition-colors mr-6" data-key="privacy_policy">Privacy Policy</button>
+                    <button onclick="openModal('contact')" class="hover:text-white transition-colors" data-key="contact_us">Contact</button>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>&copy; 2026 UNIVERSAL MUSIC LLC / Apple / Now2Future RECORDS / 0M_P All Rights Reserved.</p>
+                <p class="mt-2 md:mt-0">Designed with Material 3 Expressive</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div id="info-modal" class="fixed inset-0 z-[100] modal-enter flex items-center justify-center bg-black/60 backdrop-blur-sm transition-all duration-300">
+        <div class="bg-white rounded-[2rem] p-8 max-w-lg w-full mx-4 shadow-2xl modal-content transition-all duration-300 transform" id="modal-box">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modal-title" class="text-2xl font-bold text-gray-900">Title</h3>
+                <button onclick="closeModal()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <span class="material-symbols-outlined text-gray-500">close</span>
+                </button>
+            </div>
+            <div id="modal-body" class="text-gray-600 space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar text-sm leading-relaxed">
+                <!-- Content injected via JS -->
+            </div>
+            <div class="mt-8 text-right">
+                <button onclick="closeModal()" class="px-6 py-2 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-colors shadow-md">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIC -->
+    <script>
+        // --- DATA ---
+        const venues = {
+            china: [
+                { city: {zh:"长沙", ja:"長沙", en:"Changsha"}, venue: {zh:"湖南农业大学 / 校体育馆", ja:"湖南農業大学 / 体育館", en:"Hunan Agricultural Univ. / Gymnasium"}, date: "2026.03.27 (Fri)" },
+                { city: {zh:"长沙", ja:"長沙", en:"Changsha"}, venue: {zh:"湖南师范大学 / 校综合体育馆", ja:"湖南師範大学 / 総合体育館", en:"Hunan Normal Univ. / Comp. Gymnasium"}, date: "2026.03.28 (Sat)" },
+                { city: {zh:"武汉", ja:"武漢", en:"Wuhan"}, venue: {zh:"武汉大学 / 卓尔体育馆", ja:"武漢大学 / 卓爾体育館", en:"Wuhan Univ. / Zall Gymnasium"}, date: "2026.04.03 (Fri)" },
+                { city: {zh:"成都", ja:"成都", en:"Chengdu"}, venue: {zh:"四川大学 / 望江校区体育馆", ja:"四川大学 / 望江体育館", en:"Sichuan Univ. / Wangjiang Gym"}, date: "2026.04.04 (Sat)" },
+                { city: {zh:"重庆", ja:"重慶", en:"Chongqing"}, venue: {zh:"重庆大学 / 虎溪校区体育中心", ja:"重慶大学 / 虎渓体育センター", en:"Chongqing Univ. / Huxi Sports Center"}, date: "2026.04.05 (Sun)" },
+                { city: {zh:"南京", ja:"南京", en:"Nanjing"}, venue: {zh:"南京大学 / 仙林校区体育馆", ja:"南京大学 / 仙林体育館", en:"Nanjing Univ. / Xianlin Gym"}, date: "2026.04.10 (Fri)" },
+                { city: {zh:"上海", ja:"上海", en:"Shanghai"}, venue: {zh:"上海交通大学 / 霍英东体育中心", ja:"上海交通大学 / 霍英東体育センター", en:"SJTU / Fok Ying Tung Sports Center"}, date: "2026.04.11 (Sat)" },
+                { city: {zh:"上海", ja:"上海", en:"Shanghai"}, venue: {zh:"复旦大学 / 正大体育馆", ja:"復旦大学 / 正大体育館", en:"Fudan Univ. / Zhengda Gym"}, date: "2026.04.12 (Sun)" },
+                { city: {zh:"杭州", ja:"杭州", en:"Hangzhou"}, venue: {zh:"浙江大学 / 紫金港校区体育馆", ja:"浙江大学 / 紫金港体育館", en:"Zhejiang Univ. / Zijingang Gym"}, date: "2026.04.17 (Fri)" },
+                { city: {zh:"北京", ja:"北京", en:"Beijing"}, venue: {zh:"北京大学 / 邱德拔体育馆", ja:"北京大学 / 邱徳抜体育館", en:"Peking Univ. / Khoo Teck Puat Gym"}, date: "2026.04.18 (Sat)" },
+                { city: {zh:"北京", ja:"北京", en:"Beijing"}, venue: {zh:"清华大学 / 综合体育馆", ja:"清華大学 / 総合体育館", en:"Tsinghua Univ. / Comp. Gymnasium"}, date: "2026.04.19 (Sun)" },
+                { city: {zh:"广州", ja:"広州", en:"Guangzhou"}, venue: {zh:"中山大学 / 南校园体育馆", ja:"中山大学 / 南キャンパス体育館", en:"Sun Yat-sen Univ. / South Campus Gym"}, date: "2026.04.24 (Fri)" },
+                { city: {zh:"深圳", ja:"深セン", en:"Shenzhen"}, venue: {zh:"深圳大学 / 元平体育馆", ja:"深圳大学 / 元平体育館", en:"Shenzhen Univ. / Yuanping Gym"}, date: "2026.04.25 (Sat)" },
+                { city: {zh:"香港", ja:"香港", en:"Hong Kong"}, venue: {zh:"香港大学 / 何世光夫人体育中心", ja:"香港大学 / フローラ・ホー・スポーツセンター", en:"HKU / Flora Ho Sports Centre"}, date: "2026.05.01 (Fri)" },
+                { city: {zh:"台北", ja:"台北", en:"Taipei"}, venue: {zh:"国立台湾大学 / 台大综合体育馆 1F", ja:"国立台湾大学 / 総合体育館 1F", en:"NTU / Sports Center 1F"}, date: "2026.05.03 (Sun)" }
+            ],
+            japan: [
+                { city: {zh:"福冈", ja:"福岡", en:"Fukuoka"}, venue: {zh:"九州大学 / 椎木讲堂", ja:"九州大学 / 椎木講堂", en:"Kyushu Univ. / Shiiki Hall"}, date: "2026.05.08 (Fri)" },
+                { city: {zh:"东京", ja:"東京", en:"Tokyo"}, venue: {zh:"早稻田大学 / 早稻田体育馆", ja:"早稲田大学 / 早稲田アリーナ", en:"Waseda Univ. / Waseda Arena"}, date: "2026.05.16 (Sat)" },
+                { city: {zh:"东京", ja:"東京", en:"Tokyo"}, venue: {zh:"庆应义塾大学 / 日吉纪念馆", ja:"慶應義塾大学 / 日吉記念館", en:"Keio Univ. / Hiyoshi Comm. Hall"}, date: "2026.05.17 (Sun)" },
+                { city: {zh:"仙台", ja:"仙台", en:"Sendai"}, venue: {zh:"东北大学 / 川内体育馆", ja:"東北大学 / 川内体育館", en:"Tohoku Univ. / Kawauchi Gym"}, date: "2026.05.22 (Fri)" },
+                { city: {zh:"大阪", ja:"大阪", en:"Osaka"}, venue: {zh:"大阪大学 / 丰中校区体育馆", ja:"大阪大学 / 豊中地区体育館", en:"Osaka Univ. / Main Campus Gym"}, date: "2026.05.23 (Sat)" },
+                { city: {zh:"京都", ja:"京都", en:"Kyoto"}, venue: {zh:"京都大学 / 综合体育馆", ja:"京都大学 / 総合体育館", en:"Kyoto Univ. / Campus Gym"}, date: "2026.05.30 (Sat)" },
+                { city: {zh:"名古屋", ja:"名古屋", en:"Nagoya"}, venue: {zh:"名古屋大学 / 第一体育馆", ja:"名古屋大学 / 第1体育館", en:"Nagoya Univ. / No.1 Gymnasium"}, date: "2026.05.31 (Sun)" },
+                { city: {zh:"札幌", ja:"札幌", en:"Sapporo"}, venue: {zh:"北海道大学 / 综合体育馆", ja:"北海道大学 / 総合体育館", en:"Hokkaido Univ. / Comp. Gymnasium"}, date: "2026.06.05 (Fri)" }
+            ],
+            world: [
+                { city: {zh:"伦敦", ja:"ロンドン", en:"London"}, venue: {zh:"伦敦大学学院 / UCL South Quad", ja:"UCL / サウス・クアッド", en:"UCL / UCL South Quad"}, date: "2026.06.13 (Sat)" },
+                { city: {zh:"巴黎", ja:"パリ", en:"Paris"}, venue: {zh:"索邦大学 / Jussieu多功能厅", ja:"ソルボンヌ大学 / ジュシュー多目的ホール", en:"Sorbonne Univ. / Jussieu Hall"}, date: "2026.06.20 (Sat)" },
+                { city: {zh:"洛杉矶", ja:"ロサンゼルス", en:"Los Angeles"}, venue: {zh:"南加州大学 / 盖伦中心", ja:"USC / ガレン・センター", en:"USC / Galen Center"}, date: "2026.06.28 (Sun)" },
+                { city: {zh:"华盛顿", ja:"ワシントンDC", en:"Washington D.C."}, venue: {zh:"乔治城大学 / 麦克多诺体育馆", ja:"ジョージタウン大学 / マクドナー・アリーナ", en:"Georgetown Univ. / McDonough Arena"}, date: "2026.07.04 (Sat)" },
+                { city: {zh:"墨西哥城", ja:"メキシコシティ", en:"Mexico City"}, venue: {zh:"墨西哥国立自治大学 / Sala Nezahualcóyotl", ja:"UNAM / Sala Nezahualcóyotl", en:"UNAM / Sala Nezahualcóyotl"}, date: "2026.07.10 (Fri)" },
+                { city: {zh:"多伦多", ja:"トロント", en:"Toronto"}, venue: {zh:"多伦多大学 / Goldring中心", ja:"トロント大学 / Goldring Centre", en:"Univ. of Toronto / Goldring Centre"}, date: "2026.07.17 (Fri)" },
+                { city: {zh:"纽约", ja:"ニューヨーク", en:"New York"}, venue: {zh:"哥伦比亚大学 / Levien体育馆", ja:"コロンビア大学 / レヴィエン体育館", en:"Columbia Univ. / Levien Gym"}, date: "2026.07.19 (Sun)" },
+                { city: {zh:"柏林", ja:"ベルリン", en:"Berlin"}, venue: {zh:"柏林洪堡大学 / Horst-Korber中心", ja:"フンボルト大学 / Horst-Korber Zentrum", en:"Humboldt Univ. / Horst-Korber-Zentrum"}, date: "2026.07.25 (Sat)" },
+                { city: {zh:"马德里", ja:"マドリード", en:"Madrid"}, venue: {zh:"马德里康普顿斯大学 / 南区体育中心", ja:"コンプルテンセ大学 / 南スポーツ複合施設", en:"UCM / Complejo Deportivo Zona Sur"}, date: "2026.08.01 (Sat)" },
+                { city: {zh:"悉尼", ja:"シドニー", en:"Sydney"}, venue: {zh:"悉尼大学 / Brydens体育场", ja:"シドニー大学 / Brydens Stadium", en:"Univ. of Sydney / Brydens Stadium"}, date: "2026.08.08 (Sat)" },
+                { city: {zh:"墨尔本", ja:"メルボルン", en:"Melbourne"}, venue: {zh:"墨尔本大学 / Nuna体育馆", ja:"メルボルン大学 / Nuna Gymnasium", en:"Univ. of Melbourne / Nuna Gym"}, date: "2026.08.09 (Sun)" }
+            ]
+        };
+
+        const ticketData = {
+            china: {
+                currency: "CNY (¥)",
+                tiers: [
+                    { name: {zh:"早鸟票 (看台)", ja:"早割 (スタンド)", en:"Early Bird (Seated)"}, price: "¥129", desc: {zh:"看台区 + 发光手环 + 挂绳", ja:"スタンド席 + ペンライト + ネックストラップ", en:"Seat + LED Wristband + Lanyard"} },
+                    { name: {zh:"通常票 (看台)", ja:"一般 (スタンド)", en:"Standard (Seated)"}, price: "¥199", desc: {zh:"看台区 + 发光手环 + 挂绳", ja:"スタンド席 + ペンライト + ネックストラップ", en:"Seat + LED Wristband + Lanyard"} },
+                    { name: {zh:"通常票 (内场)", ja:"一般 (アリーナ)", en:"Standard (Floor)"}, price: "¥399", desc: {zh:"前排区 + 液态玻璃镭射卡 + 挂绳", ja:"アリーナ前方 + レーザーカード + ネックストラップ", en:"Front Floor + Laser Card + Lanyard"} },
+                    { name: {zh:"Youth 学子票", ja:"Youth 学割", en:"Youth Student"}, price: "¥99", desc: {zh:"看台区 + 发光手环 + 挂绳", ja:"スタンド席 + ペンライト + ネックストラップ", en:"Seat + LED Wristband + Lanyard"}, highlight: true },
+                    { name: {zh:"Youth+ 学子票", ja:"Youth+ 学割", en:"Youth+ Student"}, price: "¥199", desc: {zh:"内场区 + 徽章 + 挂绳", ja:"アリーナ席 + 缶バッジ + ネックストラップ", en:"Floor + Badge + Lanyard"}, highlight: true }
+                ],
+                timeline: [
+                    { date: "2026.01.10 12:00", label: {zh:"一开 (早鸟/学生)", ja:"最速先行 (早割/学生)", en:"Presale (Early Bird/Student)"} },
+                    { date: "2026.02.15 14:00", label: {zh:"二开 (全票档)", ja:"一般発売", en:"General Sale"} },
+                    { date: "2026.03.10 18:00", label: {zh:"三开 (余票/回流)", ja:"最終販売", en:"Final Release"} }
+                ],
+                platforms: ["Bilibili", "Damai", "Official Site"]
+            },
+            japan: {
+                currency: "JPY (¥)",
+                tiers: [
+                    { name: {zh:"最速先行 (看台)", ja:"最速先行 (スタンド)", en:"Early Bird (Seated)"}, price: "¥3,200", desc: {zh:"看台指定席 + 发光手环 + 挂绳", ja:"スタンド指定席 + ペンライト + ネックストラップ", en:"Reserved Seat + LED Wristband + Lanyard"} },
+                    { name: {zh:"一般票 (看台)", ja:"一般 (スタンド)", en:"General (Seated)"}, price: "¥4,800", desc: {zh:"看台指定席 + 发光手环 + 挂绳", ja:"スタンド指定席 + ペンライト + ネックストラップ", en:"Reserved Seat + LED Wristband + Lanyard"} },
+                    { name: {zh:"一般票 (内场)", ja:"一般 (アリーナ)", en:"General (Arena)"}, price: "¥9,500", desc: {zh:"内场前方 + 液态玻璃镭射卡 + 挂绳", ja:"アリーナ前方 + レーザーカード + ネックストラップ", en:"Arena Front + Laser Card + Lanyard"} },
+                    { name: {zh:"Youth 学割 (看台)", ja:"Youth 学割 (スタンド)", en:"Youth Student (Seated)"}, price: "¥2,400", desc: {zh:"看台指定席 + 发光手环 + 挂绳", ja:"スタンド指定席 + ペンライト + ネックストラップ", en:"Reserved Seat + LED Wristband + Lanyard"}, highlight: true },
+                    { name: {zh:"Youth+ 学割 (内场)", ja:"Youth+ 学割 (アリーナ)", en:"Youth+ Student (Arena)"}, price: "¥4,800", desc: {zh:"内场自由席 + 徽章 + 挂绳", ja:"アリーナ自由席 + 缶バッジ + ネックストラップ", en:"Arena Free + Badge + Lanyard"}, highlight: true }
+                ],
+                timeline: [
+                    { date: "2026.02.01 - 02.10", label: {zh:"0M Members Club 先行", ja:"0M Members Club 先行抽選", en:"FC Lottery"} },
+                    { date: "2026.02.15 - 02.25", label: {zh:"官方一次先行", ja:"オフィシャル1次先行", en:"Official Lottery 1"} },
+                    { date: "2026.04.10 10:00", label: {zh:"一般发售", ja:"一般発売", en:"General Sale"} }
+                ],
+                platforms: ["e-plus", "Lawson Ticket", "Ticket Pia"]
+            },
+            world: {
+                currency: "USD / GBP / EUR / AUD",
+                tiers: [
+                    { name: {zh:"早鸟票 (座席)", ja:"早割 (座席)", en:"Early Bird (Seated)"}, price: "$22", desc: {zh:"分区座席 + 发光手环 + 挂绳", ja:"セクション席 + ペンライト + ネックストラップ", en:"Section Seat + LED Wristband + Lanyard"} },
+                    { name: {zh:"通常票 (座席)", ja:"一般 (座席)", en:"General Admission (Seated)"}, price: "$35", desc: {zh:"分区座席 + 发光手环 + 挂绳", ja:"セクション席 + ペンライト + ネックストラップ", en:"Section Seat + LED Wristband + Lanyard"} },
+                    { name: {zh:"高级内场 (Pit)", ja:"プレミアムアリーナ", en:"Premium Floor (Pit)"}, price: "$65", desc: {zh:"前排内场 + 液态玻璃镭射卡 + 挂绳", ja:"アリーナ前方 + レーザーカード + ネックストラップ", en:"Front Floor + Laser Card + Lanyard"} },
+                    { name: {zh:"学生通票", ja:"学生パス", en:"Student Pass"}, price: "$18", desc: {zh:"分区座席 + 发光手环 + 挂绳", ja:"セクション席 + ペンライト + ネックストラップ", en:"Section Seat + LED Wristband + Lanyard"}, highlight: true },
+                ],
+                timeline: [
+                    { date: "Mar 11 10:00", label: {zh:"艺人预售", ja:"アーティスト先行", en:"Artist Presale"} },
+                    { date: "Mar 12 10:00", label: {zh:"场馆/合作方预售", ja:"会場/パートナー先行", en:"Venue/Partner Presale"} },
+                    { date: "Mar 13 10:00", label: {zh:"公开发售", ja:"一般発売", en:"General Public On-sale"} }
+                ],
+                platforms: ["Ticketmaster", "DICE", "Venue Sites"]
+            }
+        };
+
+        const sponsors = [
+            {
+                category: {zh:"全球战略合作伙伴", ja:"グローバル戦略パートナー", en:"Global Strategic Partners"},
+                logos: [
+                    {name: "Apple", desc: {zh:"官方指定创意硬件与生态合作伙伴", ja:"公式クリエイティブハードウェア＆エコシステムパートナー", en:"Official Creative Hardware & Ecosystem Partner"}, img: "https://tour.btm-m.site/youth/Apple_logo.svg"},
+                    {name: "Coca-Cola", desc: {zh:"巡演官方唯一指定饮品", ja:"オフィシャルドリンクスポンサー", en:"Official Beverage Sponsor"}, img: "https://tour.btm-m.site/youth/Coca-Cola_logo.svg"},
+                    {name: "Sony", desc: {zh:"全球视听技术与影像支持", ja:"グローバルAV＆イメージング技術提供", en:"Global Audio-Visual & Imaging Technology Provider"}, img: "https://tour.btm-m.site/youth/Sony_logo.svg"},
+                    {name: "Adobe", desc: {zh:"官方指定数字内容创作工具", ja:"オフィシャルデジタルコンテンツ制作ツール", en:"Official Digital Content Creation Suite"}, img: "https://tour.btm-m.site/youth/Adobe_logo.svg"}
+                ]
+            },
+            {
+                category: {zh:"中国大陆地区合作伙伴", ja:"中国本土地域パートナー", en:"Mainland China Regional Partners"},
+                logos: [
+                    {name: "bilibili", desc: {zh:"首席合作媒体与独家内容社区", ja:"主要メディアパートナー＆独占コンテンツコミュニティ", en:"Leading Media Partner & Exclusive Content Community"}, img: "https://tour.btm-m.site/youth/bilibili_logo.svg"},
+                    {name: "Xiaomi", desc: {zh:"官方智能生活与移动设备合作伙伴", ja:"公式スマートライフ＆モバイルデバイスパートナー", en:"Official Smart Life & Mobile Device Partner"}, img: "https://tour.btm-m.site/youth/Xiaomi_logo.svg"},
+                    {name: "HEYTEA", desc: {zh:"巡演官方联名新茶饮品牌", ja:"公式ティーコラボレーションパートナー", en:"Official Tea Drink Collaboration Partner"}, img: "https://tour.btm-m.site/youth/HEYTEA_logo.svg"},
+                    {name: "DJI", desc: {zh:"官方影像技术与无人机航拍支持", ja:"公式映像技術＆ドローン空撮サポート", en:"Official Imaging Technology & Aerial Cinematography Sponsor"}, img: "https://tour.btm-m.site/youth/DJI_logo.svg"}
+                ]
+            },
+            {
+                category: {zh:"日本站专项合作伙伴", ja:"日本公演限定パートナー", en:"Japan Exclusive Partners"},
+                logos: [
+                    {name: "Yamaha", desc: {zh:"音频技术与专业音频设备支持", ja:"オーディオ技術＆プロオーディオ機器サポート", en:"Audio Technology & Professional Audio Support"}, img: "https://tour.btm-m.site/youth/Yamaha_logo.svg"},
+                    {name: "SEGA", desc: {zh:"官方游戏互动与虚拟文化合作伙伴", ja:"公式ゲーム＆バーチャルカルチャーパートナー", en:"Official Gaming & Virtual Interaction Partner"}, img: "https://tour.btm-m.site/youth/SEGA_logo.svg"},
+                    {name: "LAWSON", desc: {zh:"日本地区线下联动与票务支持", ja:"オフィシャルリテール＆チケットパートナー", en:"Official Offline Retail & Ticketing Partner"}, img: "https://tour.btm-m.site/youth/Lawson_logo.svg"},
+                    {name: "U-NEXT", desc: {zh:"日本地区独家线上演播平台", ja:"独占オンライン配信プラットフォーム", en:"Exclusive Online Streaming Platform"}, img: "https://tour.btm-m.site/youth/U-Next_logo.svg"}
+                ]
+            },
+            {
+                category: {zh:"国际及地区合作伙伴", ja:"国際・地域パートナー", en:"International & Regional Partners"},
+                logos: [
+                    {name: "Google", desc: {zh:"Material Design 官方设计美学合作伙伴", ja:"Material Design 公式デザインパートナー", en:"Official Material Design Aesthetics Partner"}, img: "https://tour.btm-m.site/youth/Google_logo.svg"},
+                    {name: "YouTube Music", desc: {zh:"全球官方音频流媒体合作伙伴", ja:"グローバル公式音楽ストリーミングパートナー", en:"Global Official Music Streaming Partner"}, img: "https://tour.btm-m.site/youth/YouTube_Music_logo.svg"},
+                    {name: "Figma", desc: {zh:"官方界面设计与创作者协作平台", ja:"公式UIデザイン＆コラボレーションプラットフォーム", en:"Official Interface Design & Collaboration Platform"}, img: "https://tour.btm-m.site/youth/Figma_logo.svg"},
+                    {name: "Logitech", desc: {zh:"官方指定外设与生产力装备", ja:"公式周辺機器＆生産性ギアスポンサー", en:"Official Peripherals & Productivity Gear Sponsor"}, img: "https://tour.btm-m.site/youth/Logitech_logo.svg"}
+                ]
+            }
+        ];
+
+        const events = {
+            apple: [
+                "Changsha / Apple Changsha (IFS) / Apr 04",
+                "Shenzhen / Apple Shenzhen (Yitian) / Apr 25",
+                "Hong Kong / Apple Causeway Bay / May 02",
+                "Taipei / Apple Xinyi A13 / May 09",
+                "Hangzhou / Apple West Lake / May 16",
+                "Shanghai / Apple Jing’an / May 30",
+                "Beijing / Apple Sanlitun / Jun 13",
+                "Tokyo / Apple Ginza / Jul 18",
+                "London / Apple Regent Street / Aug 08",
+                "New York / Apple Fifth Avenue / Aug 15"
+            ],
+            exhibitions: [
+                {place: "Hunan Agricultural Univ.", date: "3.25 - 3.27"},
+                {place: "SJTU (Minhang)", date: "4.09 - 4.11"},
+                {place: "Zhejiang Univ. (Zijingang)", date: "4.15 - 4.17"},
+                {place: "Peking Univ.", date: "4.16 - 4.18"},
+                {place: "HKU (Centennial)", date: "4.29 - 5.01"},
+                {place: "Keio Univ. (Hiyoshi)", date: "5.15 - 5.17"},
+                {place: "Hokkaido Univ.", date: "6.03 - 6.05"},
+                {place: "UCL South Quad", date: "6.11 - 6.13"},
+                {place: "USC McCarthy Quad", date: "6.26 - 6.28"},
+                {place: "Univ. of Sydney", date: "8.06 - 8.08"}
+            ],
+            illustrators: [
+                "米山舞", "望月けい", "ろづ希", "redjuice", "秋赤音", "Rella", "Ask", "幻象黑兔", 
+                "REI (Rei_doll)", "STAR影法师", "Ilya Kuvshinov", "GUWEIZ", "Miv4t"
+            ]
+        };
+
+        const modalContent = {
+            privacy: {
+                title: {zh: "隐私政策", ja: "プライバシーポリシー", en: "Privacy Policy"},
+                body: {
+                    zh: "<p><strong>1. 简介</strong><br>Now2Future RECORDS（“我们”）致力于保护您的隐私。本隐私政策解释了我们如何在您访问我们的网站时收集、使用和保护您的个人信息。</p><p><strong>2. 信息收集</strong><br>我们收集您直接提供给我们的信息，例如当您填写联系表格时，包括您的姓名、电子邮件地址和公司详细信息。我们还会通过 Cookie 自动收集使用数据以改善网站性能。</p><p><strong>3. 信息使用</strong><br>您的信息用于回复您的咨询、改进我们的服务以及就我们的项目与您沟通。我们不会将您的个人数据出售给第三方。</p><p><strong>4. 数据安全</strong><br>我们采取适当的技术和组织措施来保护您的个人数据免受未经授权的访问、更改或破坏。</p><p><strong>5. 联系我们</strong><br>如果您对本隐私政策有任何疑问，请通过 N2F.RE@umg-mail.com 与我们联系。</p>",
+                    ja: "<p><strong>1. はじめに</strong><br>Now2Future RECORDS（以下「当社」）は、お客様のプライバシー保護に取り組んでいます。本プライバシーポリシーは、お客様が当社のウェブサイトを訪問した際に、当社がどのようにお客様の個人情報を収集、使用、保護するかを説明するものです。</p><p><strong>2. 情報の収集</strong><br>当社は、お問い合わせフォームへの記入時などにお客様が直接提供する情報（氏名、メールアドレス、会社詳細など）を収集します。また、サイトのパフォーマンス向上のため、Cookieを通じて利用データを自動的に収集します。</p><p><strong>3. 情報の使用</strong><br>お客様の情報は、お問い合わせへの回答、サービスの向上、およびプロジェクトに関する連絡に使用されます。当社は、お客様の個人データを第三者に販売することはありません。</p><p><strong>4. データセキュリティ</strong><br>当社は、不正アクセス、改ざん、または破壊からお客様の個人データを保護するために、適切な技術的および組織的対策を講じています。</p><p><strong>5. お問い合わせ</strong><br>本プライバシーポリシーに関するご質問は、N2F.RE@umg-mail.com までお問い合わせください。</p>",
+                    en: "<p><strong>1. Introduction</strong><br>Now2Future RECORDS (\"we\", \"our\", \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website.</p><p><strong>2. Information Collection</strong><br>We collect information you provide directly to us, such as when you fill out a contact form, including your name, email address, and company details. We also automatically collect usage data via cookies to improve site performance.</p><p><strong>3. Use of Information</strong><br>Your information is used to respond to your inquiries, improve our services, and communicate with you about our projects. We do not sell your personal data to third parties.</p><p><strong>4. Data Security</strong><br>We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, or destruction.</p><p><strong>5. Contact Us</strong><br>If you have any questions about this Privacy Policy, please contact us at N2F.RE@umg-mail.com.</p>"
+                }
+            },
+            contact: {
+                title: {zh: "联系我们", ja: "お問い合わせ", en: "Contact Us"},
+                body: {
+                    zh: "<p><strong>票务咨询</strong><br>ticket-support@btm-m.site</p><p><strong>商务合作</strong><br>business@btm-m.site</p><p><strong>粉丝俱乐部</strong><br>fc-support@btm-m.site</p><p><strong>唱片公司</strong><br>N2F.RE@umg-mail.com</p><p class='text-xs text-gray-400 mt-4'>工作时间: 周一至周五 10:00 - 18:00 (JST)</p>",
+                    ja: "<p><strong>チケットに関するお問い合わせ</strong><br>ticket-support@btm-m.site</p><p><strong>ビジネスに関するお問い合わせ</strong><br>business@btm-m.site</p><p><strong>ファンクラブに関するお問い合わせ</strong><br>fc-support@btm-m.site</p><p><strong>レコード会社</strong><br>N2F.RE@umg-mail.com</p><p class='text-xs text-gray-400 mt-4'>受付時間: 月〜金 10:00 - 18:00 (JST)</p>",
+                    en: "<p><strong>Ticketing Inquiries</strong><br>ticket-support@btm-m.site</p><p><strong>Business Inquiries</strong><br>business@btm-m.site</p><p><strong>Fan Club Support</strong><br>fc-support@btm-m.site</p><p><strong>Record Label</strong><br>N2F.RE@umg-mail.com</p><p class='text-xs text-gray-400 mt-4'>Business Hours: Mon-Fri 10:00 - 18:00 (JST)</p>"
+                }
+            },
+            terms: {
+                title: {zh: "使用条款", ja: "利用規約", en: "Terms of Use"},
+                body: {
+                    zh: "<p><strong>1. 条款接受</strong><br>访问并使用 Now2Future RECORDS 网站即表示您同意受这些使用条款的约束。如果您不同意，请勿使用本网站。</p><p><strong>2. 知识产权</strong><br>本网站上的所有内容（包括但不限于音乐、文本、图形、徽标、图像和软件）均为 Now2Future RECORDS 或其内容提供商的财产，受国际版权法保护。</p><p><strong>3. 许可与访问</strong><br>我们授予您有限的许可访问并个人使用本网站。未经我们要书面同意，您不得下载（页面缓存除外）或修改其任何部分。</p><p><strong>4. 责任限制</strong><br>Now2Future RECORDS 不对因使用本网站而引起的任何类型的损害承担责任，包括但不限于直接、间接、附带、惩罚性和后果性损害。</p><p><strong>5. 适用法律</strong><br>这些条款应受日本法律管辖并据其解释，不考虑其法律冲突规定。</p>",
+                    ja: "<p><strong>1. 規約への同意</strong><br>Now2Future RECORDSのウェブサイトにアクセスして利用することにより、お客様はこれらの利用規約に拘束されることに同意するものとします。同意されない場合は、本サイトを利用しないでください。</p><p><strong>2. 知的財産権</strong><br>音楽、テキスト、グラフィック、ロゴ、画像、ソフトウェアを含むがこれらに限定されない本ウェブサイト上のすべてのコンテンツは、Now2Future RECORDSまたはそのコンテンツ提供者の財産であり、国際著作権法によって保護されています。</p><p><strong>3. ライセンスとアクセス</strong><br>当社は、本サイトにアクセスし、個人的に利用するための限定的なライセンスをお客様に付与します。当社の書面による明示的な同意なしに、その一部をダウンロード（ページキャッシュを除く）または変更することはできません。</p><p><strong>4. 責任の制限</strong><br>Now2Future RECORDSは、直接的、間接的、偶発的、懲罰的、および必然的な損害を含むがこれらに限定されない、本サイトの使用から生じるいかなる種類の損害についても責任を負いません。</p><p><strong>5. 準拠法</strong><br>これらの規約は、法の抵触に関する規定にかかわらず、日本法に準拠し、同法に従って解釈されるものとします。</p>",
+                    en: "<p><strong>1. Acceptance of Terms</strong><br>By accessing and using the Now2Future RECORDS website, you agree to be bound by these Terms of Use. If you do not agree, please do not use this site.</p><p><strong>2. Intellectual Property</strong><br>All content on this website, including but not limited to music, text, graphics, logos, images, and software, is the property of Now2Future RECORDS or its content suppliers and is protected by international copyright laws.</p><p><strong>3. License and Access</strong><br>We grant you a limited license to access and make personal use of this site. You may not download (other than page caching) or modify any portion of it without our express written consent.</p><p><strong>4. Limitation of Liability</strong><br>Now2Future RECORDS will not be liable for any damages of any kind arising from the use of this site, including but not limited to direct, indirect, incidental, punitive, and consequential damages.</p><p><strong>5. Governing Law</strong><br>These terms shall be governed by and construed in accordance with the laws of Japan, without regard to its conflict of law provisions.</p>"
+                }
+            }
+        };
+
+        const uiText = {
+            zh: {
+                schedule_subtitle: "巡演日程", schedule_title: "时间与场馆",
+                ticket_subtitle: "获取门票", ticket_title: "票务信息",
+                sales_schedule: "发售时间表", platforms: "官方售票平台",
+                partners_title: "官方合作伙伴",
+                apple_desc: "在全球 Apple Store 零售店举办的独家创意分享会。",
+                movie_label: "官方宣传片",
+                theme_song_label: "主题曲 MV",
+                privacy_policy: "隐私政策", contact_us: "联系我们", terms_of_use: "使用条款"
+            },
+            ja: {
+                schedule_subtitle: "ツアースケジュール", schedule_title: "日程と会場",
+                ticket_subtitle: "チケットを入手", ticket_title: "チケット情報",
+                sales_schedule: "発売スケジュール", platforms: "プレイガイド",
+                partners_title: "オフィシャルパートナー",
+                apple_desc: "世界中のApple Storeで開催される限定クリエイティブセッション。",
+                movie_label: "公式トレーラー",
+                theme_song_label: "テーマソング MV",
+                privacy_policy: "プライバシーポリシー", contact_us: "お問い合わせ", terms_of_use: "利用規約"
+            },
+            en: {
+                schedule_subtitle: "Tour Dates", schedule_title: "Schedule & Venues",
+                ticket_subtitle: "Get Your Pass", ticket_title: "Ticket Information",
+                sales_schedule: "Sales Schedule", platforms: "Official Platforms",
+                partners_title: "Official Partners",
+                apple_desc: "Exclusive creative sessions at Apple Store locations worldwide.",
+                movie_label: "Official Trailer",
+                theme_song_label: "THEME SONG MV",
+                privacy_policy: "Privacy Policy", contact_us: "Contact", terms_of_use: "Terms of Use"
+            }
+        };
+
+        let currentLang = 'zh';
+
+        // --- RENDER FUNCTIONS ---
+        
+        function renderVenues(region) {
+            const container = document.getElementById('venues-container');
+            container.innerHTML = venues[region].map(v => `
+                <div class="m3-card p-6 flex flex-col h-full border-l-4 border-blue-500">
+                    <p class="text-blue-600 font-bold mb-1">${v.date}</p>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">${v.city[currentLang]}</h3>
+                    <p class="text-sm text-gray-500 mt-auto">${v.venue[currentLang]}</p>
+                </div>
+            `).join('');
+
+            // Update tab styles
+            ['china', 'japan', 'world'].forEach(r => {
+                const btn = document.getElementById(`tab-${r}`);
+                if (r === region) {
+                    btn.classList.add('tab-active', 'border-transparent');
+                    btn.classList.remove('border-gray-200', 'bg-white');
+                } else {
+                    btn.classList.remove('tab-active', 'border-transparent');
+                    btn.classList.add('border-gray-200', 'bg-white');
+                }
+            });
+            
+            // Update Tickets for same region automatically
+            renderTickets(region);
+        }
+
+        function renderTickets(region) {
+            const data = ticketData[region];
+            document.getElementById('currency-display').innerText = data.currency;
+            
+            // Tiers
+            document.getElementById('ticket-tiers').innerHTML = data.tiers.map(t => `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between p-5 rounded-2xl ${t.highlight ? 'bg-blue-600 text-white shadow-lg transform scale-[1.02]' : 'bg-white border border-gray-100'} transition-all">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-bold text-lg">${t.name[currentLang]}</h4>
+                            ${t.highlight ? '<span class="text-[10px] font-bold uppercase border border-white/40 px-2 py-0.5 rounded-full">Recommended</span>' : ''}
+                        </div>
+                        <p class="text-sm ${t.highlight ? 'text-blue-100' : 'text-gray-500'}">${t.desc[currentLang]}</p>
+                    </div>
+                    <div class="mt-3 sm:mt-0 font-bold text-2xl tracking-tight">${t.price}</div>
+                </div>
+            `).join('');
+
+            // Timeline
+            document.getElementById('sales-timeline').innerHTML = data.timeline.map((t, i) => `
+                <div class="flex gap-4 relative">
+                    <div class="flex flex-col items-center">
+                        <div class="w-3 h-3 rounded-full ${i === data.timeline.length -1 ? 'bg-blue-600' : 'bg-gray-300'}"></div>
+                        ${i !== data.timeline.length - 1 ? '<div class="w-0.5 h-full bg-gray-200 my-1"></div>' : ''}
+                    </div>
+                    <div class="pb-6">
+                        <p class="text-xs font-bold text-gray-400">${t.date}</p>
+                        <p class="font-medium text-gray-800">${t.label[currentLang]}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Platforms
+            document.getElementById('ticket-platforms').innerHTML = data.platforms.map(p => `
+                <span class="px-3 py-1 bg-gray-100 rounded-lg text-xs font-semibold text-gray-600">${p}</span>
+            `).join('');
+        }
+
+        function renderSpecial() {
+            // Apple
+            document.getElementById('apple-events-list').innerHTML = events.apple.map(e => `
+                <div class="flex items-start gap-3 py-2 border-b border-gray-100 last:border-0">
+                    <span class="material-symbols-outlined text-gray-400 text-sm mt-1">event</span>
+                    <span class="text-sm font-medium text-gray-700">${e}</span>
+                </div>
+            `).join('');
+
+            // Exhibitions
+            document.getElementById('exhibition-list').innerHTML = events.exhibitions.map(e => `
+                <div class="flex justify-between items-center bg-white/10 p-3 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-colors">
+                    <span class="font-bold text-sm text-white">${e.place}</span>
+                    <span class="text-xs text-blue-200 font-mono">${e.date}</span>
+                </div>
+            `).join('');
+
+            // Illustrators
+            document.getElementById('illustrator-list').innerHTML = events.illustrators.map(i => `
+                <span class="text-blue-900/80 hover:text-blue-600 transition-colors cursor-default">${i}</span>
+                <span class="text-blue-200 last:hidden">/</span>
+            `).join('');
+        }
+
+        function renderSponsors() {
+            document.getElementById('sponsors-container').innerHTML = sponsors.map(cat => `
+                <div>
+                    <h3 class="text-center text-lg font-bold text-gray-900 mb-8">${cat.category[currentLang]}</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-5xl mx-auto">
+                        ${cat.logos.map(logo => `
+                            <div class="flex flex-col items-center p-6 bg-gray-50 rounded-2xl hover:bg-white hover:shadow-lg transition-all group text-center h-full">
+                                <img src="${logo.img}" alt="${logo.name}" class="h-8 md:h-12 w-auto mb-4 object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
+                                <p class="text-[10px] md:text-xs text-gray-400 group-hover:text-gray-600 leading-tight">${logo.desc[currentLang]}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateUIText() {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (uiText[currentLang][key]) {
+                    el.innerText = uiText[currentLang][key];
+                }
+            });
+            
+            // Update Lang Button Text
+            const labels = {zh: "中文", ja: "日本語", en: "English"};
+            document.getElementById('current-lang').innerText = labels[currentLang];
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+            
+            updateUIText();
+            renderVenues(document.querySelector('.tab-active').id.split('-')[1]); // Keep current region
+            renderSponsors();
+            document.getElementById('lang-menu').classList.add('hidden');
+        }
+
+        function switchTab(region) {
+            renderVenues(region);
+        }
+
+        // --- MODAL LOGIC ---
+        function openModal(type) {
+            const modal = document.getElementById('info-modal');
+            const content = modalContent[type];
+            
+            document.getElementById('modal-title').innerText = content.title[currentLang];
+            document.getElementById('modal-body').innerHTML = content.body[currentLang];
+            
+            modal.classList.remove('hidden');
+            // Trigger reflow
+            void modal.offsetWidth;
+            modal.classList.add('modal-active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('info-modal');
+            modal.classList.remove('modal-active');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300); // Wait for transition
+        }
+
+        // Toggle Lang Menu
+        document.getElementById('lang-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('lang-menu').classList.toggle('hidden');
+        });
+        
+        // Close modal on outside click
+        document.getElementById('info-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'info-modal') {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('click', () => {
+            document.getElementById('lang-menu').classList.add('hidden');
+        });
+
+        // INIT
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVenues('china'); // Default tab
+            renderSpecial();
+            renderSponsors();
+            updateUIText();
+        });
+
+    </script>
+</body>
+</html>
