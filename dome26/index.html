@@ -27,6 +27,8 @@
             --sketch-line: rgba(0, 50, 80, 0.08);
             --modal-bg: #f8fafc;
             --border-color: #cbd5e1;
+            --tag-bg: #e2e8f0;
+            --sold-out-color: #b91c1c; /* 售罄红 */
         }
 
         body {
@@ -40,7 +42,7 @@
             font-family: "Rockwell", "Roboto Slab", serif;
         }
 
-        /* [修复] Material Symbols 图标类定义 */
+        /* Material Symbols 图标类定义 */
         .material-symbols-rounded {
             font-family: 'Material Symbols Rounded';
             font-weight: normal;
@@ -57,7 +59,7 @@
             text-rendering: optimizeLegibility;
             -moz-osx-font-smoothing: grayscale;
             font-feature-settings: 'liga';
-            vertical-align: middle; /* 优化对齐 */
+            vertical-align: middle; 
         }
 
         /* --- 主海报容器 --- */
@@ -107,11 +109,46 @@
             justify-content: center;
         }
 
+        /* 全局语言切换器样式 */
+        .global-lang-switch {
+            margin-bottom: 20px;
+            font-family: "Rockwell", serif;
+            font-size: 0.85rem;
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: "Rockwell", serif;
+            color: #888;
+            font-weight: bold;
+            padding: 2px 0;
+            transition: color 0.2s;
+        }
+        .lang-btn:hover {
+            color: var(--accent-blue);
+        }
+        .lang-btn.active {
+            color: var(--accent-blue);
+            text-decoration: underline;
+        }
+        .lang-separator {
+            color: #bbb;
+            font-weight: normal;
+        }
+
+
         /* 元素样式 */
         .logo-container {
             text-align: left;
             margin-bottom: 20px;
-            cursor: pointer; /* Logo 可点击打开 About */
+            cursor: pointer; 
+            display: block; 
+            width: fit-content; 
         }
         
         .logo-img {
@@ -153,7 +190,7 @@
             margin-bottom: 25px;
             border-bottom: 1px dashed rgba(0,0,0,0.1);
             padding-bottom: 10px;
-            cursor: pointer; /* 可点击 */
+            cursor: pointer; 
             transition: transform 0.2s, border-color 0.2s;
             position: relative;
         }
@@ -188,10 +225,25 @@
         .venue-name {
             font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "HGS Mincho E", "MS PMincho", "MS Mincho", "Noto Serif JP", "Noto Serif TC", serif;
             font-size: 1.8rem;
-            display: block;
+            display: inline-block; /* Changed for badge alignment */
             margin-top: 5px;
             font-weight: 500;
             color: var(--accent-blue);
+        }
+
+        /* SOLD OUT 徽章样式 */
+        .sold-out-badge {
+            display: inline-block;
+            background-color: var(--sold-out-color);
+            color: white;
+            font-family: "Rockwell", sans-serif;
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 2px;
+            margin-left: 10px;
+            vertical-align: middle;
+            transform: translateY(-2px);
         }
 
         /* 底部信息 */
@@ -231,7 +283,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 50, 80, 0.6); /* 蓝色系遮罩 */
+            background-color: rgba(0, 50, 80, 0.6); 
             backdrop-filter: blur(5px);
             z-index: 1000;
             display: flex;
@@ -255,12 +307,17 @@
             border-radius: 4px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.2);
             display: flex;
-            flex-direction: column; /* [修改] 始终垂直排列 */
+            flex-direction: column; 
             overflow: hidden;
             transform: translateY(20px);
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             border: 1px solid white;
+        }
+        
+        /* 宽屏弹窗 (Ticket Modal) */
+        .modal-box.wide {
+            max-width: 800px;
         }
 
         .modal-overlay.show .modal-box {
@@ -273,7 +330,7 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-            min-width: 300px; /* 调整最小宽度 */
+            min-width: 300px; 
         }
 
         .modal-header {
@@ -299,15 +356,33 @@
             opacity: 1;
         }
 
+        /* Modal 标题组样式更新 */
         .modal-title-group h3 {
             font-size: 1.8rem;
             color: var(--accent-blue);
             font-family: "Rockwell", serif;
+            margin: 0;
+            line-height: 1.2;
         }
-        .modal-title-group p {
-            font-size: 1.1rem;
-            color: #666;
+        
+        /* 修复后的标签样式 */
+        .modal-label-text {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #999;
+            display: block;
+            margin-bottom: 2px;
             font-family: "Rockwell", serif;
+            letter-spacing: 0.05em;
+        }
+        /* 修复后的日期内容样式 */
+        .modal-date-text {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            font-family: "Rockwell", serif;
+            margin-bottom: 8px;
+            font-weight: bold;
+            line-height: 1.2;
         }
 
         .info-row {
@@ -339,16 +414,15 @@
             text-decoration: underline;
         }
 
-        /* [修改] 弹窗底部按钮 */
         .modal-footer {
             margin-top: auto;
             padding-top: 20px;
-            display: flex; /* 改为 Flex 以适应单个按钮 */
+            display: flex; 
             justify-content: center;
         }
 
         .btn {
-            padding: 12px 30px; /* 加宽按钮 */
+            padding: 12px 30px; 
             border: 2px solid var(--accent-blue);
             background: transparent;
             color: var(--accent-blue);
@@ -364,7 +438,7 @@
             font-size: 1rem;
             transition: all 0.2s;
             border-radius: 2px;
-            width: 100%; /* 占满宽度 */
+            width: 100%; 
         }
         .btn:hover, .btn.active {
             background-color: var(--accent-blue);
@@ -378,6 +452,14 @@
             background-color: #004060;
             border-color: #004060;
         }
+        /* 禁用按钮样式 (Sold Out) */
+        .btn.disabled {
+            border-color: #aaa;
+            background-color: #ddd;
+            color: #888;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
 
         /* --- About Modal 特有样式 --- */
         .about-avatar {
@@ -390,22 +472,150 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             background-color: #ddd;
         }
-        .lang-switch {
-            display: flex;
-            gap: 10px;
+
+        /* --- Ticket Modal 特有样式 --- */
+        .ticket-section {
+            margin-bottom: 30px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 20px;
         }
-        .lang-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
+        .ticket-section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .ticket-section-title {
             font-family: "Rockwell", serif;
-            color: #999;
-            font-weight: bold;
-            padding: 2px 5px;
-        }
-        .lang-btn.active {
             color: var(--accent-blue);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* 票种卡片 */
+        .ticket-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .ticket-card {
+            background: white;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+        .ticket-card.vip {
+            border: 1px solid var(--accent-blue);
+            background: #f0f7ff;
+        }
+        .ticket-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            margin-bottom: 5px;
+        }
+        .ticket-price {
+            font-family: "Rockwell", serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .ticket-desc {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.4;
+        }
+        .ticket-note {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* 时间轴 */
+        .timeline-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid #ddd;
+        }
+        .timeline-item.active {
+            border-left-color: var(--accent-blue);
+        }
+        .timeline-content {
+            padding-left: 15px;
+        }
+        .timeline-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #444;
+            font-family: "Noto Serif JP", sans-serif;
+        }
+
+        /* 平台列表 */
+        .platform-list {
+            list-style: none;
+        }
+        .platform-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+        .platform-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .platform-link {
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .platform-link:hover {
             text-decoration: underline;
+        }
+        .platform-detail {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .overseas-box {
+            background: var(--accent-blue);
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .overseas-box h4 {
+            font-family: "Rockwell", serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        .overseas-box a {
+            color: #fff;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .overseas-box p {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
         }
 
         /* --- 响应式 --- */
@@ -428,15 +638,22 @@
                 padding-left: 0;
                 flex: unset;
             }
+            .global-lang-switch {
+                justify-content: center; /* 移动端居中 */
+            }
             .logo-container {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                margin: 0;
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 0 auto 20px;
+                width: fit-content;
             }
             .hero-text {
                 font-size: 5rem;
                 margin-top: 40px;
+            }
+            .ticket-type-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -447,9 +664,19 @@
         
         <!-- 左侧：视觉主导区 -->
         <section class="left-section">
-            <div class="logo-container" id="logoTrigger">
-                <img src="https://links.btm-m.site/UMGLOGO.svg" alt="Universal Music Group" class="logo-img">
+            
+            <!-- 全局语言切换 -->
+            <div class="global-lang-switch">
+                <button class="lang-btn" data-lang="jp">JP</button>
+                <span class="lang-separator">/</span>
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <span class="lang-separator">/</span>
+                <button class="lang-btn" data-lang="zh">ZH</button>
             </div>
+
+            <a href="https://www.universal-music.co.jp/" target="_blank" class="logo-container">
+                <img src="https://links.btm-m.site/UMGLOGO.svg" alt="Universal Music Group" class="logo-img">
+            </a>
             
             <div class="title-group">
                 <h2 class="main-title">0M_P Dome Tour 2026</h2>
@@ -458,25 +685,32 @@
 
             <div class="footer-info">
                 <div>MORE INFORMATION</div>
-                <!-- 修改：添加 ID 用于触发 About 弹窗 -->
-                <span id="openAboutBtn" class="more-info-link">ABOUT 0M_P / TOUR INFO &rarr;</span>
-                <div class="copyright">© 2025 UNIVERSAL MUSIC LLC / 0M_P All rights reserved.</div>
+                <!-- 新增：TICKET INFO 按钮 -->
+                <span id="openAboutBtn" class="more-info-link">ABOUT 0M_P</span><br>
+                <span id="openTicketBtn" class="more-info-link" style="color: var(--accent-blue);">TICKET INFORMATION &rarr;</span>
+                <div class="copyright">© 2025-2026 UNIVERSAL MUSIC LLC / 0M_P All rights reserved.</div>
             </div>
         </section>
 
         <!-- 右侧：信息区 -->
         <section class="right-section">
             <ul class="tour-list">
-                <!-- Osaka -->
+                <!-- Osaka [SOLD OUT] -->
                 <li class="tour-item" data-event="osaka">
                     <span class="tour-date">2026.2.28-3.1 <span class="tour-location">[OSAKA]</span></span>
-                    <span class="venue-name">京セラドーム</span>
+                    <div>
+                        <span class="venue-name">京セラドーム</span>
+                        <span class="sold-out-badge">SOLD OUT</span>
+                    </div>
                 </li>
 
-                <!-- Tokyo -->
+                <!-- Tokyo [SOLD OUT] -->
                 <li class="tour-item" data-event="tokyo">
                     <span class="tour-date">2026.3.8-9 <span class="tour-location">[TOKYO]</span></span>
-                    <span class="venue-name">東京ドーム</span>
+                    <div>
+                        <span class="venue-name">東京ドーム</span>
+                        <span class="sold-out-badge">SOLD OUT</span>
+                    </div>
                 </li>
 
                 <!-- Nagoya -->
@@ -490,12 +724,6 @@
                     <span class="tour-date">2026.3.21 <span class="tour-location">[FUKUOKA]</span></span>
                     <span class="venue-name">みずほPayPayドーム福岡</span>
                 </li>
-
-                <!-- Taipei -->
-                <li class="tour-item" data-event="taipei">
-                    <span class="tour-date">2026.3.28 <span class="tour-location">[TAIPEI]</span></span>
-                    <span class="venue-name">台北大巨蛋</span>
-                </li>
             </ul>
         </section>
 
@@ -506,12 +734,13 @@
     <!-- 1. 场馆信息弹窗 (Event Modal) -->
     <div id="eventModal" class="modal-overlay">
         <div class="modal-box" id="eventModalBox">
-            
-            <!-- 主内容 -->
             <div class="modal-main">
                 <header class="modal-header">
                     <div class="modal-title-group">
-                        <p id="modalDate">DATE</p>
+                        <!-- [修复] 分别为标签和日期内容设置独立的元素和 ID -->
+                        <span id="labelDate" class="modal-label-text">DATE</span>
+                        <p id="modalDate" class="modal-date-text">DATE TEXT</p>
+                        
                         <h3 id="modalCity">CITY</h3>
                     </div>
                     <button class="modal-close" id="closeEventModal">&times;</button>
@@ -524,7 +753,6 @@
 
                 <div class="info-row">
                     <span class="info-label" id="labelAddress">ADDRESS</span>
-                    <!-- [修改] 已删除图标 -->
                     <a href="#" target="_blank" id="modalAddressLink" class="info-link info-content">
                         <span id="modalAddress">Address text</span>
                     </a>
@@ -535,14 +763,10 @@
                     <div class="info-content" id="modalTransport" style="white-space: pre-line;">Transport info</div>
                 </div>
 
-                <!-- [修改] 底部只保留 TICKETS 按钮 -->
                 <div class="modal-footer">
                     <a href="#" target="_blank" id="btnTickets" class="btn btn-primary">TICKETS</a>
                 </div>
             </div>
-
-            <!-- [已删除] Guests 和 Setlist 侧边栏 -->
-
         </div>
     </div>
 
@@ -553,11 +777,6 @@
                 <header class="modal-header">
                     <div class="modal-title-group">
                         <h3>About 0M_P</h3>
-                    </div>
-                    <div class="lang-switch">
-                        <button class="lang-btn active" data-lang="en">EN</button>
-                        <button class="lang-btn" data-lang="zh">ZH</button>
-                        <button class="lang-btn" data-lang="jp">JP</button>
                     </div>
                     <button class="modal-close" id="closeAboutModal" style="margin-left: 15px;">&times;</button>
                 </header>
@@ -596,6 +815,27 @@
         </div>
     </div>
 
+    <!-- 3. 票务信息弹窗 (Ticket Modal) -->
+    <div id="ticketModal" class="modal-overlay">
+        <div class="modal-box wide">
+            <div class="modal-main">
+                <header class="modal-header">
+                    <div class="modal-title-group">
+                        <h3>Ticket Information</h3>
+                        <p>DOME TOUR 2026 "thoughts"</p>
+                    </div>
+                    <button class="modal-close" id="closeTicketModal">&times;</button>
+                </header>
+
+                <!-- Dynamic Content Container -->
+                <div id="ticketContent">
+                    <!-- JS Injected -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
     <!-- ================= JavaScript ================= -->
     <script>
@@ -603,82 +843,248 @@
             
             // --- 数据定义 ---
 
-            // 1. 场馆数据 (基于 Google Search 结果)
-            // [修改] 移除了 guests 数据
-            const eventDetails = {
-                osaka: {
-                    date: "2026.2.28-3.1",
-                    city: "OSAKA",
-                    venue: "Kyocera Dome Osaka (京セラドーム大阪)",
-                    address: "3 Chome-Na-2-1 Chiyozaki, Nishi Ward, Osaka",
-                    transport: "Subway: Nagahori Tsurumi-ryokuchi Line 'Dome-mae Chiyozaki' \nHanshin Namba Line 'Dome-mae' \nJR Osaka Loop Line 'Taisho' (7 min walk)",
-                    ticketLink: "https://l-tike.com/"
-                },
-                tokyo: {
-                    date: "2026.3.8-9",
-                    city: "TOKYO",
-                    venue: "Tokyo Dome (東京ドーム)",
-                    address: "1-3-61 Koraku, Bunkyo City, Tokyo",
-                    transport: "JR Chuo-Sobu Line 'Suidobashi' \nSubway Marunouchi/Namboku Line 'Korakuen' \nSubway Toei Mita Line 'Suidobashi'",
-                    ticketLink: "https://eplus.jp/"
-                },
-                nagoya: {
-                    date: "2026.3.15",
-                    city: "NAGOYA",
-                    venue: "Vantelin Dome Nagoya (バンテリンドーム ナゴヤ)",
-                    address: "1-1-1 Daikominami, Higashi Ward, Nagoya, Aichi",
-                    transport: "Subway Meijo Line 'Nagoya Dome-mae Yada' (5 min walk) \nJR Chuo Line 'Ozone' (15 min walk)",
-                    ticketLink: "https://t.pia.jp/",
-                    guests: [
-                        { name: "Fujii Kaze", img: "https://tour.btm-m.site/NewDays/images/kaze.jpg" }
-                    ]
-                },
-                fukuoka: { 
-                    date: "2026.3.21",
-                    city: "FUKUOKA", 
-                    venue: "Mizuho PayPay Dome Fukuoka (みずほPayPayドーム福岡)",
-                    address: "2-2-2 Jigyohama, Chuo Ward, Fukuoka",
-                    transport: "Subway Kuko Line 'Tojinmachi' (15 min walk) \nNishitetsu Bus 'Mizuho PayPay Dome'",
-                    ticketLink: "https://l-tike.com/",
-                    guests: [
-                        { name: "[Alexandros]", img: "" },
-                        { name: "Sakanaction", img: "" }
-                    ]
-                },
-                taipei: {
-                    date: "2026.3.28",
-                    city: "TAIPEI",
-                    venue: "Taipei Dome (臺北大巨蛋)",
-                    address: "No. 505, Sec. 4, Zhongxiao E. Rd., Xinyi Dist., Taipei City",
-                    transport: "MRT Blue Line (Bannan Line) 'Sun Yat-Sen Memorial Hall' (Exit 5) \nBus stops along Zhongxiao East Road",
-                    ticketLink: "https://tixcraft.com/"
-                }
-            };
-
-            // 3. About 多语言数据
-            const bioData = {
+            // 全局语言数据 (整合了场馆信息、About、Ticket)
+            const langData = {
                 en: {
+                    // Event Modal Labels
+                    labels: { date: "DATE", city: "CITY", venue: "VENUE", address: "ADDRESS", transport: "ACCESS", ticketBtn: "TICKETS", soldOut: "SOLD OUT" },
+                    
+                    // Event Details (EN)
+                    events: {
+                        osaka: {
+                            date: "2026.2.28-3.1",
+                            city: "OSAKA",
+                            venue: "Kyocera Dome Osaka",
+                            address: "3 Chome-Na-2-1 Chiyozaki, Nishi Ward, Osaka",
+                            transport: "Subway: Nagahori Tsurumi-ryokuchi Line 'Dome-mae Chiyozaki' \nHanshin Namba Line 'Dome-mae' \nJR Osaka Loop Line 'Taisho' (7 min walk)",
+                            ticketLink: "https://l-tike.com/",
+                            soldOut: true
+                        },
+                        tokyo: {
+                            date: "2026.3.8-9",
+                            city: "TOKYO",
+                            venue: "Tokyo Dome",
+                            address: "1-3-61 Koraku, Bunkyo City, Tokyo",
+                            transport: "JR Chuo-Sobu Line 'Suidobashi' \nSubway Marunouchi/Namboku Line 'Korakuen' \nSubway Toei Mita Line 'Suidobashi'",
+                            ticketLink: "https://eplus.jp/",
+                            soldOut: true
+                        },
+                        nagoya: {
+                            date: "2026.3.15",
+                            city: "NAGOYA",
+                            venue: "Vantelin Dome Nagoya",
+                            address: "1-1-1 Daikominami, Higashi Ward, Nagoya, Aichi",
+                            transport: "Subway Meijo Line 'Nagoya Dome-mae Yada' (5 min walk) \nJR Chuo Line 'Ozone' (15 min walk)",
+                            ticketLink: "https://t.pia.jp/",
+                            soldOut: false
+                        },
+                        fukuoka: { 
+                            date: "2026.3.21",
+                            city: "FUKUOKA", 
+                            venue: "Mizuho PayPay Dome Fukuoka",
+                            address: "2-2-2 Jigyohama, Chuo Ward, Fukuoka",
+                            transport: "Subway Kuko Line 'Tojinmachi' (15 min walk) \nNishitetsu Bus 'Mizuho PayPay Dome'",
+                            ticketLink: "https://l-tike.com/",
+                            soldOut: false
+                        }
+                    },
+
+                    // About Section (EN)
                     roles: "Sound Producer / Singer / Writer",
                     bio: "0M_P is a sound producer and singer active since 2017. Known for blending rock elements with emotional storytelling. In 2026, marking the 10th anniversary with the 'thoughts' Dome Tour.",
                     worksLabel: "NOTABLE WORKS",
-                    projectsLabel: "2026 PROJECTS"
+                    projectsLabel: "2026 PROJECTS",
+                    
+                    // Ticket Section (EN)
+                    tLabels: { types: "TICKET TYPES", timeline: "TIMELINE", jp: "JAPAN PLAYGUIDES", os: "OVERSEAS TICKETS" },
+                    tickets: [
+                        { name: "thoughts VIP Seat", price: "¥22,000", desc: "Arena Front Area Guaranteed, Priority Entry, Tour Limited Acrylic Block, VIP Pass", note: "FC Members & Official Lottery Only" },
+                        { name: "S Seat (Reserved)", price: "¥12,000", desc: "Arena Rear Area or Lower Stand" },
+                        { name: "A Seat (Reserved)", price: "¥9,500", desc: "Upper Stand (Level 2 & above)" },
+                        { name: "U-18 Student Seat", price: "¥6,000", desc: "Designated Area / Restricted View", note: "ID/Student ID Required. Must be under 18." }
+                    ],
+                    timeline: [
+                        { title: "[Round 1] 0M_P MEMBERS 'Zero Mind'", date: "Application: Oct 17 - Oct 27, 2025 | Result: Nov 1" },
+                        { title: "[Round 2] Official Website / SNS", date: "Application: Nov 8 - Nov 23, 2025 | Result: Nov 28" },
+                        { title: "[Round 3] Play Guide Lottery", date: "Application: Dec 5 - Dec 15, 2025 | Result: Dec 20" },
+                        { title: "[Final] General Sale", date: "Starts Jan 24, 2026 (Sat) 10:00 AM" },
+                        { title: "[Ticket Trade] Official Resale", date: "Starts Feb 14, 2026" }
+                    ],
+                    platforms: [
+                        { name: "e+ (eplus)", url: "https://eplus.jp/0m_p-2026/", detail: "Payment: Credit Card, Convenience Store, PayPay. <br>App required for e-tickets. Official Trade partner." },
+                        { name: "Lawson Ticket", url: "https://l-tike.com/0m_p-tour/", detail: "L-Codes: Osaka 52001, Tokyo 33089, Nagoya 41026, Fukuoka 89002. <br>Loppi terminal at Lawson/Mini Stop." },
+                        { name: "Ticket Pia", url: "https://t.pia.jp/0m_p/", detail: "P-Code: 245-108 (All Venues). Cloak service available." },
+                        { name: "Rakuten Ticket", url: "https://r-t.jp/0m_p", detail: "Rakuten Points supported." }
+                    ],
+                    overseas: {
+                        title: "Overseas Ticket Service (e+ Inbound)",
+                        desc: "Exclusive for fans outside Japan. Credit Card (Visa/Master/Alipay/UnionPay) only. QR Code entry.",
+                        linkText: "Buy Tickets Here (English/Chinese/Korean)",
+                        url: "https://ib.eplus.jp/0m_p_2026_world"
+                    }
                 },
                 zh: {
+                    // Event Modal Labels
+                    labels: { date: "日期", city: "城市", venue: "场馆", address: "地址", transport: "交通方式", ticketBtn: "购票", soldOut: "已售罄" },
+
+                    // Event Details (ZH)
+                    events: {
+                        osaka: {
+                            date: "2026.2.28-3.1",
+                            city: "OSAKA",
+                            venue: "京瓷巨蛋 (大阪)",
+                            address: "大阪市西区千代崎3丁目中2-1",
+                            transport: "地铁 长堀鹤见绿地线「巨蛋前千代崎站」 \n阪神难波线「巨蛋前站」 \nJR大阪环状线「大正站」（步行7分钟）",
+                            ticketLink: "https://l-tike.com/",
+                            soldOut: true
+                        },
+                        tokyo: {
+                            date: "2026.3.8-9",
+                            city: "TOKYO",
+                            venue: "东京巨蛋",
+                            address: "东京都文京区后乐1-3-61",
+                            transport: "JR总武线「水道桥站」 \n地铁 丸之内线/南北线「后乐园站」 \n都营三田线「水道桥站」",
+                            ticketLink: "https://eplus.jp/",
+                            soldOut: true
+                        },
+                        nagoya: {
+                            date: "2026.3.15",
+                            city: "NAGOYA",
+                            venue: "万特力巨蛋 (名古屋)",
+                            address: "爱知县名古屋市东区大幸南1-1-1",
+                            transport: "地铁 名城线「名古屋巨蛋前矢田站」（步行5分钟） \nJR中央线「大曾根站」（步行15分钟）",
+                            ticketLink: "https://t.pia.jp/",
+                            soldOut: false
+                        },
+                        fukuoka: { 
+                            date: "2026.3.21",
+                            city: "FUKUOKA", 
+                            venue: "瑞穗PayPay巨蛋 (福冈)",
+                            address: "福冈市中央区地行浜2-2-2",
+                            transport: "地铁 机场线「唐人町站」（步行15分钟） \n西铁巴士「瑞穗PayPay巨蛋」",
+                            ticketLink: "https://l-tike.com/",
+                            soldOut: false
+                        }
+                    },
+
+                    // About
                     roles: "音乐制作人 / 歌手 / 作家",
                     bio: "0M_P 是一位自 2017 年开始活跃的音乐制作人和歌手。以将摇滚元素与感性叙事相结合而闻名。2026 年，以 'thoughts' 巨蛋巡演纪念出道 10 周年。",
                     worksLabel: "代表作品",
-                    projectsLabel: "2026 年度计划"
+                    projectsLabel: "2026 年度计划",
+
+                    // Ticket
+                    tLabels: { types: "席位种类", timeline: "售票时间轴", jp: "官方指定购票平台", os: "海外/国际乐迷通道" },
+                    tickets: [
+                        { name: "thoughts VIP席", price: "22,000日元", desc: "内场最前区确权、优先入场通道、巡演限定亚克力砖、VIP专属纪念挂牌", note: "仅限FC会员及官网先行抽选" },
+                        { name: "S席 (全席指定)", price: "12,000日元", desc: "内场后区 或 看台一层（下层看台）" },
+                        { name: "A席 (全席指定)", price: "9,500日元", desc: "看台二层及以上（上层看台）" },
+                        { name: "U-18 学生席", price: "6,000日元", desc: "注釈付指定席或指定高层区域", note: "需查验学生证/身份证，未满18岁适用。必须有成年人陪同" }
+                    ],
+                    timeline: [
+                        { title: "[第1弹] 0M_P MEMBERS 'Zero Mind' 最速先行", date: "受理: 2025.10.17 - 10.27 | 发表: 11.1" },
+                        { title: "[第2弹] 官方网站/SNS 先行抽选", date: "受理: 2025.11.8 - 11.23 | 发表: 11.28" },
+                        { title: "[第3弹] Play Guide 预售抽选", date: "受理: 2025.12.5 - 12.15 | 发表: 12.20" },
+                        { title: "[最终] 一般发售 (先到先得)", date: "2026年1月24日(周六) 10:00起" },
+                        { title: "[Ticket Trade] 官方定价转票", date: "2026年2月14日(周六) 起" }
+                    ],
+                    platforms: [
+                        { name: "e+ (eplus) / イープラス", url: "https://eplus.jp/0m_p-2026/", detail: "支付: 信用卡/便利店/PayPay。需下载e+ APP (日号认证)。<br>官方转票唯一指定平台。" },
+                        { name: "Lawson Ticket / ローソンチケット", url: "https://l-tike.com/0m_p-tour/", detail: "L代码: 大阪 52001, 东京 33089, 名古屋 41026, 福冈 89002。<br>Lawson/Mini Stop 店内 Loppi 购票。" },
+                        { name: "Ticket Pia / チケットぴあ", url: "https://t.pia.jp/0m_p/", detail: "P代码: 245-108 (共通)。支持 Cloak 取票。" },
+                        { name: "Rakuten Ticket / 楽天チケット", url: "https://r-t.jp/0m_p", detail: "支持乐天积分抵扣。" }
+                    ],
+                    overseas: {
+                        title: "Overseas Ticket Service (e+ Inbound)",
+                        desc: "海外乐迷专属通道。支持国际信用卡/支付宝/银联。QR码电子票入场（无需日本手机号）。",
+                        linkText: "点击购票 (简中/繁中/English)",
+                        url: "https://ib.eplus.jp/0m_p_2026_world"
+                    }
                 },
                 jp: {
+                    // Event Modal Labels
+                    labels: { date: "日時", city: "都市", venue: "会場", address: "住所", transport: "アクセス", ticketBtn: "チケット", soldOut: "SOLD OUT" },
+
+                    // Event Details (JP)
+                    events: {
+                        osaka: {
+                            date: "2026.2.28-3.1",
+                            city: "OSAKA",
+                            venue: "京セラドーム大阪",
+                            address: "大阪府大阪市西区千代崎3丁目中2-1",
+                            transport: "地下鉄 長堀鶴見緑地線「ドーム前千代崎駅」 \n阪神なんば線「ドーム前駅」 \nJR大阪環状線「大正駅」（徒歩7分）",
+                            ticketLink: "https://l-tike.com/",
+                            soldOut: true
+                        },
+                        tokyo: {
+                            date: "2026.3.8-9",
+                            city: "TOKYO",
+                            venue: "東京ドーム",
+                            address: "東京都文京区後楽1-3-61",
+                            transport: "JR中央・総武線「水道橋駅」 \n地下鉄 丸ノ内線・南北線「後楽園駅」 \n都営三田線「水道橋駅」",
+                            ticketLink: "https://eplus.jp/",
+                            soldOut: true
+                        },
+                        nagoya: {
+                            date: "2026.3.15",
+                            city: "NAGOYA",
+                            venue: "バンテリンドーム ナゴヤ",
+                            address: "愛知県名古屋市東区大幸南1-1-1",
+                            transport: "地下鉄 名城線「ナゴヤドーム前矢田駅」（徒歩5分） \nJR中央線「大曽根駅」（徒歩15分）",
+                            ticketLink: "https://t.pia.jp/",
+                            soldOut: false
+                        },
+                        fukuoka: { 
+                            date: "2026.3.21",
+                            city: "FUKUOKA", 
+                            venue: "みずほPayPayドーム福岡",
+                            address: "福岡県福岡市中央区地行浜2-2-2",
+                            transport: "地下鉄 空港線「唐人町駅」（徒歩15分） \n西鉄バス「みずほPayPayドーム」",
+                            ticketLink: "https://l-tike.com/",
+                            soldOut: false
+                        }
+                    },
+
+                    // About
                     roles: "サウンドプロデューサー / 歌手 / 作家",
                     bio: "2017年より活動するサウンドプロデューサー・歌手。ロックと感情豊かなストーリーテリングを融合させたスタイルで知られる。2026年、10周年を記念して「thoughts」ドームツアーを開催。",
                     worksLabel: "主な作品",
-                    projectsLabel: "2026 プロジェクト"
+                    projectsLabel: "2026 プロジェクト",
+
+                    // Ticket
+                    tLabels: { types: "チケット種類", timeline: "チケット販売スケジュール", jp: "プレイガイド", os: "海外からの購入 (Overseas)" },
+                    tickets: [
+                        { name: "thoughts VIP席", price: "¥22,000", desc: "アリーナ前方確約、優先入場レーン、ツアー限定アクリルブロック、VIPパス", note: "FC会員・オフィシャル先行限定" },
+                        { name: "S席 (全席指定)", price: "¥12,000", desc: "アリーナ後方 または スタンド下層" },
+                        { name: "A席 (全席指定)", price: "¥9,500", desc: "スタンド上層" },
+                        { name: "U-18 学生席", price: "¥6,000", desc: "注釈付指定席 または 指定エリア", note: "当日身分証確認あり。18歳未満対象。" }
+                    ],
+                    timeline: [
+                        { title: "[第1弾] 0M_P MEMBERS 'Zero Mind' 最速先行", date: "受付: 2025.10.17 - 10.27 | 発表: 11.1" },
+                        { title: "[第2弾] オフィシャルHP/SNS 先行", date: "受付: 2025.11.8 - 11.23 | 発表: 11.28" },
+                        { title: "[第3弾] プレイガイド先行", date: "受付: 2025.12.5 - 12.15 | 発表: 12.20" },
+                        { title: "[最終] 一般発売 (先着)", date: "2026年1月24日(土) 10:00〜" },
+                        { title: "[Ticket Trade] 公式定価トレード", date: "2026年2月14日(土) 〜" }
+                    ],
+                    platforms: [
+                        { name: "e+ (イープラス)", url: "https://eplus.jp/0m_p-2026/", detail: "支払: カード/コンビニ/PayPay。<br>電子チケット(アプリ)必須。公式トレード対象。" },
+                        { name: "ローソンチケット", url: "https://l-tike.com/0m_p-tour/", detail: "Lコード: 大阪 52001, 東京 33089, 名古屋 41026, 福岡 89002。<br>Loppiにて発券。" },
+                        { name: "チケットぴあ", url: "https://t.pia.jp/0m_p/", detail: "Pコード: 245-108 (共通)。Cloak利用可。" },
+                        { name: "楽天チケット", url: "https://r-t.jp/0m_p", detail: "楽天ポイント利用可。" }
+                    ],
+                    overseas: {
+                        title: "Overseas Ticket Service (e+ Inbound)",
+                        desc: "For fans living outside Japan. Credit Card only. QR Code entry.",
+                        linkText: "Buy Tickets Here",
+                        url: "https://ib.eplus.jp/0m_p_2026_world"
+                    }
                 }
             };
 
             // --- 逻辑控制 ---
+            let currentLang = 'en'; // 默认语言
 
+            // Event Modal Logic
             const modalOverlay = document.getElementById('eventModal');
             const tourItems = document.querySelectorAll('.tour-item');
             
@@ -691,73 +1097,169 @@
             const modalTransport = document.getElementById('modalTransport');
             const btnTickets = document.getElementById('btnTickets');
 
-            // Function: Open Event Modal
-            function openEventModal(eventKey) {
-                const data = eventDetails[eventKey];
-                if (!data) return;
+            // Modal Labels
+            const labelDate = document.getElementById('labelDate');
+            // modalCity acts as label and content in header
+            const labelVenue = document.getElementById('labelVenue');
+            const labelAddress = document.getElementById('labelAddress');
+            const labelTransport = document.getElementById('labelTransport');
 
-                modalDate.textContent = data.date;
-                modalCity.textContent = data.city;
-                modalVenue.textContent = data.venue;
-                modalAddress.textContent = data.address;
-                modalAddressLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.venue + " " + data.address)}`;
-                modalTransport.textContent = data.transport;
-                btnTickets.href = data.ticketLink;
+            function openEventModal(eventKey) {
+                // 使用当前语言获取数据
+                const eventData = langData[currentLang].events[eventKey];
+                const labels = langData[currentLang].labels;
+
+                if (!eventData) return;
+
+                // 更新内容
+                modalDate.textContent = eventData.date;
+                modalCity.textContent = eventData.city;
+                modalVenue.textContent = eventData.venue;
+                modalAddress.textContent = eventData.address;
+                modalAddressLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(eventData.venue + " " + eventData.address)}`;
+                modalTransport.textContent = eventData.transport;
+                
+                // 处理 Ticket 按钮 (Sold Out 逻辑)
+                if (eventData.soldOut) {
+                    btnTickets.classList.add('disabled');
+                    btnTickets.textContent = labels.soldOut;
+                    btnTickets.removeAttribute('href');
+                } else {
+                    btnTickets.classList.remove('disabled');
+                    btnTickets.textContent = labels.ticketBtn;
+                    btnTickets.href = eventData.ticketLink;
+                }
 
                 modalOverlay.classList.add('show');
             }
 
-            // Click Handlers for Tour Items
             tourItems.forEach(item => {
                 item.addEventListener('click', () => {
                     openEventModal(item.dataset.event);
                 });
             });
 
-            // Close Event Modal
             document.getElementById('closeEventModal').addEventListener('click', () => {
                 modalOverlay.classList.remove('show');
             });
             modalOverlay.addEventListener('click', (e) => {
-                if (e.target === modalOverlay) {
-                    modalOverlay.classList.remove('show');
-                }
+                if (e.target === modalOverlay) modalOverlay.classList.remove('show');
             });
 
 
-            // --- About Modal Logic ---
+            // --- About & Ticket Modal Logic ---
             const aboutModal = document.getElementById('aboutModal');
+            const ticketModal = document.getElementById('ticketModal'); 
             const openAboutBtn = document.getElementById('openAboutBtn');
-            const logoTrigger = document.getElementById('logoTrigger');
+            const openTicketBtn = document.getElementById('openTicketBtn'); 
             const closeAboutModal = document.getElementById('closeAboutModal');
-            const langBtns = document.querySelectorAll('.lang-btn');
+            const closeTicketModal = document.getElementById('closeTicketModal'); 
+            
+            const langBtns = document.querySelectorAll('.global-lang-switch .lang-btn');
+            
+            // Ticket Content Container
+            const ticketContentDiv = document.getElementById('ticketContent');
+
+            // Render Ticket Info Function
+            function renderTicketInfo(lang) {
+                const d = langData[lang];
+                
+                // Build HTML string for Ticket Modal
+                let html = '';
+
+                // 1. Ticket Types
+                html += `<div class="ticket-section"><h4 class="ticket-section-title"><span class="material-symbols-rounded">confirmation_number</span>${d.tLabels.types}</h4><div class="ticket-type-grid">`;
+                d.tickets.forEach(t => {
+                    const isVip = t.name.includes('VIP');
+                    html += `
+                        <div class="ticket-card ${isVip ? 'vip' : ''}">
+                            <div class="ticket-name">${t.name}</div>
+                            <span class="ticket-price">${t.price}</span>
+                            <div class="ticket-desc">${t.desc}</div>
+                            ${t.note ? `<div class="ticket-note">* ${t.note}</div>` : ''}
+                        </div>`;
+                });
+                html += `</div></div>`;
+
+                // 2. Timeline
+                html += `<div class="ticket-section"><h4 class="ticket-section-title"><span class="material-symbols-rounded">calendar_month</span>${d.tLabels.timeline}</h4>`;
+                d.timeline.forEach(t => {
+                    html += `
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-title">${t.title}</div>
+                                <div class="timeline-date">${t.date}</div>
+                            </div>
+                        </div>`;
+                });
+                html += `</div>`;
+
+                // 3. Playguides (Domestic)
+                html += `<div class="ticket-section"><h4 class="ticket-section-title"><span class="material-symbols-rounded">storefront</span>${d.tLabels.jp}</h4><ul class="platform-list">`;
+                d.platforms.forEach(p => {
+                    html += `
+                        <li class="platform-item">
+                            <div class="platform-name">
+                                <span>${p.name}</span>
+                                <a href="${p.url}" target="_blank" class="platform-link">LINK &rarr;</a>
+                            </div>
+                            <div class="platform-detail">${p.detail}</div>
+                        </li>`;
+                });
+                html += `</ul></div>`;
+
+                // 4. Overseas
+                html += `<div class="ticket-section"><h4 class="ticket-section-title"><span class="material-symbols-rounded">public</span>${d.tLabels.os}</h4>
+                        <div class="overseas-box">
+                            <h4>${d.overseas.title}</h4>
+                            <p>${d.overseas.desc}</p>
+                            <a href="${d.overseas.url}" target="_blank">${d.overseas.linkText} &rarr;</a>
+                        </div>
+                    </div>`;
+
+                ticketContentDiv.innerHTML = html;
+            }
 
             function updateLang(lang) {
-                const data = bioData[lang];
+                currentLang = lang; // Update Global State
+                const data = langData[lang];
+                
+                // Update About Content
                 document.getElementById('aboutRoles').textContent = data.roles;
                 document.getElementById('aboutBio').textContent = data.bio;
                 document.getElementById('labelWorks').textContent = data.worksLabel;
                 document.getElementById('labelProjects').textContent = data.projectsLabel;
                 
+                // Update Event Modal Labels
+                document.getElementById('labelDate').textContent = data.labels.date;
+                document.getElementById('labelVenue').textContent = data.labels.venue;
+                document.getElementById('labelAddress').textContent = data.labels.address;
+                document.getElementById('labelTransport').textContent = data.labels.transport;
+
+                // Update Ticket Content
+                renderTicketInfo(lang);
+
+                // Update Buttons State
                 langBtns.forEach(b => {
                     b.classList.toggle('active', b.dataset.lang === lang);
                 });
             }
 
-            function openAbout() {
-                aboutModal.classList.add('show');
-            }
-
-            openAboutBtn.addEventListener('click', openAbout);
-            logoTrigger.addEventListener('click', openAbout);
-            
-            closeAboutModal.addEventListener('click', () => {
-                aboutModal.classList.remove('show');
-            });
+            // About Modal
+            openAboutBtn.addEventListener('click', () => aboutModal.classList.add('show'));
+            closeAboutModal.addEventListener('click', () => aboutModal.classList.remove('show'));
             aboutModal.addEventListener('click', (e) => {
                 if (e.target === aboutModal) aboutModal.classList.remove('show');
             });
 
+            // Ticket Modal
+            openTicketBtn.addEventListener('click', () => ticketModal.classList.add('show'));
+            closeTicketModal.addEventListener('click', () => ticketModal.classList.remove('show'));
+            ticketModal.addEventListener('click', (e) => {
+                if (e.target === ticketModal) ticketModal.classList.remove('show');
+            });
+
+            // Lang Switch
             langBtns.forEach(btn => {
                 btn.addEventListener('click', () => updateLang(btn.dataset.lang));
             });
