@@ -29,6 +29,7 @@
             --border-color: #cbd5e1;
             --tag-bg: #e2e8f0;
             --sold-out-color: #b91c1c; /* 售罄红 */
+            --ended-color: #64748b; /* 已结束灰 */
             --gold-accent: #b49658; /* 特典金色 */
         }
 
@@ -192,13 +193,25 @@
             border-bottom: 1px dashed rgba(0,0,0,0.1);
             padding-bottom: 10px;
             cursor: pointer; 
-            transition: transform 0.2s, border-color 0.2s;
+            transition: transform 0.2s, border-color 0.2s, opacity 0.3s;
             position: relative;
         }
         
         .tour-item:hover {
             transform: translateX(10px);
             border-bottom-color: var(--accent-blue);
+        }
+        
+        /* 已结束场次的半透明样式 */
+        .tour-item.ended {
+            opacity: 0.55;
+        }
+        .tour-item.ended .venue-name {
+            color: #555;
+        }
+        .tour-item.ended:hover {
+            transform: translateX(5px);
+            border-bottom-color: #888;
         }
 
         .tour-item:last-child {
@@ -226,18 +239,18 @@
         .venue-name {
             font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "HGS Mincho E", "MS PMincho", "MS Mincho", "Noto Serif JP", "Noto Serif TC", serif;
             font-size: 1.8rem;
-            display: inline-block; /* Changed for badge alignment */
+            display: inline-block; 
             margin-top: 5px;
             font-weight: 500;
             color: var(--accent-blue);
+            transition: color 0.3s;
         }
 
-        /* SOLD OUT 徽章样式 */
-        .sold-out-badge {
-            display: inline-block;
-            background-color: var(--sold-out-color);
+        /* 徽章样式：SOLD OUT & ENDED */
+        .sold-out-badge, .ended-badge {
+            display: none; /* 默认隐藏，由 JS 控制显示 */
             color: white;
-            font-family: "Rockwell", sans-serif;
+            font-family: "Rockwell", "Noto Serif JP", "Noto Serif TC", sans-serif;
             font-size: 0.8rem;
             font-weight: bold;
             padding: 3px 8px;
@@ -245,6 +258,14 @@
             margin-left: 10px;
             vertical-align: middle;
             transform: translateY(-2px);
+        }
+        
+        .sold-out-badge {
+            background-color: var(--sold-out-color);
+        }
+
+        .ended-badge {
+            background-color: var(--ended-color);
         }
 
         /* 底部信息 */
@@ -425,7 +446,7 @@
             border: 2px solid var(--accent-blue);
             background: transparent;
             color: var(--accent-blue);
-            font-family: "Rockwell", serif;
+            font-family: "Rockwell", "Noto Serif JP", "Noto Serif TC", serif;
             font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
@@ -451,7 +472,7 @@
             background-color: #004060;
             border-color: #004060;
         }
-        /* 禁用按钮样式 (Sold Out) */
+        /* 禁用按钮样式 (Sold Out / Ended) */
         .btn.disabled {
             border-color: #aaa;
             background-color: #ddd;
@@ -944,35 +965,41 @@
 
         <!-- 右侧：信息区 -->
         <section class="right-section">
-            <ul class="tour-list">
-                <!-- Osaka [SOLD OUT] -->
+            <ul class="tour-list" id="mainTourList">
+                <!-- Osaka -->
                 <li class="tour-item" data-event="osaka">
                     <span class="tour-date">2026.2.28-3.1 <span class="tour-location">[OSAKA]</span></span>
                     <div>
                         <span class="venue-name">京セラドーム</span>
-                        <span class="sold-out-badge">SOLD OUT</span>
+                        <span class="status-badge"></span>
                     </div>
                 </li>
 
-                <!-- Tokyo [SOLD OUT] -->
+                <!-- Tokyo -->
                 <li class="tour-item" data-event="tokyo">
                     <span class="tour-date">2026.3.8-9 <span class="tour-location">[TOKYO]</span></span>
                     <div>
                         <span class="venue-name">東京ドーム</span>
-                        <span class="sold-out-badge">SOLD OUT</span>
+                        <span class="status-badge"></span>
                     </div>
                 </li>
 
                 <!-- Nagoya -->
                 <li class="tour-item" data-event="nagoya">
                     <span class="tour-date">2026.3.15 <span class="tour-location">[NAGOYA]</span></span>
-                    <span class="venue-name">バンテリンドーム</span>
+                    <div>
+                        <span class="venue-name">バンテリンドーム</span>
+                        <span class="status-badge"></span>
+                    </div>
                 </li>
 
                 <!-- Fukuoka -->
                 <li class="tour-item" data-event="fukuoka">
                     <span class="tour-date">2026.3.21 <span class="tour-location">[FUKUOKA]</span></span>
-                    <span class="venue-name">みずほPayPayドーム福岡</span>
+                    <div>
+                        <span class="venue-name">みずほPayPayドーム福岡</span>
+                        <span class="status-badge"></span>
+                    </div>
                 </li>
             </ul>
         </section>
@@ -1103,13 +1130,22 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- 数据定义 ---
+            // --- 各场次结束时间定义 (转换为绝对的毫秒级时间戳) ---
+            // 采用 ISO 8601 格式强制绑定 +09:00 (JST日本标准时间)
+            // 满足条件：演出当天 22:30 及之后
+            const eventEndTimesJST = {
+                osaka: new Date('2026-03-01T22:30:00+09:00').getTime(),
+                tokyo: new Date('2026-03-09T22:30:00+09:00').getTime(),
+                nagoya: new Date('2026-03-15T22:30:00+09:00').getTime(),
+                fukuoka: new Date('2026-03-21T22:30:00+09:00').getTime()
+            };
 
+            // --- 数据定义 ---
             // 全局语言数据
             const langData = {
                 en: {
                     // Event Modal Labels
-                    labels: { date: "DATE", city: "CITY", venue: "VENUE", address: "ADDRESS", transport: "ACCESS", ticketBtn: "TICKETS", soldOut: "SOLD OUT" },
+                    labels: { date: "DATE", city: "CITY", venue: "VENUE", address: "ADDRESS", transport: "ACCESS", ticketBtn: "TICKETS", soldOut: "SOLD OUT", ended: "ENDED" },
                     
                     // Event Details (EN)
                     events: {
@@ -1225,7 +1261,7 @@
                 },
                 zh: {
                     // Event Modal Labels
-                    labels: { date: "日期", city: "城市", venue: "场馆", address: "地址", transport: "交通方式", ticketBtn: "购票", soldOut: "已售罄" },
+                    labels: { date: "日期", city: "城市", venue: "场馆", address: "地址", transport: "交通方式", ticketBtn: "购票", soldOut: "已售罄", ended: "已结束" },
 
                     // Event Details (ZH)
                     events: {
@@ -1341,7 +1377,7 @@
                 },
                 jp: {
                     // Event Modal Labels
-                    labels: { date: "日時", city: "都市", venue: "会場", address: "住所", transport: "アクセス", ticketBtn: "チケット", soldOut: "SOLD OUT" },
+                    labels: { date: "日時", city: "都市", venue: "会場", address: "住所", transport: "アクセス", ticketBtn: "チケット", soldOut: "SOLD OUT", ended: "終了" },
 
                     // Event Details (JP)
                     events: {
@@ -1406,7 +1442,7 @@
                     ],
                     platforms: [
                         { name: "e+ (イープラス)", url: "https://eplus.jp/0m_p-2026/", detail: "支払: カード/コンビニ/PayPay。<br>電子チケット(アプリ)必須。公式トレード対象。" },
-                        { name: "ローソンチケット", url: "https://l-tike.com/0m_p-tour/", detail: "Lコード: 大阪 52001, 東京 33089, 名古屋 41026, 福岡 89002。<br>Loppiにて発券。" },
+                        { name: "ローソンチケット", url: "https://l-tike.com/0m_p-tour/", detail: "Lコード: 大阪 52001, 東京 33089, 名古屋 41026, 福福岡 89002。<br>Loppiにて発券。" },
                         { name: "チケットぴあ", url: "https://t.pia.jp/0m_p/", detail: "Pコード: 245-108 (共通)。Cloak利用可。" },
                         { name: "楽天チケット", url: "https://r-t.jp/0m_p", detail: "楽天ポイント利用可。" }
                     ],
@@ -1475,7 +1511,6 @@
 
             // Modal Labels
             const labelDate = document.getElementById('labelDate');
-            // modalCity acts as label and content in header
             const labelVenue = document.getElementById('labelVenue');
             const labelAddress = document.getElementById('labelAddress');
             const labelTransport = document.getElementById('labelTransport');
@@ -1484,6 +1519,8 @@
                 // 使用当前语言获取数据
                 const eventData = langData[currentLang].events[eventKey];
                 const labels = langData[currentLang].labels;
+                const now = Date.now();
+                const isEnded = eventEndTimesJST[eventKey] && now >= eventEndTimesJST[eventKey];
 
                 if (!eventData) return;
 
@@ -1495,8 +1532,12 @@
                 modalAddressLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(eventData.venue + " " + eventData.address)}`;
                 modalTransport.textContent = eventData.transport;
                 
-                // 处理 Ticket 按钮 (Sold Out 逻辑)
-                if (eventData.soldOut) {
+                // 处理 Ticket 按钮 (优先判断是否已结束，再判断是否售罄)
+                if (isEnded) {
+                    btnTickets.classList.add('disabled');
+                    btnTickets.textContent = labels.ended;
+                    btnTickets.removeAttribute('href');
+                } else if (eventData.soldOut) {
                     btnTickets.classList.add('disabled');
                     btnTickets.textContent = labels.soldOut;
                     btnTickets.removeAttribute('href');
@@ -1697,6 +1738,7 @@
             function updateLang(lang) {
                 currentLang = lang; // Update Global State
                 const data = langData[lang];
+                const now = Date.now();
                 
                 // Update About Content
                 document.getElementById('aboutRoles').textContent = data.roles;
@@ -1709,6 +1751,32 @@
                 document.getElementById('labelVenue').textContent = data.labels.venue;
                 document.getElementById('labelAddress').textContent = data.labels.address;
                 document.getElementById('labelTransport').textContent = data.labels.transport;
+
+                // 动态更新主列表中的演出状态（已结束 / 已售罄 / 正常）
+                tourItems.forEach(item => {
+                    const eventKey = item.dataset.event;
+                    const eventData = data.events[eventKey];
+                    const badgeContainer = item.querySelector('.status-badge');
+                    
+                    const isEnded = eventEndTimesJST[eventKey] && now >= eventEndTimesJST[eventKey];
+
+                    if (isEnded) {
+                        item.classList.add('ended');
+                        badgeContainer.className = 'status-badge ended-badge';
+                        badgeContainer.textContent = data.labels.ended;
+                        badgeContainer.style.display = 'inline-block';
+                    } else if (eventData.soldOut) {
+                        item.classList.remove('ended');
+                        badgeContainer.className = 'status-badge sold-out-badge';
+                        badgeContainer.textContent = data.labels.soldOut;
+                        badgeContainer.style.display = 'inline-block';
+                    } else {
+                        item.classList.remove('ended');
+                        badgeContainer.className = 'status-badge';
+                        badgeContainer.textContent = '';
+                        badgeContainer.style.display = 'none';
+                    }
+                });
 
                 // Update Ticket Content
                 renderTicketInfo(lang);
